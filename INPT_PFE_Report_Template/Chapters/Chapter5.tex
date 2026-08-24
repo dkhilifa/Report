@@ -107,6 +107,12 @@ tools and their roles are:
         \texttt{@param}, \texttt{@return} tags, file headers).
 \end{itemize}
 
+\reportscreenshot
+      {Figures/ti-static/screenshots/analysis-reports.png}
+      {Open the generated static-analysis output for the pinned ST and TI SDK releases. Capture the tool and version metadata plus representative cloc, Lizard, Cppcheck MISRA, and jscpd results, using a report dashboard or a clean terminal collage.}
+      {Static-analysis evidence generated for the STM32CubeC5 LL and MSPM33 driverlib source sets.}
+      {fig:ti-screenshot-static-analysis}
+
 % --------------------------------------------------------------------
 \subsection{Lines of code}
 \label{subsec:ti-loc}
@@ -603,7 +609,7 @@ whether equivalent application behaviours can be exercised in practice. We there
 twelve bare-metal scenarios that pair TI driverlib examples with STM32CubeC5 LL examples. The
 scenarios cover conversion, GPIO control, I\textsuperscript{2}C, SPI, and UART behaviours, as
 summarised in Table~\ref{tab:ti-functional-scenarios}. They constitute the first part of the
-functional phase; the second part will apply the same process to middleware stacks.
+functional phase; the second part applies the same process to the FreeRTOS middleware stack.
 
 \subsection{Benchmark design and observables}
 \label{subsec:ti-functional-design}
@@ -649,6 +655,12 @@ debugger-visible value, or a UART output.
 \bottomrule
 \end{tabularx}
 \end{table}
+
+\reportscreenshot
+      {Figures/ti-functional/screenshots/functional-build-and-map.png}
+      {Open one matched TI and ST scenario pair in IAR EWARM. Capture successful build summaries and the corresponding linker-map totals for RO code, RO data, and RW data.}
+      {Matched functional scenario builds and linker-map memory totals in IAR EWARM.}
+      {fig:ti-screenshot-functional-build}
 
 The I\textsuperscript{2}C and SPI examples validate the transfer path by comparing received
 and expected buffers; a successful completion is indicated by the normal LED state, whereas an
@@ -810,6 +822,12 @@ Preemptive & Five workers use priorities 1--5 and a priority-6 reporter. STM32 u
 \end{tabularx}
 \end{table}
 
+\reportscreenshot
+      {Figures/ti-freertos/screenshots/project-configuration.png}
+      {Capture the IAR project options or generated configuration for both FreeRTOS targets. Make the device, optimisation level, core clock, FreeRTOS version, heap size, tick rate, and key scheduler options legible.}
+      {Recorded build and FreeRTOS configuration for the STM32C5 and MSPM33 targets.}
+      {fig:ti-screenshot-freertos-config}
+
 The basic and cooperative scenarios preserve the same worker count, creation order, priorities,
 and counter semantics on both platforms. The preemptive projects do not preserve the same
 synchronisation primitive: STM32 uses \texttt{vTaskSuspend()} and \texttt{vTaskResume()}, while
@@ -855,6 +873,12 @@ Preemptive & 55\,015.52 chains/thread/s & 7\,110.96 chains/thread/s & 1.719 \\
 \bottomrule
 \end{tabular}
 \end{table}
+
+\reportscreenshot
+      {Figures/ti-freertos/screenshots/uart-runtime-windows.png}
+      {Place the STM32C5 and MSPM33 UART captures side by side. Show the board identity, scenario, raw counters, 30-second reporting window, and enough repeated windows to support the values in the runtime table.}
+      {Raw UART reporting windows used for the ST--TI FreeRTOS runtime comparison.}
+      {fig:ti-screenshot-freertos-uart}
 
 Basic processing scales almost exactly with the configured clock ratio: after normalisation,
 STM32C5 and MSPM33 differ by only 0.2\%. The cooperative observation retains a normalised ratio
@@ -921,8 +945,8 @@ measurement boundaries.
 \newpage
 \section*{Conclusion}
 This chapter presented the ST-versus-TI comparison of the STM32CubeC5 LL layer and TI
-driverlib. The static phase covered seven quality dimensions and a complete SDK coverage
-mapping. The functional phase then mapped twelve bare-metal scenarios spanning ADC, GPIO,
+driverlib. The static phase covered seven quality dimensions and an SDK inventory comparison
+for the selected releases. The functional phase then mapped twelve bare-metal scenarios spanning ADC, GPIO,
 I\textsuperscript{2}C, SPI, and UART behaviour, and documented their observable completion
 criteria.
 

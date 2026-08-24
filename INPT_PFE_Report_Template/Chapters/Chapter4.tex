@@ -18,10 +18,11 @@ through basic, cooperative, and preemptive scheduling scenarios). For each stack
 the scenario design, per-scenario footprint and execution-time results, a per-layer ROM
 breakdown, and an interpretation of the trade-offs the data reveals.
 
-All measurements follow the methodology described in
-Chapter~\ref{chap:general-description}: identical scenarios on both platforms, same compiler
-optimisation level, same clock frequency, and results extracted from IAR EWARM linker maps
-using the footprint analysis tool presented in Chapter~\ref{chap:footprint-tool}.
+The campaign was designed to follow the methodology described in
+Chapter~\ref{chap:general-description}: matched scenarios and clock frequencies, with
+footprint results extracted from IAR EWARM linker maps using the analysis tool presented in
+Chapter~\ref{chap:footprint-tool}. The surviving artifacts do not establish every compiler,
+linker, and runtime control; the corresponding limitations are stated with each result set.
 
 % ====================================================================
 \section{Hardware platforms}
@@ -52,6 +53,12 @@ Table~\ref{tab:gd32-boards} contrasts their key characteristics.
     \bottomrule
   \end{tabularx}
 \end{table}
+
+  \reportscreenshot
+    {Figures/gd32/screenshots/board-and-project-setup.png}
+    {Photograph both powered boards side by side, or capture the two IAR project option windows. The board names, target devices, 160 MHz configuration, and active build configurations must be identifiable.}
+    {ST and GD32 benchmark platforms and their matched project configurations.}
+    {fig:gd32-screenshot-platforms}
 
 The STM32U575 belongs to the ultra-low-power STM32U5 series and offers substantially more
 flash and RAM, hardware security accelerators, and a richer peripheral set
@@ -110,6 +117,12 @@ Table~\ref{tab:gd32-usb-scenarios} summarises the scenarios and the metrics coll
     \bottomrule
   \end{tabularx}
 \end{table}
+
+  \reportscreenshot
+    {Figures/gd32/screenshots/usb-runtime-capture.png}
+    {Run one USB HID or CDC pair and capture the host, UART, or debugger output for both platforms. Show enumeration success, the measured initialisation and transfer values, and the scenario name.}
+    {Runtime evidence captured for the matched ST and GD32 USB device scenarios.}
+    {fig:gd32-screenshot-usb-runtime}
 
 % --- Results --------------------------------------------------------
 \subsection{Results}
@@ -299,15 +312,19 @@ configurations are byte-equivalent are also unavailable. The timing values are t
 retained as reported observations, but causal and protocol-level conclusions remain
 unresolved.
 
-The USB benchmark reveals a clear architectural trade-off between the two vendors.
+The USB benchmark reveals a clear difference in the classified footprint distribution between
+the two vendors. The available artifacts do not establish the architectural cause of that
+difference.
 
 \subsubsection*{ROM footprint}
 STM32 consumes 77--88\,\% more total ROM than GD32 across both scenarios. The dominant
 contributor is the HAL layer, which is roughly twelve times larger on STM32. Two modules
 drive this cost: the \textbf{HAL RCC} clock-configuration driver ($\approx$4\,560 bytes)
-and the \textbf{HAL/LL USB} peripheral driver ($\approx$5\,000 bytes). GigaDevice achieves
-a much smaller HAL by embedding peripheral-initialisation logic inside the middleware
-library rather than exposing it as a separate, reusable driver layer.
+and the \textbf{HAL/LL USB} peripheral driver ($\approx$5\,000 bytes). The GigaDevice image
+has a much smaller classified HAL contribution and a larger classified middleware
+contribution. Determining whether this comes from embedded initialisation logic,
+classification boundaries, or another implementation choice requires the original module
+inventory and source-level inspection.
 
 \subsubsection*{RAM footprint}
 The reported whole-image RAM totals favour STM32 by 57--65\,\% in the two USB scenarios.
@@ -320,13 +337,13 @@ After initialisation, the reported values differ by no more than 1.5\,\%. Repeat
 and a documented timing boundary are required before assigning these differences to the
 software stacks or the USB protocol.
 
-\subsubsection*{Design philosophy}
-STM32Cube separates concerns: HAL handles clocks and peripheral access, the middleware
-handles protocol logic, and the application owns configuration through user-editable files
-(\texttt{usbd\_conf.c}, \texttt{usbd\_desc.c}). This modular design gives developers
-explicit control and reusability at the cost of a larger total ROM. GigaDevice takes a more
-monolithic approach --- smaller HAL, but a thicker middleware that bundles configuration
-internally, reducing ROM but also reducing the user's configuration flexibility.
+\subsubsection*{Observed layer distribution}
+In the classified STM32 image, HAL handles clocks and peripheral access, middleware contains
+protocol logic, and user-editable files such as \texttt{usbd\_conf.c} and
+\texttt{usbd\_desc.c} appear in the application contribution. The GigaDevice image places a
+larger share of ROM in the middleware category and a smaller share in HAL. These measurements
+describe where the bytes were classified; they do not establish modularity, reusability, or
+configuration flexibility.
 
 \subsubsection*{Enhancement proposals}
 The data suggests two concrete areas where STM32Cube could reduce ROM without sacrificing
@@ -397,6 +414,12 @@ Table~\ref{tab:gd32-freertos-scenarios} summarises the three scenarios.
     \bottomrule
   \end{tabularx}
 \end{table}
+
+  \reportscreenshot
+    {Figures/gd32/screenshots/freertos-uart-results.png}
+    {Capture the UART or debugger output for the same FreeRTOS scenario on both boards. Include the 30-second counter values, scenario name, target identity, and a run timestamp or repetition identifier.}
+    {UART observations for a matched ST and GD32 FreeRTOS scheduling scenario.}
+    {fig:gd32-screenshot-freertos-runtime}
 
 % --- Results --------------------------------------------------------
 \subsection{Results}
@@ -550,9 +573,9 @@ and FreeRTOS middleware stack --- for all three scenarios.
 The pattern is strikingly consistent across all three scenarios:
 
 \begin{itemize}
-  \item The \textbf{FreeRTOS middleware stack} itself is virtually identical in size
-    ($\leq$1\,\% difference). Both vendors ship the same upstream FreeRTOS kernel, so
-    this is expected.
+  \item The classified \textbf{FreeRTOS middleware} ROM totals differ by at most 1\,\%
+    in these images. The available evidence does not isolate kernel version, port, wrappers,
+    or configuration as independent variables.
   \item The \textbf{application layer} is $\approx$6\,\% larger on STM32, reflecting
     slightly more initialisation code in the STM32Cube project template.
   \item The \textbf{HAL layer} is 355--357\,\% larger on STM32, entirely accounting for
@@ -581,8 +604,8 @@ measurement are required before attributing the observations to either FreeRTOS 
 \subsubsection*{ROM footprint}
 The ROM overhead follows the same pattern as the USB stack: a 35--41\,\% total increase
 driven almost entirely by the HAL layer, specifically the HAL RCC clock-configuration
-module. Crucially, the FreeRTOS middleware itself contributes no measurable overhead ---
-the gap is in the vendor's hardware-abstraction code, not in the RTOS kernel.
+module. The classified middleware totals are close; most of the measured ROM gap is assigned
+to the vendor hardware-abstraction category. This result is not a kernel-only comparison.
 
 \subsubsection*{RAM footprint}
 RAM differences are negligible (2.1--2.3\,\%), indicating that both FreeRTOS ports allocate
@@ -608,14 +631,12 @@ five scenarios reveals a consistent pattern:
   \item \textbf{ROM footprint:} STM32 consumes 35--88\,\% more flash, with the HAL layer
     (principally HAL RCC and, for USB, HAL/LL USB) responsible for the bulk of the
     difference. The middleware stacks themselves are comparable in size.
-  \item \textbf{RAM footprint:} STM32 uses significantly less RAM than GD32 in USB
-    scenarios (57--65\,\% less) thanks to smaller default stack/heap allocations and more
-    static memory management. FreeRTOS RAM is nearly identical.
-  \item \textbf{Architectural trade-off:} STM32Cube's modular, layered design (separate
-    HAL, middleware, and user-configuration files) provides greater flexibility and
-    reusability but at a measurable ROM cost. GigaDevice's more monolithic approach yields
-    smaller ROM by bundling driver and configuration logic into the middleware, at the
-    expense of less user-visible modularity.
+  \item \textbf{RAM footprint:} the reported STM32 whole-image totals are 57--65\,\% lower
+    in the USB scenarios. The available allocation records do not support attributing this
+    difference to stack, heap, or static-memory policy. FreeRTOS RAM is nearly identical.
+  \item \textbf{Layer distribution:} the STM32 images assign more ROM to HAL, while the
+    GigaDevice USB images assign more to middleware. The current evidence does not establish
+    the design decisions or flexibility trade-offs behind those classifications.
 \end{itemize}
 
 The single most impactful enhancement for STM32 would be \textbf{optimising the HAL RCC

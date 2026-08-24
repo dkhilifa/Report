@@ -417,11 +417,23 @@ MCU Workflow Studio.
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{Figures/benchmark-agent/workflow.pdf}
-\caption{End-to-end benchmark lifecycle. The MCU Benchmark Copilot Agent handles steps~1
-through~11 autonomously (with a hardware gate at step~9); once semantic equivalence is
+\caption{Designed end-to-end benchmark lifecycle. The MCU Benchmark Copilot Agent is configured to handle steps~1
+through~11, subject to a hardware gate at step~9; once semantic equivalence is
 confirmed, the validated linker map is handed to MCU Workflow Studio for footprint analysis.}
 \label{fig:agent-workflow}
 \end{figure}
+
+\reportscreenshot
+	{Figures/benchmark-agent/screenshots/copilot-campaign.png}
+	{In VS Code, open Copilot Chat on a real benchmark request. Capture the user prompt, the selected benchmark agent, at least one delegated action, and a concise tool or build result. Hide personal paths, tokens, and unrelated conversations.}
+	{Benchmark campaign initiated through the custom agent in VS Code Copilot Chat.}
+	{fig:agent-screenshot-campaign}
+
+\reportscreenshot
+	{Figures/benchmark-agent/screenshots/iar-build-output.png}
+	{Build a representative benchmark in IAR EWARM. Capture the project tree and Build Output pane with the target, configuration, warning or error count, and successful build summary visible.}
+	{IAR EWARM build evidence produced during an agent-assisted benchmark campaign.}
+	{fig:agent-screenshot-iar-build}
 
 Figure~\ref{fig:agent-sequence} presents the same campaign as a UML sequence diagram,
 showing the actual participant delegation, message flow, the hardware approval gate, and
@@ -499,7 +511,14 @@ Each benchmark campaign persists its state in a structured dossier under
 \item \texttt{measurement\_metadata.yaml} --- metrics collected, methods, triggers, and confidence levels.
 \end{itemize}
 
-This artifact model makes every campaign auditable and reproducible. A reviewer can inspect
+\reportscreenshot
+	{Figures/benchmark-agent/screenshots/campaign-dossier.png}
+	{In VS Code Explorer, open one completed campaign dossier. Show the manifest, execution status, fairness review, semantic-equivalence record, and measurement metadata; open one file so its populated fields are legible.}
+	{Structured campaign dossier retained for traceability and fairness review.}
+	{fig:agent-screenshot-dossier}
+
+This artifact model improves campaign auditability and records the inputs needed for later
+reproduction. A reviewer can inspect
 the dossier to understand exactly what was resolved, acquired, built, measured, and
 concluded --- without re-running the campaign.
 
@@ -565,6 +584,12 @@ structure.
 \bottomrule
 \end{tabularx}
 \end{table}
+
+\reportscreenshot
+	{Figures/benchmark-agent/screenshots/workspace-configuration.png}
+	{In VS Code, show the .github agents, skills, tools, config, prompts, and campaign folders in Explorer. Open a populated board or toolchain YAML entry in the editor.}
+	{Agent-system workspace and a board configuration registry entry in VS Code.}
+	{fig:agent-screenshot-workspace}
 
 The implementation requires no external server, no API keys beyond the user's existing
 GitHub Copilot subscription, and no deployment pipeline. Adding a new agent, skill, tool,

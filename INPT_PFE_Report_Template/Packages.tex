@@ -138,6 +138,35 @@
    \clearpage           % finish off the page
   }
 
+\newcommand{\reportscreenshot}[4]{%
+    \begin{figure}[H]
+        \centering
+        \IfFileExists{#1}{%
+            \includegraphics[width=\textwidth,height=0.72\textheight,keepaspectratio]{#1}%
+        }{%
+            \fbox{%
+                \begin{minipage}[c][0.24\textheight][c]{0.92\textwidth}
+                    \centering
+                    \textbf{Screenshot to be added}\\[0.8em]
+                    #2\\[0.8em]
+                    Save the image as:\\[0.3em]
+                    \texttt{\detokenize{#1}}
+                \end{minipage}%
+            }%
+        }
+        \caption{#3}
+        \label{#4}
+    \end{figure}%
+}
+
+% Legacy package hooks in this template load support files at \begin{document}.
+\makeatletter
+\def\@fileswithoptions#1{%
+        \@ifnextchar[%]
+                {\@fileswith@ptions#1}%
+                {\@fileswith@ptions#1[]}}
+\makeatother
+
 
 % Legacy package hooks in this template load support files at \begin{document}.
 \makeatletter

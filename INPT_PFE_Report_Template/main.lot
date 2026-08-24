@@ -2,56 +2,56 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \contentsline {table}{\numberline {2.1}{\ignorespaces Principal inputs and outputs of the tool.}}{15}{table.caption.15}%
-\contentsline {table}{\numberline {2.2}{\ignorespaces Implementation stack and the role of each external dependency.}}{17}{table.caption.17}%
-\contentsline {table}{\numberline {2.3}{\ignorespaces Optional language-model back-ends. All are disabled by default; the tool runs fully without them.}}{22}{table.caption.23}%
+\contentsline {table}{\numberline {2.2}{\ignorespaces Implementation stack and the role of each external dependency.}}{17}{table.caption.18}%
+\contentsline {table}{\numberline {2.3}{\ignorespaces Optional language-model back-ends. All are disabled by default; the tool runs fully without them.}}{22}{table.caption.25}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {3.1}{\ignorespaces Specialist agents and their responsibilities.}}{29}{table.caption.25}%
-\contentsline {table}{\numberline {3.2}{\ignorespaces Reusable skills and their purposes.}}{31}{table.caption.27}%
-\contentsline {table}{\numberline {3.3}{\ignorespaces Automation tools in the agent system.}}{32}{table.caption.28}%
-\contentsline {table}{\numberline {3.4}{\ignorespaces Configuration registry files.}}{33}{table.caption.29}%
-\contentsline {table}{\numberline {3.5}{\ignorespaces Autonomy model: autonomous actions versus approval-required actions.}}{34}{table.caption.30}%
-\contentsline {table}{\numberline {3.6}{\ignorespaces Surface classification under the baseline immutability rule.}}{35}{table.caption.31}%
-\contentsline {table}{\numberline {3.7}{\ignorespaces Pre-built prompt templates for common benchmark tasks.}}{41}{table.caption.34}%
-\contentsline {table}{\numberline {3.8}{\ignorespaces File structure of the agent system.}}{42}{table.caption.35}%
+\contentsline {table}{\numberline {3.1}{\ignorespaces Specialist agents and their responsibilities.}}{30}{table.caption.28}%
+\contentsline {table}{\numberline {3.2}{\ignorespaces Reusable skills and their purposes.}}{32}{table.caption.30}%
+\contentsline {table}{\numberline {3.3}{\ignorespaces Automation tools in the agent system.}}{33}{table.caption.31}%
+\contentsline {table}{\numberline {3.4}{\ignorespaces Configuration registry files.}}{34}{table.caption.32}%
+\contentsline {table}{\numberline {3.5}{\ignorespaces Autonomy model: autonomous actions versus approval-required actions.}}{35}{table.caption.33}%
+\contentsline {table}{\numberline {3.6}{\ignorespaces Surface classification under the baseline immutability rule.}}{36}{table.caption.34}%
+\contentsline {table}{\numberline {3.7}{\ignorespaces Pre-built prompt templates for common benchmark tasks.}}{44}{table.caption.40}%
+\contentsline {table}{\numberline {3.8}{\ignorespaces File structure of the agent system.}}{45}{table.caption.41}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {4.1}{\ignorespaces Board characteristics: ST reference vs GigaDevice GD32.}}{46}{table.caption.36}%
-\contentsline {table}{\numberline {4.2}{\ignorespaces USB device stack benchmark scenarios.}}{47}{table.caption.37}%
-\contentsline {table}{\numberline {4.3}{\ignorespaces USB HID device footprint (bytes).}}{47}{table.caption.38}%
-\contentsline {table}{\numberline {4.4}{\ignorespaces USB HID ROM breakdown by layer (bytes).}}{48}{table.caption.39}%
-\contentsline {table}{\numberline {4.5}{\ignorespaces USB HID execution time (ms).}}{48}{table.caption.40}%
-\contentsline {table}{\numberline {4.6}{\ignorespaces USB CDC device footprint (bytes).}}{49}{table.caption.41}%
-\contentsline {table}{\numberline {4.7}{\ignorespaces USB CDC ROM breakdown by layer (bytes).}}{49}{table.caption.42}%
-\contentsline {table}{\numberline {4.8}{\ignorespaces USB CDC execution time (ms).}}{50}{table.caption.43}%
-\contentsline {table}{\numberline {4.9}{\ignorespaces FreeRTOS benchmark scenarios.}}{52}{table.caption.44}%
-\contentsline {table}{\numberline {4.10}{\ignorespaces FreeRTOS basic processing --- performance.}}{53}{table.caption.45}%
-\contentsline {table}{\numberline {4.11}{\ignorespaces FreeRTOS basic processing --- footprint (bytes).}}{53}{table.caption.46}%
-\contentsline {table}{\numberline {4.12}{\ignorespaces FreeRTOS cooperative processing --- performance.}}{53}{table.caption.47}%
-\contentsline {table}{\numberline {4.13}{\ignorespaces FreeRTOS cooperative processing --- footprint (bytes).}}{53}{table.caption.48}%
-\contentsline {table}{\numberline {4.14}{\ignorespaces FreeRTOS preemptive processing --- performance.}}{54}{table.caption.49}%
-\contentsline {table}{\numberline {4.15}{\ignorespaces FreeRTOS preemptive processing --- footprint (bytes).}}{54}{table.caption.50}%
-\contentsline {table}{\numberline {4.16}{\ignorespaces FreeRTOS ROM breakdown by layer (bytes).}}{54}{table.caption.51}%
+\contentsline {table}{\numberline {4.1}{\ignorespaces Board characteristics: ST reference vs GigaDevice GD32.}}{49}{table.caption.43}%
+\contentsline {table}{\numberline {4.2}{\ignorespaces USB device stack benchmark scenarios.}}{50}{table.caption.45}%
+\contentsline {table}{\numberline {4.3}{\ignorespaces USB HID device footprint (bytes).}}{51}{table.caption.47}%
+\contentsline {table}{\numberline {4.4}{\ignorespaces USB HID ROM breakdown by layer (bytes).}}{51}{table.caption.48}%
+\contentsline {table}{\numberline {4.5}{\ignorespaces USB HID execution time (ms).}}{52}{table.caption.49}%
+\contentsline {table}{\numberline {4.6}{\ignorespaces USB CDC device footprint (bytes).}}{52}{table.caption.50}%
+\contentsline {table}{\numberline {4.7}{\ignorespaces USB CDC ROM breakdown by layer (bytes).}}{53}{table.caption.51}%
+\contentsline {table}{\numberline {4.8}{\ignorespaces USB CDC execution time (ms).}}{53}{table.caption.52}%
+\contentsline {table}{\numberline {4.9}{\ignorespaces FreeRTOS benchmark scenarios.}}{56}{table.caption.53}%
+\contentsline {table}{\numberline {4.10}{\ignorespaces FreeRTOS basic processing --- performance.}}{57}{table.caption.55}%
+\contentsline {table}{\numberline {4.11}{\ignorespaces FreeRTOS basic processing --- footprint (bytes).}}{57}{table.caption.56}%
+\contentsline {table}{\numberline {4.12}{\ignorespaces FreeRTOS cooperative processing --- performance.}}{57}{table.caption.57}%
+\contentsline {table}{\numberline {4.13}{\ignorespaces FreeRTOS cooperative processing --- footprint (bytes).}}{57}{table.caption.58}%
+\contentsline {table}{\numberline {4.14}{\ignorespaces FreeRTOS preemptive processing --- performance.}}{58}{table.caption.59}%
+\contentsline {table}{\numberline {4.15}{\ignorespaces FreeRTOS preemptive processing --- footprint (bytes).}}{58}{table.caption.60}%
+\contentsline {table}{\numberline {4.16}{\ignorespaces FreeRTOS ROM breakdown by layer (bytes).}}{58}{table.caption.61}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {5.1}{\ignorespaces Board and MCU comparison --- STM32C5A3 vs.\ MSPM33C321A.}}{58}{table.caption.52}%
-\contentsline {table}{\numberline {5.2}{\ignorespaces Lines-of-code comparison --- ST LL vs.\ TI driverlib.}}{59}{table.caption.53}%
-\contentsline {table}{\numberline {5.3}{\ignorespaces Documentation coverage --- ST LL vs.\ TI driverlib.}}{60}{table.caption.54}%
-\contentsline {table}{\numberline {5.4}{\ignorespaces Code duplication --- ST LL vs.\ TI driverlib.}}{61}{table.caption.55}%
-\contentsline {table}{\numberline {5.5}{\ignorespaces Cyclomatic complexity comparison --- ST LL vs.\ TI driverlib.}}{62}{table.caption.56}%
-\contentsline {table}{\numberline {5.6}{\ignorespaces API surface comparison --- ST LL vs.\ TI driverlib.}}{63}{table.caption.57}%
-\contentsline {table}{\numberline {5.7}{\ignorespaces Cppcheck MISRA-addon findings --- ST LL vs.\ TI driverlib.}}{64}{table.caption.58}%
-\contentsline {table}{\numberline {5.8}{\ignorespaces Exclusive peripheral drivers --- features in one SDK only.}}{66}{table.caption.59}%
-\contentsline {table}{\numberline {5.9}{\ignorespaces Exclusive middleware --- present in one SDK only.}}{67}{table.caption.60}%
-\contentsline {table}{\numberline {5.10}{\ignorespaces Cryptographic algorithm coverage comparison.}}{68}{table.caption.61}%
-\contentsline {table}{\numberline {5.11}{\ignorespaces Communication protocol support comparison.}}{69}{table.caption.62}%
-\contentsline {table}{\numberline {5.12}{\ignorespaces Static-analysis scoreboard --- STM32CubeC5 LL vs.\ TI MSPM33 driverlib.}}{69}{table.caption.63}%
-\contentsline {table}{\numberline {5.13}{\ignorespaces ST--TI low-level-driver functional scenario mapping.}}{72}{table.caption.65}%
-\contentsline {table}{\numberline {5.14}{\ignorespaces Whole-image footprint results from IAR high/size linker maps (bytes). Flash is RO code plus RO data and RAM is RW data~\cite {iar-ewarm}; negative deltas favour STM32C5.}}{73}{table.caption.66}%
-\contentsline {table}{\numberline {5.15}{\ignorespaces Controls required before quantitative ST--TI functional results are compared.}}{75}{table.caption.67}%
-\contentsline {table}{\numberline {5.16}{\ignorespaces FreeRTOS scenario semantics and reported metric.}}{76}{table.caption.69}%
-\contentsline {table}{\numberline {5.17}{\ignorespaces Observed FreeRTOS runtime rates and clock-normalised STM32/MSPM33 ratio.}}{77}{table.caption.70}%
-\contentsline {table}{\numberline {5.18}{\ignorespaces FreeRTOS whole-image footprint under IAR high/size optimisation (bytes).}}{78}{table.caption.71}%
+\contentsline {table}{\numberline {5.1}{\ignorespaces Board and MCU comparison --- STM32C5A3 vs.\ MSPM33C321A.}}{62}{table.caption.62}%
+\contentsline {table}{\numberline {5.2}{\ignorespaces Lines-of-code comparison --- ST LL vs.\ TI driverlib.}}{64}{table.caption.64}%
+\contentsline {table}{\numberline {5.3}{\ignorespaces Documentation coverage --- ST LL vs.\ TI driverlib.}}{64}{table.caption.65}%
+\contentsline {table}{\numberline {5.4}{\ignorespaces Code duplication --- ST LL vs.\ TI driverlib.}}{65}{table.caption.66}%
+\contentsline {table}{\numberline {5.5}{\ignorespaces Cyclomatic complexity comparison --- ST LL vs.\ TI driverlib.}}{66}{table.caption.67}%
+\contentsline {table}{\numberline {5.6}{\ignorespaces API surface comparison --- ST LL vs.\ TI driverlib.}}{67}{table.caption.68}%
+\contentsline {table}{\numberline {5.7}{\ignorespaces Cppcheck MISRA-addon findings --- ST LL vs.\ TI driverlib.}}{68}{table.caption.69}%
+\contentsline {table}{\numberline {5.8}{\ignorespaces Exclusive peripheral drivers --- features in one SDK only.}}{70}{table.caption.70}%
+\contentsline {table}{\numberline {5.9}{\ignorespaces Exclusive middleware --- present in one SDK only.}}{71}{table.caption.71}%
+\contentsline {table}{\numberline {5.10}{\ignorespaces Cryptographic algorithm coverage comparison.}}{72}{table.caption.72}%
+\contentsline {table}{\numberline {5.11}{\ignorespaces Communication protocol support comparison.}}{73}{table.caption.73}%
+\contentsline {table}{\numberline {5.12}{\ignorespaces Static-analysis scoreboard --- STM32CubeC5 LL vs.\ TI MSPM33 driverlib.}}{73}{table.caption.74}%
+\contentsline {table}{\numberline {5.13}{\ignorespaces ST--TI low-level-driver functional scenario mapping.}}{76}{table.caption.76}%
+\contentsline {table}{\numberline {5.14}{\ignorespaces Whole-image footprint results from IAR high/size linker maps (bytes). Flash is RO code plus RO data and RAM is RW data~\cite {iar-ewarm}; negative deltas favour STM32C5.}}{77}{table.caption.78}%
+\contentsline {table}{\numberline {5.15}{\ignorespaces Controls required before quantitative ST--TI functional results are compared.}}{79}{table.caption.79}%
+\contentsline {table}{\numberline {5.16}{\ignorespaces FreeRTOS scenario semantics and reported metric.}}{80}{table.caption.81}%
+\contentsline {table}{\numberline {5.17}{\ignorespaces Observed FreeRTOS runtime rates and clock-normalised STM32/MSPM33 ratio.}}{82}{table.caption.83}%
+\contentsline {table}{\numberline {5.18}{\ignorespaces FreeRTOS whole-image footprint under IAR high/size optimisation (bytes).}}{83}{table.caption.85}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {C.1}{\ignorespaces Reproducibility record for the ST--MSPM33 high/size functional footprint study (bytes).}}{90}{table.caption.74}%
-\contentsline {table}{\numberline {C.2}{\ignorespaces Raw UART observation windows for the ST--TI FreeRTOS benchmark.}}{91}{table.caption.75}%
-\contentsline {table}{\numberline {C.3}{\ignorespaces IAR high/size map totals for the ST--TI FreeRTOS projects (bytes).}}{91}{table.caption.76}%
+\contentsline {table}{\numberline {C.1}{\ignorespaces Reproducibility record for the ST--MSPM33 high/size functional footprint study (bytes).}}{94}{table.caption.88}%
+\contentsline {table}{\numberline {C.2}{\ignorespaces Raw UART observation windows for the ST--TI FreeRTOS benchmark.}}{95}{table.caption.89}%
+\contentsline {table}{\numberline {C.3}{\ignorespaces IAR high/size map totals for the ST--TI FreeRTOS projects (bytes).}}{95}{table.caption.90}%

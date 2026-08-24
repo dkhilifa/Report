@@ -130,6 +130,12 @@ Run manifest (JSON) & Tool version, input checksums, equivalence DB hash, and de
 \end{tabularx}
 \end{table}
 
+\reportscreenshot
+  {Figures/footprint-tool/screenshots/main-analysis-window.png}
+  {Open MCU Workflow Studio with a completed two-map comparison. Capture the full application window with the project summary, one footprint chart, the analysis tabs, and mapping status visible.}
+  {Main MCU Workflow Studio analysis window after a cross-vendor footprint run.}
+  {fig:tool-screenshot-main}
+
 \section{The benchmarking pipeline}
 \label{sec:tool-pipeline}
 
@@ -240,8 +246,8 @@ signal.
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.88\textwidth]{Figures/footprint-tool/weights.pdf}
-\caption{Relative weights of the signals combined by the deterministic mapping scorer. Name
-and role similarity dominate; the optional LLM-similarity signal (highlighted) is capped so
+\caption{Relative weights of the signals combined by the deterministic mapping scorer. Role
+and alias similarity carry the largest individual weights; the optional LLM-similarity signal (highlighted) is capped so
 that AI assistance can shift a candidate's confidence by at most twelve percent.}
 \label{fig:tool-weights}
 \end{figure}
@@ -249,8 +255,8 @@ that AI assistance can shift a candidate's confidence by at most twelve percent.
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{Figures/footprint-tool/scoring-signals.pdf}
-\caption{Detailed signal computation and penalty system. Seven evidence signals are computed
-for each candidate pair; penalties for size mismatch and layer conflict reduce the composite
+\caption{Detailed signal computation and penalty system. The deterministic evidence signals
+are combined with knowledge-base priors for each candidate pair; penalties for size mismatch and layer conflict reduce the composite
 score before the acceptance threshold is applied.}
 \label{fig:tool-scoring-signals}
 \end{figure}
@@ -274,6 +280,12 @@ and target items is pruned by fast rejection filters, scored on all signals, and
 into accepted, review, alternative, and unmatched categories by confidence thresholds.}
 \label{fig:tool-candidate-ranking}
 \end{figure}
+
+\reportscreenshot
+  {Figures/footprint-tool/screenshots/mapping-review-queue.png}
+  {Open the mapping review queue for a real comparison. Show several candidate pairs, confidence values, acceptance states, and the per-signal explanation for the selected pair.}
+  {Mapping review queue and confidence diagnostics for a low-confidence symbol pair.}
+  {fig:tool-screenshot-mapping-review}
 
 \subsection{Optional AI assistance}
 \label{sec:tool-ai}
@@ -428,6 +440,12 @@ develop and validate the tool are themselves a representative comparison: a USB 
 class project built for an STM32U575 board against the equivalent project built for an NXP
 MCXN947 board~\cite{nxp-mcuxpresso}, both compiled with the same IAR toolchain so that only the
 vendor software stacks differ.
+
+\reportscreenshot
+  {Figures/footprint-tool/screenshots/exported-results.png}
+  {Open a generated benchmark workbook or PDF report. Capture the global flash/RAM comparison, one per-layer breakdown, and the verdict or quality summary in a single legible view.}
+  {Generated footprint report showing the global and per-layer comparison outputs.}
+  {fig:tool-screenshot-export}
 
 \section{Engineering value and limitations}
 \label{sec:tool-value}
