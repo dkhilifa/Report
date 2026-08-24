@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>STM32C5 vs TI MSPM33 — FreeRTOS Benchmark Presentation</title>
+<style>
+  :root{
+    --bg:#f6f8fb;
+    --panel:#ffffff;
+    --panel2:#eef3f9;
+    --text:#1f2937;
+    --muted:#5f6f82;
+    --border:#d7e0ea;
+    --stm:#1565c0;
+    --ti:#c62828;
+    --ok:#2e7d32;
+    --warn:#b26a00;
+    --bad:#c0392b;
+    --cyan:#0f8ea8;
+    --purple:#6d4cbb;
+
+    --ok-bg:#eaf7ed;
+    --warn-bg:#fff4df;
+    --info-bg:#eaf3ff;
+    --bad-bg:#fdeeee;
+
+    --tag-ok-bg:#e6f4ea;
+    --tag-ok-fg:#1e7e34;
+    --tag-warn-bg:#fff4db;
+    --tag-warn-fg:#9a6700;
+    --tag-bad-bg:#fdecec;
+    --tag-bad-fg:#b42318;
+    --tag-info-bg:#e8f1ff;
+    --tag-info-fg:#175cd3;
+  }
+
+  *{box-sizing:border-box}
+
+  body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+    background:linear-gradient(180deg,#f8fafc 0%, #f3f6fb 100%);
+    color:var(--text);
+    line-height:1.5;
+  }
+
+  .wrap{max-width:1240px;margin:0 auto;padding:0 22px}
+
+  header{
+    padding:42px 0 30px;
+    border-bottom:1px solid var(--border);
+    background:linear-gradient(135deg,#f8fbff 0%, #eef4fb 100%);
+  }
+
+  h1{margin:0 0 8px;font-size:34px;line-height:1.15;color:#10243e}
+  .subtitle{color:var(--muted);font-size:16px;max-width:980px}
+  .badges{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+
+  .badge{
+    display:inline-block;
+    padding:6px 12px;
+    border-radius:999px;
+    border:1px solid var(--border);
+    font-size:12px;
+    font-weight:700;
+    background:#fff;
+  }
+
+  .green{background:var(--ok-bg);color:var(--ok);border-color:#b8dfc0}
+  .blue{background:var(--info-bg);color:var(--stm);border-color:#bfd8ff}
+  .amber{background:var(--warn-bg);color:var(--warn);border-color:#f1d49a}
+  .red{background:var(--bad-bg);color:var(--bad);border-color:#f0b7b7}
+
+  section{padding:34px 0;border-bottom:1px solid var(--border)}
+
+  h2{
+    margin:0 0 18px;
+    font-size:25px;
+    border-left:5px solid var(--stm);
+    padding-left:12px;
+    color:#163252;
+  }
+
+  h3{margin:22px 0 10px;font-size:18px;color:#1d334d}
+  p, li{color:#344559}
+  .lead{font-size:17px;color:#30465f;max-width:1050px}
+
+  .grid-4,.grid-3,.grid-2{display:grid;gap:16px}
+  .grid-4{grid-template-columns:repeat(4,1fr)}
+  .grid-3{grid-template-columns:repeat(3,1fr)}
+  .grid-2{grid-template-columns:repeat(2,1fr)}
+
+  .card{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:18px;
+    box-shadow:0 2px 10px rgba(10,30,60,0.04);
+  }
+
+  .label{
+    color:var(--muted);
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:.5px;
+    margin-bottom:8px;
+    font-weight:700;
+  }
+
+  .value{font-weight:800;font-size:30px;line-height:1.1}
+  .sub{color:var(--muted);font-size:13px;margin-top:6px}
+  .stm{color:var(--stm)}
+  .ti{color:var(--ti)}
+  .oktxt{color:var(--ok)}
+  .muted{color:var(--muted)}
+
+  .callout{
+    border-radius:12px;
+    padding:18px 20px;
+    border:1px solid var(--border);
+    background:var(--panel);
+    box-shadow:0 2px 10px rgba(10,30,60,0.04);
+  }
+
+  .callout.ok{background:var(--ok-bg);border-color:#b8dfc0}
+  .callout.warn{background:var(--warn-bg);border-color:#f1d49a}
+  .callout.info{background:var(--info-bg);border-color:#bfd8ff}
+
+  table{
+    width:100%;
+    border-collapse:collapse;
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:10px;
+    overflow:hidden;
+    font-size:14px;
+    box-shadow:0 2px 10px rgba(10,30,60,0.04);
+  }
+
+  th,td{
+    padding:11px 12px;
+    border-bottom:1px solid var(--border);
+    text-align:left;
+    color:var(--text);
+  }
+
+  th{
+    background:var(--panel2);
+    color:var(--muted);
+    text-transform:uppercase;
+    font-size:12px;
+    letter-spacing:.4px;
+    font-weight:800;
+  }
+
+  tr:last-child td{border-bottom:none}
+  tbody tr:nth-child(even){background:#fbfdff}
+  tbody tr:hover{background:#f4f8fc}
+
+  .tag{
+    display:inline-block;
+    padding:3px 8px;
+    border-radius:7px;
+    font-size:11px;
+    font-weight:700;
+  }
+
+  .tag.ok{background:var(--tag-ok-bg);color:var(--tag-ok-fg)}
+  .tag.warn{background:var(--tag-warn-bg);color:var(--tag-warn-fg)}
+  .tag.bad{background:var(--tag-bad-bg);color:var(--tag-bad-fg)}
+  .tag.info{background:var(--tag-info-bg);color:var(--tag-info-fg)}
+
+  .bars{display:grid;gap:14px;margin-top:12px}
+
+  .barrow{
+    display:grid;
+    grid-template-columns:180px 1fr;
+    gap:12px;
+    align-items:center;
+  }
+
+  .barlabel{color:var(--muted);font-weight:700;font-size:13px}
+
+  .track{
+    height:22px;
+    background:#edf2f7;
+    border:1px solid var(--border);
+    border-radius:999px;
+    overflow:hidden;
+    position:relative;
+  }
+
+  .fill{
+    height:100%;
+    display:flex;
+    align-items:center;
+    padding-left:10px;
+    font-size:11px;
+    font-weight:800;
+    color:white;
+    white-space:nowrap;
+  }
+
+  .fill.stm{background:linear-gradient(90deg,#1976d2,#42a5f5)}
+  .fill.ti{background:linear-gradient(90deg,#d84343,#ef7777)}
+
+  .chartgrid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+
+  .chartcard{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:18px;
+    box-shadow:0 2px 10px rgba(10,30,60,0.04);
+  }
+
+  .chtitle{font-weight:800;margin-bottom:6px;color:#1d334d}
+  .chnote{font-size:12px;color:var(--muted);margin-bottom:14px}
+  .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-bottom:12px}
+
+  .sw{
+    width:10px;
+    height:10px;
+    border-radius:2px;
+    display:inline-block;
+    margin-right:6px;
+  }
+
+  .sw.stm{background:var(--stm)}
+  .sw.ti{background:var(--ti)}
+
+  .colchart{
+    height:280px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+    align-items:end;
+    padding:0 8px 34px;
+    border-bottom:1px solid var(--border);
+    position:relative;
+  }
+
+  .grp{
+    height:100%;
+    display:flex;
+    align-items:end;
+    justify-content:center;
+    gap:8px;
+    position:relative;
+  }
+
+  .bar{
+    width:min(42%,50px);
+    border-radius:6px 6px 0 0;
+    position:relative;
+    min-height:24px;
+  }
+
+  .bar.stm{background:linear-gradient(180deg,#67b0ff,#1f78df)}
+  .bar.ti{background:linear-gradient(180deg,#f5a1a1,#d64b4b)}
+
+  .barv{
+    position:absolute;
+    bottom:calc(100% + 4px);
+    left:50%;
+    transform:translateX(-50%);
+    font-size:10px;
+    font-weight:800;
+    white-space:nowrap;
+    color:#334155;
+  }
+
+  .grplbl{
+    position:absolute;
+    bottom:-28px;
+    left:0;
+    right:0;
+    text-align:center;
+    font-size:12px;
+    color:var(--muted);
+  }
+
+  ul{padding-left:20px}
+
+  code{
+    background:#f1f5f9;
+    border:1px solid #d6e0ea;
+    border-radius:6px;
+    padding:1px 6px;
+    color:#0f5ea8;
+  }
+
+  footer{
+    padding:22px 0 36px;
+    color:var(--muted);
+    font-size:12px;
+    text-align:center;
+  }
+
+  .small{font-size:12px;color:var(--muted)}
+
+  @media (max-width:1000px){
+    .grid-4{grid-template-columns:repeat(2,1fr)}
+    .chartgrid,.grid-2,.grid-3{grid-template-columns:1fr}
+  }
+
+  @media (max-width:640px){
+    .grid-4{grid-template-columns:1fr}
+    .barrow{grid-template-columns:1fr}
+    h1{font-size:28px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <h1>STM32C5 vs TI MSPM33 — FreeRTOS Benchmark Results</h1>
+    <div class="subtitle">
+      Presentation-ready summary of footprint and runtime benchmark outputs for
+      <strong>basic_processing</strong>, <strong>cooperative_scheduling</strong>, and
+      <strong>preemptive_scheduling</strong> using <strong>IAR EWARM 9.60.3.422</strong> with
+      <strong>High/Size (-Ohz)</strong>.
+    </div>
+    <div class="badges">
+      <span class="badge green">STM32C5 wins flash in all 3 scenarios</span>
+      <span class="badge blue">RAM essentially tied</span>
+      <span class="badge amber">Runtime = observed throughput only</span>
+      <span class="badge blue">FreeRTOS config aligned on TI side</span>
+      <span class="badge green">Analysis ready for management review</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+<section id="exec">
+  <h2>Executive Summary</h2>
+  <p class="lead">
+    Across the 3 FreeRTOS benchmark scenarios, <strong>STM32C5 consistently produces the smaller linked flash image</strong>,
+    with a measured reduction of about <strong>28–30%</strong> versus TI MSPM33 after TI's FreeRTOS configuration was aligned to remove an avoidable fairness artifact.
+    RAM is <strong>effectively tied</strong>, with STM32 only <strong>56–76 bytes higher</strong> depending on scenario.
+  </p>
+  <p class="lead">
+    Observed runtime logs also show <strong>higher raw throughput on STM32</strong> in all 3 scenarios. However, that runtime result must be treated as
+    <strong>observed behavior only</strong>, not a final capability conclusion, because CPU clock parity and cross-target codegen equivalence were not fully verified.
+  </p>
+
+  <div class="grid-4">
+    <div class="card">
+      <div class="label">Flash Outcome</div>
+      <div class="value stm">STM32 Smaller</div>
+      <div class="sub">All 3 scenarios, post-alignment</div>
+    </div>
+    <div class="card">
+      <div class="label">Average Flash Advantage</div>
+      <div class="value stm">-28.6%</div>
+      <div class="sub">Range: -27.9% to -29.6%</div>
+    </div>
+    <div class="card">
+      <div class="label">RAM Outcome</div>
+      <div class="value">Near Tie</div>
+      <div class="sub">STM32 +56 to +76 bytes</div>
+    </div>
+    <div class="card">
+      <div class="label">Runtime Conclusion Status</div>
+      <div class="value" style="color:var(--warn)">Not Final</div>
+      <div class="sub">Observed throughput only</div>
+    </div>
+  </div>
+
+  <div class="callout ok" style="margin-top:18px">
+    <strong>Bottom line:</strong> For this FreeRTOS benchmark campaign, the strongest confirmed result is
+    <strong>flash footprint leadership for STM32C5</strong>. The application layer is close to equivalent across vendors,
+    while the remaining footprint gap is driven primarily by TI's low-level/library side, especially
+    <code>vsnprintf()</code>-driven full printf inclusion.
+  </div>
+</section>
+
+<section id="kpis">
+  <h2>Top-Level KPIs</h2>
+  <div class="grid-4">
+    <div class="card">
+      <div class="label">Largest Remaining Flash Driver</div>
+      <div class="value ti">~6.8 KB</div>
+      <div class="sub">TI printf/library pull-in from <code>vsnprintf()</code></div>
+    </div>
+    <div class="card">
+      <div class="label">Largest TI Object</div>
+      <div class="value ti">3,766 B</div>
+      <div class="sub"><code>xprintffull_nomb.o</code></div>
+    </div>
+    <div class="card">
+      <div class="label">Middleware Gap After Alignment</div>
+      <div class="value">~16–17%</div>
+      <div class="sub">Previously ~46–50%</div>
+    </div>
+    <div class="card">
+      <div class="label">Application Layer</div>
+      <div class="value stm">Comparable</div>
+      <div class="sub">Near-parity across all scenarios</div>
+    </div>
+  </div>
+</section>
+
+<section id="footprint-overview">
+  <h2>Footprint Overview</h2>
+
+  <div class="chartgrid">
+    <div class="chartcard">
+      <div class="chtitle">Flash by Scenario</div>
+      <div class="chnote">Linked flash bytes. Lower is better.</div>
+      <div class="legend">
+        <span><span class="sw stm"></span>STM32C5</span>
+        <span><span class="sw ti"></span>TI MSPM33</span>
+      </div>
+      <div class="colchart" role="img" aria-label="Flash comparison across 3 scenarios">
+        <div class="grp">
+          <div class="bar stm" style="height:56.6%"><span class="barv">9,052</span></div>
+          <div class="bar ti" style="height:80.3%"><span class="barv">12,854</span></div>
+          <div class="grplbl">Basic</div>
+        </div>
+        <div class="grp">
+          <div class="bar stm" style="height:60.3%"><span class="barv">9,640</span></div>
+          <div class="bar ti" style="height:83.9%"><span class="barv">13,430</span></div>
+          <div class="grplbl">Cooperative</div>
+        </div>
+        <div class="grp">
+          <div class="bar stm" style="height:62.6%"><span class="barv">10,012</span></div>
+          <div class="bar ti" style="height:86.8%"><span class="barv">13,894</span></div>
+          <div class="grplbl">Preemptive</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chartcard">
+      <div class="chtitle">RAM by Scenario</div>
+      <div class="chnote">Linked RAM bytes. Difference is small; values are effectively tied.</div>
+      <div class="bars">
+        <div class="barrow">
+          <div class="barlabel">Basic — STM32</div>
+          <div class="track"><div class="fill stm" style="width:100%">10,196 B</div></div>
+        </div>
+        <div class="barrow">
+          <div class="barlabel">Basic — TI</div>
+          <div class="track"><div class="fill ti" style="width:99.5%">10,140 B</div></div>
+        </div>
+
+        <div class="barrow">
+          <div class="barlabel">Coop — STM32</div>
+          <div class="track"><div class="fill stm" style="width:90.1%">9,188 B</div></div>
+        </div>
+        <div class="barrow">
+          <div class="barlabel">Coop — TI</div>
+          <div class="track"><div class="fill ti" style="width:89.6%">9,132 B</div></div>
+        </div>
+
+        <div class="barrow">
+          <div class="barlabel">Preempt — STM32</div>
+          <div class="track"><div class="fill stm" style="width:90.1%">9,188 B</div></div>
+        </div>
+        <div class="barrow">
+          <div class="barlabel">Preempt — TI</div>
+          <div class="track"><div class="fill ti" style="width:89.4%">9,112 B</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <table style="margin-top:18px">
+    <thead>
+      <tr>
+        <th>Scenario</th>
+        <th>STM32 Flash</th>
+        <th>TI Flash</th>
+        <th>Flash Delta</th>
+        <th>STM32 RAM</th>
+        <th>TI RAM</th>
+        <th>RAM Delta</th>
+        <th>Result</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>basic_processing</td>
+        <td>9,052</td>
+        <td>12,854</td>
+        <td class="stm">-3,802 (-29.58%)</td>
+        <td>10,196</td>
+        <td>10,140</td>
+        <td style="color:var(--ti);font-weight:700;">+56 (+0.55%)</td>
+        <td><span class="tag ok">STM32 flash win</span></td>
+      </tr>
+      <tr>
+        <td>cooperative_scheduling</td>
+        <td>9,640</td>
+        <td>13,430</td>
+        <td class="stm">-3,790 (-28.22%)</td>
+        <td>9,188</td>
+        <td>9,132</td>
+        <td style="color:var(--ti);font-weight:700;">+56 (+0.61%)</td>
+        <td><span class="tag ok">STM32 flash win</span></td>
+      </tr>
+      <tr>
+        <td>preemptive_scheduling</td>
+        <td>10,012</td>
+        <td>13,894</td>
+        <td class="stm">-3,882 (-27.94%)</td>
+        <td>9,188</td>
+        <td>9,112</td>
+        <td style="color:var(--ti);font-weight:700;">+76 (+0.83%)</td>
+        <td><span class="tag ok">STM32 flash win</span></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="root-cause">
+  <h2>Why the Flash Gap Exists</h2>
+  <div class="grid-3">
+    <div class="card">
+      <h3 style="margin-top:0">1. Application Layer</h3>
+      <p>
+        The benchmark application logic is essentially comparable across vendors. In multiple cases,
+        object-level evidence shows only a few bytes of difference, supporting that the app itself is
+        <strong>not the main driver</strong> of the measured gap.
+      </p>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">2. Middleware Layer</h3>
+      <p>
+        A significant fairness artifact on TI was removed by aligning FreeRTOS feature flags
+        with STM32. That reduced the middleware gap from roughly <strong>46–50%</strong> down to roughly
+        <strong>16–17%</strong>.
+      </p>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">3. Low-Level / Library Layer</h3>
+      <p>
+        The largest remaining flash delta is dominated by TI's <code>vsnprintf()</code> path,
+        which pulls in a much larger full printf formatter. This is the main remaining explanation for the
+        measured flash difference.
+      </p>
+    </div>
+  </div>
+
+  <div class="callout warn" style="margin-top:18px">
+    <strong>Important nuance:</strong> the remaining low-level gap is <strong>not purely a driver-library problem</strong>.
+    In isolation, TI DriverLib is lighter than STM32 HAL in direction, but TI's measured low-level bucket still becomes larger overall
+    because of the standard-library formatting path.
+  </div>
+</section>
+
+<section id="scenario-details">
+  <h2>Scenario Results</h2>
+
+  <div class="grid-3">
+    <div class="card">
+      <div class="label">basic_processing</div>
+      <div class="value stm">-29.6%</div>
+      <div class="sub">Flash delta: -3,802 B</div>
+      <div class="sub">RAM delta: +56 B</div>
+      <hr style="border-color:var(--border);margin:14px 0">
+      <div class="small">
+        <strong>Main points:</strong><br>
+        STM32 smaller in flash; RAM effectively tied. Biggest contributor remains TI full printf formatter pull-in.
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="label">cooperative_scheduling</div>
+      <div class="value stm">-28.2%</div>
+      <div class="sub">Flash delta: -3,790 B</div>
+      <div class="sub">RAM delta: +56 B</div>
+      <hr style="border-color:var(--border);margin:14px 0">
+      <div class="small">
+        <strong>Main points:</strong><br>
+        Application layer near-identical. Middleware fairness issue resolved. Remaining gap still mostly low-level/library.
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="label">preemptive_scheduling</div>
+      <div class="value stm">-27.9%</div>
+      <div class="sub">Flash delta: -3,882 B</div>
+      <div class="sub">RAM delta: +76 B</div>
+      <hr style="border-color:var(--border);margin:14px 0">
+      <div class="small">
+        <strong>Main points:</strong><br>
+        Same pattern as other scenarios. RAM difference explained by approved design differences and static allocation placement.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="runtime">
+  <h2>Runtime Throughput — Observed Results</h2>
+  <p class="lead">
+    UART log captures show higher raw throughput on STM32 in all 3 scenarios. However, this section reports
+    <strong>observed throughput only</strong>. It does <strong>not</strong> establish a confirmed performance advantage,
+    because target clock frequency and cross-target compiler efficiency were not normalized or independently verified.
+  </p>
+
+  <div class="grid-4">
+    <div class="card">
+      <div class="label">Basic processing</div>
+      <div class="value stm">+351.11%</div>
+      <div class="sub">Observed thread/s vs TI</div>
+    </div>
+    <div class="card">
+      <div class="label">Cooperative scheduling</div>
+      <div class="value stm">+533.40%</div>
+      <div class="sub">Observed per-thread/s vs TI</div>
+    </div>
+    <div class="card">
+      <div class="label">Preemptive scheduling</div>
+      <div class="value stm">+673.67%</div>
+      <div class="sub">Observed per-thread/s vs TI</div>
+    </div>
+    <div class="card">
+      <div class="label">Conclusion Status</div>
+      <div class="value" style="color:var(--warn)">Blocked</div>
+      <div class="sub">Clock parity and codegen parity unverified</div>
+    </div>
+  </div>
+
+  <table style="margin-top:18px">
+    <thead>
+      <tr>
+        <th>Scenario</th>
+        <th>Metric</th>
+        <th>STM32</th>
+        <th>TI</th>
+        <th>Delta %</th>
+        <th>Interpretation</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>basic_processing</td>
+        <td>thread/second</td>
+        <td>43,172.93</td>
+        <td>9,570.47</td>
+        <td class="stm">+351.11%</td>
+        <td><span class="tag warn">Observed only</span></td>
+      </tr>
+      <tr>
+        <td>cooperative_scheduling</td>
+        <td>per-thread/second</td>
+        <td>226,652.76</td>
+        <td>35,783.68</td>
+        <td class="stm">+533.40%</td>
+        <td><span class="tag warn">Observed only</span></td>
+      </tr>
+      <tr>
+        <td>preemptive_scheduling</td>
+        <td>per-thread/second</td>
+        <td>55,015.52</td>
+        <td>7,110.96</td>
+        <td class="stm">+673.67%</td>
+        <td><span class="tag warn">Observed only</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout info" style="margin-top:18px">
+    <strong>Interpretation rule:</strong> These data are valid as <strong>test observations under the captured conditions</strong>.
+    They should not be presented externally as “STM32 is X times faster” until clock-rate equality or normalization is verified,
+    and the accepted risk around cross-target compiler/codegen efficiency is addressed.
+  </div>
+</section>
+
+<section id="runtime-anomaly">
+  <h2>Observed Runtime Anomaly</h2>
+  <div class="card">
+    <h3 style="margin-top:0">TI cooperative_scheduling ERROR at 90 s / 120 s</h3>
+    <p>
+      The TI cooperative log shows an <code>ERROR</code> at the 90,000 ms and 120,000 ms marks only.
+      This was traced to the benchmark's own integer-truncated average and ±1 tolerance logic, not to a confirmed scheduling defect.
+    </p>
+    <ul>
+      <li>The condition occurs when integer division truncation places one thread count just outside the allowed bound.</li>
+      <li>The spread is of the same order as non-error windows.</li>
+      <li>STM32 did not show the same artifact in the shorter capture window, but a longer STM32 run could plausibly hit it too.</li>
+    </ul>
+    <p><span class="tag info">Classification:</span> <strong>Benchmark-design artifact</strong>, not a confirmed functional gap.</p>
+  </div>
+</section>
+
+<section id="fairness">
+  <h2>Fairness and Interpretation Boundaries</h2>
+  <div class="grid-2">
+    <div class="card">
+      <h3 style="margin-top:0">Confirmed Fair / Controlled</h3>
+      <ul>
+        <li>Same toolchain family: IAR EWARM</li>
+        <li>High/Size optimization on both platforms</li>
+        <li>Same benchmark scenarios and intent</li>
+        <li>FreeRTOS config fairness issue corrected on TI side</li>
+        <li>Equal CSTACK set to 512 B in the final comparison</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">Still Open / Not Fully Controlled</h3>
+      <ul>
+        <li>Actual CPU clock frequency equality not independently verified</li>
+        <li>Cross-target codegen efficiency not normalized</li>
+        <li>Runtime sample-length asymmetry remains</li>
+        <li>One preemptive implementation uses different but approved primitives</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout warn" style="margin-top:18px">
+    <strong>Executive caution:</strong> The <strong>footprint conclusion is solid</strong>.
+    The <strong>runtime conclusion is provisional</strong> and should be described as
+    <em>observed throughput under current test conditions</em>, not as a final platform-performance ranking.
+  </div>
+</section>
+
+<section id="recommendations">
+  <h2>Recommended Actions</h2>
+  <div class="grid-3">
+    <div class="card">
+      <h3 style="margin-top:0">1. Close the runtime blocker</h3>
+      <p>
+        Measure or normalize actual CPU clock frequency on both targets.
+        This is the main blocker to converting observed throughput into a defensible capability conclusion.
+      </p>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">2. Remove TI printf inflation</h3>
+      <p>
+        Replace TI's <code>vsnprintf()</code> path in <code>benchmark_port.c</code> with a lightweight formatter similar in scope
+        to the STM32 implementation. This is expected to recover about <strong>6.8 KB</strong> of flash.
+      </p>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">3. Optional STM32 footprint reduction</h3>
+      <p>
+        If needed, evaluate HAL-to-LL migration for STM32 low-level drivers.
+        This requires approval because it changes protected low-level implementation surface.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="management-summary">
+  <h2>Management Summary</h2>
+  <div class="callout ok">
+    <ul style="margin:0">
+      <li><strong>STM32C5 is the confirmed flash-footprint winner</strong> across all 3 FreeRTOS benchmark scenarios.</li>
+      <li>The measured flash advantage remains substantial even after fairness alignment on TI's FreeRTOS configuration.</li>
+      <li><strong>RAM is effectively tied</strong>; differences are very small.</li>
+      <li>The application layer is near-equivalent and is not the primary cause of the measured gap.</li>
+      <li>The dominant remaining flash driver is TI's standard-library formatting path, not just vendor driver weight.</li>
+      <li>Observed runtime throughput favors STM32 in all logs captured, but <strong>that is not yet a final capability claim</strong>.</li>
+      <li>Next step for a runtime conclusion: verify or normalize clock frequency and accept or resolve the remaining codegen-risk caveat.</li>
+    </ul>
+  </div>
+</section>
+
+</div>
+
+<footer>
+  Generated from:
+  <code>footprint_layer_analysis_report.html</code>,
+  <code>footprint_high_size_comparison.md</code>,
+  and <code>runtime_performance_comparison.md</code>.
+  Runtime values are reported as observed throughput only.
+</footer>
+
+</body>
+</html>

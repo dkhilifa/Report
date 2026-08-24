@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MSPM33C321A vs STM32C5A3ZG Footprint Comparison</title>
+  <style>
+    :root {
+      --st-blue: #0033a0;
+      --ti-red: #c00000;
+      --mspm0-green: #2e8b57;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --bg: #f7f9fc;
+      --card: #ffffff;
+      --line: #dbe2ea;
+      --pos: #b42318;
+      --neg: #027a48;
+      --neutral: #667085;
+      --shadow: 0 6px 18px rgba(15, 23, 42, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.35;
+    }
+
+    .deck {
+      max-width: 1400px;
+      margin: 24px auto 48px;
+      padding: 0 16px;
+    }
+
+    .slide {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      padding: 28px 32px;
+      margin: 0 0 24px 0;
+      page-break-after: always;
+    }
+
+    .slide h1, .slide h2, .slide h3 {
+      margin: 0 0 14px 0;
+      color: var(--st-blue);
+    }
+
+    .slide h1 { font-size: 34px; }
+    .slide h2 { font-size: 28px; }
+    .slide h3 { font-size: 20px; }
+
+    .subtitle {
+      font-size: 18px;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .kpis {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .kpi {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 16px;
+      background: #fbfdff;
+    }
+
+    .kpi .label {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    .kpi .value {
+      font-size: 26px;
+      font-weight: 700;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-right: 8px;
+      margin-bottom: 6px;
+      color: white;
+    }
+
+    .badge.st { background: var(--st-blue); }
+    .badge.ti { background: var(--ti-red); }
+    .badge.m0 { background: var(--mspm0-green); }
+    .badge.neutral { background: #475467; }
+
+    .cols-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .cols-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    ul {
+      margin: 8px 0 0 20px;
+      padding: 0;
+    }
+
+    li { margin-bottom: 6px; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 14px;
+      font-size: 14px;
+    }
+
+    th, td {
+      border: 1px solid var(--line);
+      padding: 8px 10px;
+      vertical-align: top;
+      text-align: left;
+    }
+
+    th {
+      background: #eef4ff;
+      color: #0f172a;
+      font-weight: 700;
+      position: sticky;
+      top: 0;
+    }
+
+    td.num, th.num {
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .delta-pos { color: var(--pos); font-weight: 700; }
+    .delta-neg { color: var(--neg); font-weight: 700; }
+    .delta-zero { color: var(--neutral); font-weight: 700; }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 16px;
+      background: #fbfdff;
+    }
+
+    .small { font-size: 13px; color: var(--muted); }
+    .center { text-align: center; }
+
+    .bar-wrap {
+      margin-top: 18px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .bar-row {
+      display: grid;
+      grid-template-columns: 240px 1fr 100px;
+      gap: 12px;
+      align-items: center;
+      font-size: 14px;
+    }
+
+    .bar {
+      height: 18px;
+      border-radius: 999px;
+      background: #e5e7eb;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .bar > span {
+      display: block;
+      height: 100%;
+      border-radius: 999px;
+    }
+
+    .bar.st > span { background: var(--st-blue); }
+    .bar.ti > span { background: var(--ti-red); }
+    .bar.m0 > span { background: var(--mspm0-green); }
+
+    .footer-note {
+      margin-top: 16px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    @media print {
+      body { background: white; }
+      .deck { max-width: none; margin: 0; padding: 0; }
+      .slide {
+        border: none;
+        box-shadow: none;
+        border-radius: 0;
+        min-height: 100vh;
+        margin: 0;
+        padding: 18mm 16mm;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .kpis, .cols-2, .cols-3 {
+        grid-template-columns: 1fr;
+      }
+      .bar-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="deck">
+
+    <!-- Slide 1 -->
+    <section class="slide">
+      <div>
+        <span class="badge ti">TI MSPM33C321A</span>
+        <span class="badge st">ST STM32C5A3ZG</span>
+        <span class="badge m0">MSPM0 Extension</span>
+      </div>
+      <h1>MSPM33C321A vs STM32C5A3ZG Footprint Comparison</h1>
+      <div class="subtitle">Flash and RAM analysis across 12 semantically mapped IAR projects</div>
+
+      <div class="panel">
+        <ul>
+          <li><b>Method:</b> IAR linker map analysis</li>
+          <li><b>Rebuilt maps date:</b> 2026-07-28</li>
+          <li><b>Toolchain baseline:</b> IAR EWARM 9.60.3</li>
+          <li><b>Optimization baseline:</b> <code>CCOptLevel = 3</code>, <code>CCOptStrategy = 1</code></li>
+          <li><b>Normalized metrics:</b> Flash = RO code + RO data, RAM = RW data</li>
+        </ul>
+      </div>
+
+      <div class="kpis">
+        <div class="kpi">
+          <div class="label">Compared project pairs</div>
+          <div class="value">12</div>
+        </div>
+        <div class="kpi">
+          <div class="label">STM32 flash wins</div>
+          <div class="value">7 / 12</div>
+        </div>
+        <div class="kpi">
+          <div class="label">STM32 RAM wins</div>
+          <div class="value">8 / 12</div>
+        </div>
+        <div class="kpi">
+          <div class="label">Fairness status</div>
+          <div class="value">Valid</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 2 -->
+    <section class="slide">
+      <h2>Objective and Measurement Method</h2>
+      <div class="cols-2">
+        <div class="panel">
+          <h3>Objective</h3>
+          <ul>
+            <li>Compare linked flash and RAM footprint of 12 semantically mapped projects.</li>
+            <li>Verify equal optimization baseline across both platforms.</li>
+            <li>Identify where STM32 is stronger and where it remains weaker.</li>
+            <li>Interpret differences using only map-file evidence.</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>Measurement</h3>
+          <ul>
+            <li><b>RO code</b>: readonly code memory</li>
+            <li><b>RO data</b>: readonly data memory</li>
+            <li><b>RW data</b>: readwrite data memory</li>
+            <li><b>Flash</b> = RO code + RO data</li>
+            <li><b>RAM</b> = RW data</li>
+            <li>Both platforms reserve a 512-byte stack in these maps.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="panel" style="margin-top:16px;">
+        <h3>Fairness rules</h3>
+        <ul>
+          <li>Like-for-like scenario and role pairing</li>
+          <li>Controller/master matches controller/master</li>
+          <li>Responder/target/peripheral matches responder/target/peripheral</li>
+          <li>DMA, interrupt, and polling modes are not mixed</li>
+          <li>Startup/vector-table bytes are included as real deployable image cost</li>
+          <li>Startup, linker, HAL, LL, CMSIS, middleware, and vendor internals were not modified</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Slide 3 -->
+    <section class="slide">
+      <h2>Compared Scenario Set</h2>
+      <table>
+        <thead>
+          <tr>
+            <th class="num">#</th>
+            <th>Scenario and role</th>
+            <th>MSPM33 project</th>
+            <th>STM32C5 project</th>
+            <th>Optimization fairness</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="num">1</td><td>ADC single conversion, timer trigger</td><td>ADC_SingleConv_Trigger_MSPM33C321A</td><td>adc/ADC_SingleConv_Trigger_manualOptimize -withoutMX</td><td>Valid</td></tr>
+          <tr><td class="num">2</td><td>GPIO output toggle</td><td>GPIO_IOToggling_MSPM33C321A</td><td>gpio/GPIO_Toggle_manualOptimize_withoutMX</td><td>Valid</td></tr>
+          <tr><td class="num">3</td><td>I2C DMA controller</td><td>I2C_TwoBoards_ComDMA_MSPM33C321A/CONTROLLER_BOARD</td><td>i2c/two_boards_com_dma_controller_Optimize</td><td>Valid</td></tr>
+          <tr><td class="num">4</td><td>I2C DMA responder/target</td><td>I2C_TwoBoards_ComDMA_MSPM33C321A/TARGET_BOARD</td><td>i2c/two_boards_com_dma_responder_Optimize</td><td>Valid</td></tr>
+          <tr><td class="num">5</td><td>I2C interrupt controller</td><td>I2C_TwoBoards_ComIT_MSPM33C321A/CONTROLLER_BOARD</td><td>i2c/two_boards_com_it_controller_manualOptimize _withoutMX</td><td>Valid</td></tr>
+          <tr><td class="num">6</td><td>I2C interrupt responder/target</td><td>I2C_TwoBoards_ComIT_MSPM33C321A/TARGET_BOARD</td><td>i2c/two_boards_com_it_responder_manualOptimize_withoutMX</td><td>Valid</td></tr>
+          <tr><td class="num">7</td><td>I2C polling controller</td><td>I2C_TwoBoards_ComPolling_MSPM33C321A/CONTROLLER_BOARD</td><td>i2c/two_boards_com_polling_control_manualOptimize_withoutMX</td><td>Valid</td></tr>
+          <tr><td class="num">8</td><td>I2C polling responder/target</td><td>I2C_TwoBoards_ComPolling_MSPM33C321A/TARGET_BOARD</td><td>i2c/two_boards_com_polling_responder_manualOptimize_withoutMX</td><td>Valid</td></tr>
+          <tr><td class="num">9</td><td>SPI DMA controller/master</td><td>SPI_TwoBoards_ComDMA_MSPM33C321A/CONTROLLER_BOARD</td><td>spi/SPI_DMA_Master_manualOptimize _withoutMX</td><td>Valid</td></tr>
+          <tr><td class="num">10</td><td>SPI DMA peripheral/slave</td><td>SPI_TwoBoards_ComDMA_MSPM33C321A/PERIPHERAL_BOARD</td><td>spi/SPI_DMA_Slave_manualOptimize _withoutMX</td><td>Valid</td></tr>
+          <tr><td class="num">11</td><td>UART/USART printf</td><td>UART_Printf_MSPM33C321A</td><td>USART/USART_printf_manualOptimize_withoutMX</td><td>Valid</td></tr>
+          <tr><td class="num">12</td><td>USART loopback</td><td>USART_LOOPBACK_MSPM33C321A</td><td>USART/USART_LOOPBACK_manualOptimize_withoutMX</td><td>Valid</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Slide 4 -->
+    <section class="slide">
+      <h2>Detailed Footprint Results</h2>
+      <div class="small">Positive delta means STM32 uses more memory. Negative delta means STM32 uses less memory.</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Scenario</th>
+            <th class="num">MSP Flash</th>
+            <th class="num">ST Flash</th>
+            <th class="num">Delta Flash (bytes)</th>
+            <th class="num">Delta Flash (%)</th>
+            <th class="num">MSP RAM</th>
+            <th class="num">ST RAM</th>
+            <th class="num">Delta RAM (bytes)</th>
+            <th class="num">Delta RAM (%)</th>
+            <th>Result</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>ADC timer trigger</td><td class="num">1,476</td><td class="num">1,416</td><td class="num delta-neg">-60</td><td class="num delta-neg">-4.1%</td><td class="num">513</td><td class="num">513</td><td class="num delta-zero">0</td><td class="num delta-zero">0.0%</td><td><b>ST flash win</b></td></tr>
+          <tr><td>GPIO toggle</td><td class="num">656</td><td class="num">772</td><td class="num delta-pos">+116</td><td class="num delta-pos">+17.7%</td><td class="num">512</td><td class="num">512</td><td class="num delta-zero">0</td><td class="num delta-zero">0.0%</td><td>MSP flash; ST less code</td></tr>
+          <tr><td>I2C DMA controller</td><td class="num">1,928</td><td class="num">1,840</td><td class="num delta-neg">-88</td><td class="num delta-neg">-4.6%</td><td class="num">553</td><td class="num">517</td><td class="num delta-neg">-36</td><td class="num delta-neg">-6.5%</td><td><b>ST flash/RAM win</b></td></tr>
+          <tr><td>I2C DMA responder</td><td class="num">1,744</td><td class="num">1,687</td><td class="num delta-neg">-57</td><td class="num delta-neg">-3.3%</td><td class="num">593</td><td class="num">556</td><td class="num delta-neg">-37</td><td class="num delta-neg">-6.2%</td><td><b>ST flash/RAM win</b></td></tr>
+          <tr><td>I2C IT controller</td><td class="num">1,580</td><td class="num">1,732</td><td class="num delta-pos">+152</td><td class="num delta-pos">+9.6%</td><td class="num">557</td><td class="num">514</td><td class="num delta-neg">-43</td><td class="num delta-neg">-7.7%</td><td>MSP flash; <b>ST RAM</b></td></tr>
+          <tr><td>I2C IT responder</td><td class="num">1,388</td><td class="num">1,460</td><td class="num delta-pos">+72</td><td class="num delta-pos">+5.2%</td><td class="num">600</td><td class="num">553</td><td class="num delta-neg">-47</td><td class="num delta-neg">-7.8%</td><td>MSP flash; <b>ST RAM</b></td></tr>
+          <tr><td>I2C polling controller</td><td class="num">1,420</td><td class="num">1,376</td><td class="num delta-neg">-44</td><td class="num delta-neg">-3.1%</td><td class="num">556</td><td class="num">513</td><td class="num delta-neg">-43</td><td class="num delta-neg">-7.7%</td><td><b>ST flash/RAM win</b></td></tr>
+          <tr><td>I2C polling responder</td><td class="num">1,412</td><td class="num">1,340</td><td class="num delta-neg">-72</td><td class="num delta-neg">-5.1%</td><td class="num">608</td><td class="num">552</td><td class="num delta-neg">-56</td><td class="num delta-neg">-9.2%</td><td><b>ST flash/RAM win</b></td></tr>
+          <tr><td>SPI DMA controller</td><td class="num">1,704</td><td class="num">2,151</td><td class="num delta-pos">+447</td><td class="num delta-pos">+26.2%</td><td class="num">592</td><td class="num">556</td><td class="num delta-neg">-36</td><td class="num delta-neg">-6.1%</td><td>MSP flash; <b>ST RAM</b></td></tr>
+          <tr><td>SPI DMA peripheral</td><td class="num">1,876</td><td class="num">1,940</td><td class="num delta-pos">+64</td><td class="num delta-pos">+3.4%</td><td class="num">592</td><td class="num">552</td><td class="num delta-neg">-40</td><td class="num delta-neg">-6.8%</td><td>MSP flash; <b>ST RAM</b></td></tr>
+          <tr><td>UART printf</td><td class="num">1,326</td><td class="num">1,318</td><td class="num delta-neg">-8</td><td class="num delta-neg">-0.6%</td><td class="num">512</td><td class="num">512</td><td class="num delta-zero">0</td><td class="num delta-zero">0.0%</td><td><b>ST flash win</b></td></tr>
+          <tr><td>USART loopback</td><td class="num">1,588</td><td class="num">1,580</td><td class="num delta-neg">-8</td><td class="num delta-neg">-0.5%</td><td class="num">532</td><td class="num">532</td><td class="num delta-zero">0</td><td class="num delta-zero">0.0%</td><td><b>ST flash win</b></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Slide 5 -->
+    <section class="slide">
+      <h2>Aggregate Results</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Metric</th>
+            <th class="num">MSPM33 total</th>
+            <th class="num">STM32C5 total</th>
+            <th class="num">Delta (bytes)</th>
+            <th class="num">Delta (%)</th>
+            <th>Interpretation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Flash</td>
+            <td class="num">18,098</td>
+            <td class="num">18,612</td>
+            <td class="num delta-pos">+514</td>
+            <td class="num delta-pos">+2.8%</td>
+            <td>MSPM33 has the smaller aggregate linked image</td>
+          </tr>
+          <tr>
+            <td>RAM</td>
+            <td class="num">6,720</td>
+            <td class="num">6,382</td>
+            <td class="num delta-neg">-338</td>
+            <td class="num delta-neg">-5.0%</td>
+            <td>STM32 has the smaller aggregate RAM allocation</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="cols-2" style="margin-top:18px;">
+        <div class="panel">
+          <h3>Scorecard</h3>
+          <ul>
+            <li><b>Flash wins:</b> STM32 7, MSPM33 5</li>
+            <li><b>RAM wins:</b> STM32 8, MSPM33 0</li>
+            <li><b>RAM ties:</b> 4</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>Interpretation</h3>
+          <ul>
+            <li>STM32 is stronger on RAM efficiency.</li>
+            <li>MSPM33 remains slightly better on aggregate flash.</li>
+            <li>STM32 is competitive in most scenario-level flash comparisons.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 6 -->
+    <section class="slide">
+      <h2>Where STM32 Is Strong</h2>
+      <div class="cols-2">
+        <div class="panel">
+          <h3>Scenario wins</h3>
+          <ul>
+            <li>ADC timer trigger</li>
+            <li>I2C DMA controller</li>
+            <li>I2C DMA responder</li>
+            <li>I2C polling controller</li>
+            <li>I2C polling responder</li>
+            <li>UART printf</li>
+            <li>USART loopback</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>Main reasons</h3>
+          <ul>
+            <li>Minimal app-owned initialization</li>
+            <li>Removal of unused buffers and dead state</li>
+            <li>Internalized helpers enabling better compiler folding</li>
+            <li>Lower RW data in many communication scenarios</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="panel" style="margin-top:16px;">
+        <h3>Key point</h3>
+        <p>STM32 is not inherently worse in executable code size. In some scenarios, STM32 RO code is smaller than MSPM33 RO code. Several remaining flash losses come from fixed RO-data overhead rather than inefficient application logic.</p>
+      </div>
+    </section>
+
+    <!-- Slide 7 -->
+    <section class="slide">
+      <h2>Where STM32 Is Weaker</h2>
+      <div class="cols-3">
+        <div class="panel">
+          <h3>GPIO toggle</h3>
+          <ul>
+            <li>Flash delta: <span class="delta-pos">+116 bytes</span></li>
+            <li>Flash delta: <span class="delta-pos">+17.7%</span></li>
+            <li>RAM: tie</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>I2C interrupt roles</h3>
+          <ul>
+            <li>IT controller: <span class="delta-pos">+152 bytes</span>, <span class="delta-pos">+9.6%</span></li>
+            <li>IT responder: <span class="delta-pos">+72 bytes</span>, <span class="delta-pos">+5.2%</span></li>
+            <li>But STM32 still wins RAM in both</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>SPI DMA</h3>
+          <ul>
+            <li>Controller: <span class="delta-pos">+447 bytes</span>, <span class="delta-pos">+26.2%</span></li>
+            <li>Peripheral: <span class="delta-pos">+64 bytes</span>, <span class="delta-pos">+3.4%</span></li>
+            <li>STM32 still wins RAM in both</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="panel" style="margin-top:16px;">
+        <h3>Main causes</h3>
+        <ul>
+          <li>Larger fixed startup/vector-table RO-data footprint</li>
+          <li>Required interrupt event/error infrastructure</li>
+          <li>More explicit application-owned control logic, especially in SPI DMA controller</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Slide 8 -->
+    <section class="slide">
+      <h2>Case Study — GPIO Toggle</h2>
+      <div class="cols-2">
+        <div class="panel">
+          <h3>Observed result</h3>
+          <ul>
+            <li>MSPM33 flash: <b>656</b></li>
+            <li>STM32 flash: <b>772</b></li>
+            <li>Delta: <span class="delta-pos">+116 bytes</span>, <span class="delta-pos">+17.7%</span></li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>Important nuance</h3>
+          <ul>
+            <li>MSPM33 RO code: <b>380</b></li>
+            <li>STM32 RO code: <b>312</b></li>
+            <li>STM32 code is actually <b>68 bytes smaller</b></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="panel" style="margin-top:16px;">
+        <h3>Why STM32 still loses</h3>
+        <ul>
+          <li>MSPM33 RO data: <b>276</b></li>
+          <li>STM32 RO data: <b>460</b></li>
+          <li>Fixed RO-data difference: <b>184 bytes</b></li>
+        </ul>
+        <p>This is a structural startup/vector-table penalty. The GPIO case is too small for the lower STM32 code size to overcome the fixed RO-data overhead.</p>
+      </div>
+    </section>
+
+    <!-- Slide 9 -->
+    <section class="slide">
+      <h2>Case Study — I2C Family</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Scenario</th>
+            <th class="num">Flash delta (bytes)</th>
+            <th class="num">Flash delta (%)</th>
+            <th class="num">RAM delta (bytes)</th>
+            <th class="num">RAM delta (%)</th>
+            <th>Interpretation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>I2C DMA controller</td><td class="num delta-neg">-88</td><td class="num delta-neg">-4.6%</td><td class="num delta-neg">-36</td><td class="num delta-neg">-6.5%</td><td>STM32 flash/RAM win</td></tr>
+          <tr><td>I2C DMA responder</td><td class="num delta-neg">-57</td><td class="num delta-neg">-3.3%</td><td class="num delta-neg">-37</td><td class="num delta-neg">-6.2%</td><td>STM32 flash/RAM win</td></tr>
+          <tr><td>I2C IT controller</td><td class="num delta-pos">+152</td><td class="num delta-pos">+9.6%</td><td class="num delta-neg">-43</td><td class="num delta-neg">-7.7%</td><td>MSP flash; STM32 RAM</td></tr>
+          <tr><td>I2C IT responder</td><td class="num delta-pos">+72</td><td class="num delta-pos">+5.2%</td><td class="num delta-neg">-47</td><td class="num delta-neg">-7.8%</td><td>MSP flash; STM32 RAM</td></tr>
+          <tr><td>I2C polling controller</td><td class="num delta-neg">-44</td><td class="num delta-neg">-3.1%</td><td class="num delta-neg">-43</td><td class="num delta-neg">-7.7%</td><td>STM32 flash/RAM win</td></tr>
+          <tr><td>I2C polling responder</td><td class="num delta-neg">-72</td><td class="num delta-neg">-5.1%</td><td class="num delta-neg">-56</td><td class="num delta-neg">-9.2%</td><td>STM32 flash/RAM win</td></tr>
+        </tbody>
+      </table>
+
+      <div class="panel" style="margin-top:16px;">
+        <h3>Interpretation</h3>
+        <ul>
+          <li>DMA and polling modes benefit strongly from cleanup of generic init and dead state.</li>
+          <li>Interrupt mode still pays flash for event/error setup and handlers.</li>
+          <li>Result: STM32 is strong on RAM throughout I2C, but only mixed on flash in interrupt mode.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Slide 10 -->
+    <section class="slide">
+      <h2>Case Study — SPI DMA</h2>
+      <div class="cols-2">
+        <div class="panel">
+          <h3>Controller</h3>
+          <ul>
+            <li>MSPM33 flash: <b>1,704</b></li>
+            <li>STM32 flash: <b>2,151</b></li>
+            <li>Delta: <span class="delta-pos">+447 bytes</span>, <span class="delta-pos">+26.2%</span></li>
+            <li>RAM delta: <span class="delta-neg">-36 bytes</span>, <span class="delta-neg">-6.1%</span></li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>Peripheral</h3>
+          <ul>
+            <li>MSPM33 flash: <b>1,876</b></li>
+            <li>STM32 flash: <b>1,940</b></li>
+            <li>Delta: <span class="delta-pos">+64 bytes</span>, <span class="delta-pos">+3.4%</span></li>
+            <li>RAM delta: <span class="delta-neg">-40 bytes</span>, <span class="delta-neg">-6.8%</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="panel" style="margin-top:16px;">
+        <h3>Why STM32 is worse here</h3>
+        <p>The STM32 application explicitly carries GPIO, DMA, SPI, NVIC, EOT, DMA-error, compare, LED, and delay behavior in the application object. MSPM33 resolves more of this behavior through compact linked DriverLib modules. This remains STM32’s largest flash weakness in the portfolio.</p>
+      </div>
+    </section>
+
+    <!-- Slide 11 -->
+    <section class="slide">
+      <h2>Effect of STM32 Optimization Work</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>STM32 project</th>
+            <th class="num">Previous flash</th>
+            <th class="num">Rebuilt flash</th>
+            <th class="num">Improvement (bytes)</th>
+            <th class="num">Improvement (%)</th>
+            <th>Cause</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>GPIO toggle</td><td class="num">792</td><td class="num">772</td><td class="num delta-neg">-20</td><td class="num delta-neg">-2.5%</td><td>Folded two-operation GPIO init into application code</td></tr>
+          <tr><td>I2C DMA controller</td><td class="num">2,076</td><td class="num">1,840</td><td class="num delta-neg">-236</td><td class="num delta-neg">-11.4%</td><td>Removed unused receive/debug state and generic generated init</td></tr>
+          <tr><td>I2C DMA responder</td><td class="num">1,982</td><td class="num">1,687</td><td class="num delta-neg">-295</td><td class="num delta-neg">-14.9%</td><td>Removed unused state and generic generated init</td></tr>
+          <tr><td>I2C IT controller</td><td class="num">2,716</td><td class="num">1,732</td><td class="num delta-neg">-984</td><td class="num delta-neg">-36.2%</td><td>Restored high/size, removed write-only debug flags, minimized init</td></tr>
+          <tr><td>I2C IT responder</td><td class="num">1,508</td><td class="num">1,460</td><td class="num delta-neg">-48</td><td class="num delta-neg">-3.2%</td><td>Narrowed transfer state and minimized init</td></tr>
+          <tr><td>I2C polling controller</td><td class="num">1,456</td><td class="num">1,376</td><td class="num delta-neg">-80</td><td class="num delta-neg">-5.5%</td><td>Removed unused receive buffer and minimized init</td></tr>
+          <tr><td>I2C polling responder</td><td class="num">1,398</td><td class="num">1,340</td><td class="num delta-neg">-58</td><td class="num delta-neg">-4.1%</td><td>Removed unused state and minimized init</td></tr>
+          <tr><td>SPI DMA controller</td><td class="num">2,265</td><td class="num">2,151</td><td class="num delta-neg">-114</td><td class="num delta-neg">-5.0%</td><td>Minimal init, compile-time lengths, internal helper optimization</td></tr>
+          <tr><td>SPI DMA peripheral</td><td class="num">2,025</td><td class="num">1,940</td><td class="num delta-neg">-85</td><td class="num delta-neg">-4.2%</td><td>Minimal init, removed unused state, internal helper optimization</td></tr>
+        </tbody>
+      </table>
+
+      <div class="footer-note">
+        ADC, UART printf, and USART loopback were rebuilt without application changes; their map totals remained unchanged.
+      </div>
+    </section>
+
+    <!-- Slide 12 -->
+    <section class="slide">
+      <h2>MSPM0 Extension</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Metric</th>
+            <th class="num">MSPM0 total</th>
+            <th class="num">MSPM33 total</th>
+            <th class="num">STM32C5 total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Flash</td><td class="num">14,954</td><td class="num">18,098</td><td class="num">18,612</td></tr>
+          <tr><td>RAM</td><td class="num">6,692</td><td class="num">6,720</td><td class="num">6,382</td></tr>
+        </tbody>
+      </table>
+
+      <div class="cols-2" style="margin-top:16px;">
+        <div class="panel">
+          <h3>Derived deltas vs MSPM0</h3>
+          <ul>
+            <li>STM32 flash: <span class="delta-pos">+3,658 bytes</span>, <span class="delta-pos">+24.5%</span></li>
+            <li>STM32 RAM: <span class="delta-neg">-310 bytes</span>, <span class="delta-neg">-4.6%</span></li>
+            <li>MSPM33 flash: <span class="delta-pos">+3,144 bytes</span>, <span class="delta-pos">+21.0%</span></li>
+            <li>MSPM33 RAM: <span class="delta-pos">+28 bytes</span>, <span class="delta-pos">+0.4%</span></li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>Interpretation</h3>
+          <ul>
+            <li>MSPM0 has the smallest aggregate flash of the three platforms.</li>
+            <li>STM32 keeps the smallest aggregate RAM.</li>
+            <li>The portfolio therefore splits into a flash leader and a RAM leader.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bar-wrap">
+        <div class="bar-row">
+          <div>Aggregate Flash</div>
+          <div class="bar m0"><span style="width:80.3%"></span></div>
+          <div class="num">14,954</div>
+        </div>
+        <div class="bar-row">
+          <div></div>
+          <div class="bar ti"><span style="width:97.2%"></span></div>
+          <div class="num">18,098</div>
+        </div>
+        <div class="bar-row">
+          <div></div>
+          <div class="bar st"><span style="width:100%"></span></div>
+          <div class="num">18,612</div>
+        </div>
+
+        <div class="bar-row" style="margin-top:10px;">
+          <div>Aggregate RAM</div>
+          <div class="bar m0"><span style="width:98.0%"></span></div>
+          <div class="num">6,692</div>
+        </div>
+        <div class="bar-row">
+          <div></div>
+          <div class="bar ti"><span style="width:98.4%"></span></div>
+          <div class="num">6,720</div>
+        </div>
+        <div class="bar-row">
+          <div></div>
+          <div class="bar st"><span style="width:94.9%"></span></div>
+          <div class="num">6,382</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 13 -->
+    <section class="slide">
+      <h2>Fairness Status and Limits</h2>
+      <div class="cols-2">
+        <div class="panel">
+          <h3>What is solid</h3>
+          <ul>
+            <li>All 12 active projects use the same high/size IAR baseline.</li>
+            <li>DMA, interrupt, and polling modes are paired like-for-like.</li>
+            <li>Controller/master and target/responder/peripheral roles are paired like-for-like.</li>
+            <li>Generated vendor files and internals were not modified.</li>
+            <li>All modified projects build with zero IAR errors and zero warnings.</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>Current limits</h3>
+          <ul>
+            <li>Hardware runtime equivalence has not yet been revalidated.</li>
+            <li>STM32Cube tree provenance is based on local evidence path.</li>
+            <li>MSPM0 numbers are from existing map artifacts, not rebuilt in this pass.</li>
+            <li>These are footprint results, not throughput or peripheral-quality claims.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 14 -->
+    <section class="slide">
+      <h2>Conclusion</h2>
+      <div class="kpis">
+        <div class="kpi">
+          <div class="label">Aggregate flash delta</div>
+          <div class="value delta-pos">+514</div>
+          <div class="small">STM32 vs MSPM33, +2.8%</div>
+        </div>
+        <div class="kpi">
+          <div class="label">Aggregate RAM delta</div>
+          <div class="value delta-neg">-338</div>
+          <div class="small">STM32 vs MSPM33, -5.0%</div>
+        </div>
+        <div class="kpi">
+          <div class="label">STM32 flash scene</div>
+          <div class="value">7 wins</div>
+          <div class="small">out of 12 scenarios</div>
+        </div>
+        <div class="kpi">
+          <div class="label">Largest STM32 weakness</div>
+          <div class="value">SPI DMA</div>
+          <div class="small">controller flash gap</div>
+        </div>
+      </div>
+
+      <div class="panel" style="margin-top:18px;">
+        <h3>Final message</h3>
+        <ul>
+          <li>MSPM33 has the smaller aggregate flash footprint by <b>514 bytes</b> or <b>2.8%</b>.</li>
+          <li>STM32 has the smaller aggregate RAM footprint by <b>338 bytes</b> or <b>5.0%</b>.</li>
+          <li>STM32 is strongest in ADC, I2C DMA, I2C polling, and small UART/USART cases.</li>
+          <li>STM32 remains weaker where fixed startup/vector overhead or explicit application-owned control paths dominate, especially GPIO and SPI DMA controller.</li>
+        </ul>
+      </div>
+
+      <div class="panel" style="margin-top:16px;">
+        <h3>Next actions</h3>
+        <ul>
+          <li>Run hardware validation on modified GPIO, I2C, and SPI projects.</li>
+          <li>Confirm GPIO periodicity, I2C transfer/completion behavior, SPI completion, buffer equality, success indication, and error behavior.</li>
+          <li>Use function-level map attribution for the remaining I2C interrupt and SPI controller gaps.</li>
+        </ul>
+      </div>
+    </section>
+
+  </div>
+</body>
+</html>

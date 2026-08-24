@@ -1,0 +1,46 @@
+\chapter*{Résumé}
+\addcontentsline{toc}{chapter}{Résumé}
+
+Ce rapport présente un projet de fin d'études réalisé au sein de STMicroelectronics Tunis
+afin de comparer l'écosystème STM32Cube à des écosystèmes concurrents au moyen de scénarios
+logiciels contrôlés. Nous avons établi une méthode de benchmarking fondée sur des
+fonctionnalités équivalentes, des conditions de compilation documentées, l'empreinte mémoire
+extraite des fichiers linker map, des mesures d'exécution lorsqu'elles étaient étayées par
+des observations matérielles, ainsi qu'une vérification explicite de l'équivalence sémantique
+et de l'équité des comparaisons. Nous avons également conçu deux outils de support~:
+\emph{MCU Workflow Studio}, qui structure l'analyse inter-vendeurs des fichiers linker map,
+et le \emph{MCU Benchmark Copilot Agent}, qui formalise le processus de création, de portage,
+de compilation, de traçabilité et de validation des projets.
+
+La campagne ST--GD32 achevée couvre la pile USB device à travers les scénarios Human
+Interface Device (HID) et Communication Device Class (CDC), ainsi que FreeRTOS à travers des
+scénarios d'ordonnancement basique, coopératif et préemptif. STM32 nécessite 35--88\,\% de
+mémoire flash supplémentaire selon les scénarios, principalement en raison de la couche
+Hardware Abstraction Layer (HAL), mais utilise 57--65\,\% de RAM en moins dans les scénarios
+USB. Dans les observations rapportées, l'initialisation USB est 61,7\,\% plus rapide sur
+STM32, les mesures USB en régime établi sont proches et les mesures FreeRTOS diffèrent au
+maximum de 3,3\,\%. Ces résultats nous ont conduits à retenir le module Reset and Clock
+Control (RCC) de la HAL et la sélection des fonctionnalités USB à la compilation comme pistes
+d'investigation ciblées.
+
+La comparaison ST--Texas Instruments associe une analyse statique des pilotes Low-Layer de
+STM32CubeC5 et de la bibliothèque de pilotes MSPM33 à douze projets bare-metal appariés
+couvrant la conversion analogique-numérique, les entrées-sorties généralistes,
+l'I\textsuperscript{2}C, le SPI et l'UART. Sur l'ensemble de ces douze images liées
+indépendamment, STM32C5 utilise 2,8\,\% de mémoire flash agrégée supplémentaire et 5,0\,\% de
+RAM agrégée en moins. Ces résultats caractérisent la structure du code, la couverture des
+Software Development Kits (SDK) et l'empreinte des images complètes. Nous avons ensuite
+comparé FreeRTOS à travers des scénarios basique, coopératif et préemptif. Les trois images
+STM32C5 utilisent 27,9--29,6\,\% de flash en moins, tandis que MSPM33 économise 56 à 76
+octets de RAM. Des observations d'exécution ont également été collectées, mais STM32C5
+fonctionne à 144\,MHz contre 32\,MHz pour MSPM33. Après normalisation par la fréquence, le
+scénario basique devient presque équivalent; les scénarios coopératif et préemptif restent
+affectés par la configuration du noyau et par des primitives de synchronisation différentes.
+Ces limites empêchent de conclure globalement sur l'efficacité de l'ordonnanceur.
+
+\noindent\rule[2pt]{\textwidth}{0.5pt}
+
+{\textbf{Mots clés :}}
+STM32Cube, benchmarking, empreinte firmware, microcontrôleur, FreeRTOS, USB, GD32, Texas Instruments, pilotes bas niveau, comparaison inter-vendeurs.
+\\
+\noindent\rule[2pt]{\textwidth}{0.5pt}

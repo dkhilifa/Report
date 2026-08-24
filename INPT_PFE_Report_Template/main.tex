@@ -1,0 +1,334 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Welcome to Overleaf --- just edit your LaTeX on the left,
+% and we'll compile it for you on the right. If you open the
+% 'Share' menu, you can invite other users to edit at the same
+% time. See www.overleaf.com/learn for more info. Enjoy!
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[12pt,a4paper,oneside]{book}
+\pdfminorversion=7
+
+
+\input{Packages}
+
+
+%\makenoidxglossaries 
+
+%\newglossaryentry{latex}
+%{
+       % name=latex,
+        %description={Is a mark up language specially suited for scientific documents}
+%}
+
+
+
+%\selectlanguage{English}
+
+
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdfauthor={Fares Dkhili},
+    pdftitle={STM32Cube Competitor Benchmark},
+    pdfsubject={Engineering end-of-study project report},
+    pdfkeywords={STM32Cube, embedded systems, benchmarking, firmware footprint},
+    pdfdisplaydoctitle=true,
+    pdfpagemode=FullScreen,
+    }
+
+
+
+\begin{document}
+
+
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+    \definecolor{codegray}{rgb}{0.5,0.5,0.5}
+    \definecolor{codepurple}{rgb}{0.58,0,0.82}
+    \definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+    
+    \lstdefinestyle{mystyle}{
+        backgroundcolor=\color{backcolour},   
+        keywordstyle=\color{magenta},
+        numberstyle=\tiny\color{codegreen},
+        stringstyle=\color{codepurple},
+        basicstyle=\ttfamily\footnotesize,
+        breakatwhitespace=false,         
+        breaklines=true,                 
+        captionpos=b,                    
+        keepspaces=true,                 
+        numbers=left,                    
+        numbersep=5pt,                  
+        showspaces=false,                
+        showstringspaces=false,
+        showtabs=false,                  
+        tabsize=2
+    }
+
+
+
+
+%\include{Frontmatter/Page_de_garde} %FRENCH ONE
+
+\hypersetup{pageanchor=false}
+\include{Frontmatter/Page_de_Garde_EN} % ENGLISH
+
+\afterpage{\blankpage}  %page vide obligatoire
+
+\frontmatter
+\hypersetup{pageanchor=true}
+
+
+\input{Frontmatter/Dedication}
+
+
+\input{Frontmatter/Acknowledgements}
+
+
+\input{Frontmatter/Résumé}
+
+% \cleardoublepage
+%
+
+\input{Frontmatter/Abstract}
+
+% \cleardoublepage
+%
+
+\input{Frontmatter/Molakhas}
+
+% \cleardoublepage
+%
+
+
+
+
+
+
+\listoffigures
+\addcontentsline{toc}{chapter}{List of Figures} 
+%figures are added automatically here
+
+\listoftables
+\addcontentsline{toc}{chapter}{List of Tables} 
+%tables are added automatically here
+
+\lstlistoflistings
+\addcontentsline{toc}{chapter}{List of Listings} 
+%Code snippets are added automatically here
+
+\tableofcontents
+\addcontentsline{toc}{chapter}{Table of Contents}
+%contents are added automatically here
+
+\mainmatter
+
+%debut of chapters
+
+\input{Chapters/Chapter1}
+
+\input{Chapters/Chapter2}
+
+\input{Chapters/Chapter3}
+
+\input{Chapters/Chapter4}
+
+\input{Chapters/Chapter5}
+
+
+\input{Chapters/Conclusion}
+
+\appendix
+
+
+\input{Endmatter/Glossary}
+
+\input{Endmatter/Acronyms}
+
+\input{Endmatter/ComplementaryCodes}
+
+\begin{thebibliography}{99}
+\addcontentsline{toc}{chapter}{Bibliography}
+
+% --- References cited in Chapter~\ref{chap:general-description} ---
+
+\bibitem{st-about}
+STMicroelectronics, \emph{About ST}. [Online]. Available: \url{https://www.st.com/content/st_com/en/about/st_company_information.html}. Accessed: 2026.
+
+\bibitem{st-investors}
+STMicroelectronics, \emph{2024 Annual Report and Financial Highlights}. [Online]. Available: \url{https://investors.st.com/}. Accessed: 2026.
+
+\bibitem{st-strategy}
+STMicroelectronics, \emph{Strategy and Innovation}. [Online]. Available: \url{https://www.st.com/content/st_com/en/about/innovation---technology/innovation---technology.html}. Accessed: 2026.
+
+\bibitem{stm32-family}
+STMicroelectronics, \emph{STM32 32-bit Arm Cortex MCUs}. [Online]. Available: \url{https://www.st.com/en/microcontrollers-microprocessors/stm32-32-bit-arm-cortex-mcus.html}. Accessed: 2026.
+
+\bibitem{arm-cortexm}
+Arm Ltd., \emph{Cortex-M Series Processors}. [Online]. Available: \url{https://developer.arm.com/Processors/Cortex-M}. Accessed: 2026.
+
+\bibitem{stm32cube-ecosystem}
+STMicroelectronics, \emph{STM32Cube Ecosystem}. [Online]. Available: \url{https://www.st.com/en/ecosystems/stm32cube.html}. Accessed: 2026.
+
+\bibitem{divide-conquer}
+T.~H. Cormen, C.~E. Leiserson, R.~L. Rivest, and C.~Stein, \emph{Introduction to Algorithms}, 3rd~ed. Cambridge, MA: MIT Press, 2009.
+
+% --- External tools, libraries, and references cited in Chapter~\ref{chap:footprint-tool} ---
+
+\bibitem{python}
+Python Software Foundation, \emph{The Python Language Reference, version~3.11}. [Online]. Available: \url{https://docs.python.org/3.11/}. Accessed: 2026.
+
+\bibitem{pyside6}
+The Qt Company, \emph{Qt for Python (PySide6) Documentation}. [Online]. Available: \url{https://doc.qt.io/qtforpython/}. Accessed: 2026.
+
+\bibitem{pandas}
+The pandas development team, \emph{pandas: Powerful Python Data Analysis Toolkit}. [Online]. Available: \url{https://pandas.pydata.org/}. Accessed: 2026.
+
+\bibitem{openpyxl}
+E.~Gazoni and C.~Clark, \emph{openpyxl: A Python Library to Read and Write Excel 2010 xlsx/xlsm Files}. [Online]. Available: \url{https://openpyxl.readthedocs.io/}. Accessed: 2026.
+
+\bibitem{matplotlib}
+J.~D. Hunter, ``Matplotlib: A 2D Graphics Environment,'' \emph{Computing in Science \& Engineering}, vol.~9, no.~3, pp.~90--95, 2007. [Online]. Available: \url{https://matplotlib.org/}.
+
+\bibitem{sqlite}
+SQLite Development Team, \emph{SQLite Documentation}. [Online]. Available: \url{https://www.sqlite.org/docs.html}. Accessed: 2026.
+
+\bibitem{pyinstaller}
+PyInstaller Development Team, \emph{PyInstaller Manual}. [Online]. Available: \url{https://pyinstaller.org/}. Accessed: 2026.
+
+\bibitem{iar-ewarm}
+IAR Systems, \emph{IAR Embedded Workbench for Arm --- C/C++ Development Guide (ILINK Linker and Linker Map File)}. [Online]. Available: \url{https://www.iar.com/embedded-development-tools/iar-embedded-workbench}. Accessed: 2026.
+
+\bibitem{github-copilot}
+GitHub, \emph{GitHub Copilot Documentation}. [Online]. Available: \url{https://docs.github.com/en/copilot}. Accessed: 2026.
+
+\bibitem{anthropic}
+Anthropic, \emph{Claude API Documentation}. [Online]. Available: \url{https://docs.anthropic.com/}. Accessed: 2026.
+
+\bibitem{openai-api}
+OpenAI, \emph{OpenAI API Reference}. [Online]. Available: \url{https://platform.openai.com/docs/}. Accessed: 2026.
+
+\bibitem{ollama}
+Ollama, \emph{Ollama: Run Large Language Models Locally}. [Online]. Available: \url{https://ollama.com/}. Accessed: 2026.
+
+\bibitem{github-models}
+GitHub, \emph{GitHub Models Documentation}. [Online]. Available: \url{https://docs.github.com/en/github-models}. Accessed: 2026.
+
+\bibitem{nxp-mcuxpresso}
+NXP Semiconductors, \emph{MCUXpresso SDK Documentation}. [Online]. Available: \url{https://mcuxpresso.nxp.com/}. Accessed: 2026.
+
+% --- External tools and references cited in Chapter~\ref{chap:benchmark-agent} ---
+
+\bibitem{vscode}
+Microsoft, \emph{Visual Studio Code Documentation}. [Online]. Available: \url{https://code.visualstudio.com/docs}. Accessed: 2026.
+
+\bibitem{vscode-agent-mode}
+Microsoft, \emph{GitHub Copilot Agent Mode in VS Code}. [Online]. Available: \url{https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode}. Accessed: 2026.
+
+\bibitem{vscode-custom-agents}
+Microsoft, \emph{Custom Chat Agents and Skills --- VS Code Documentation}. [Online]. Available: \url{https://code.visualstudio.com/docs/copilot/copilot-customization}. Accessed: 2026.
+
+\bibitem{iar-cspybat}
+IAR Systems, \emph{C-SPY Debugging Guide --- Batch Mode (cspybat)}. [Online]. Available: \url{https://www.iar.com/knowledge/support/technical-notes/debugger/}. Accessed: 2026.
+
+% --- References cited in Chapter~\ref{chap:vs-gd32} ---
+
+\bibitem{gigadevice-gd32}
+GigaDevice Semiconductor, \emph{GD32 Microcontrollers}. [Online]. Available: \url{https://www.gigadevice.com/microcontroller}. Accessed: 2026.
+
+\bibitem{gd32e507-ds}
+GigaDevice Semiconductor, \emph{GD32E507xx Datasheet}, Rev.~1.2, 2022. [Online]. Available: \url{https://www.gigadevice.com/microcontroller/gd32e507zet6}. Accessed: 2026.
+
+\bibitem{stm32u575-ds}
+STMicroelectronics, \emph{STM32U575/585 Datasheet --- Ultra-low-power with FPU Arm Cortex-M33 MCU}. [Online]. Available: \url{https://www.st.com/resource/en/datasheet/stm32u575zi.pdf}. Accessed: 2026.
+
+\bibitem{freertos}
+Amazon Web Services, \emph{FreeRTOS --- Real-Time Operating System for Microcontrollers}. [Online]. Available: \url{https://www.freertos.org/}. Accessed: 2026.
+
+\bibitem{freertos-v11}
+Amazon Web Services, \emph{FreeRTOS V11.2.0 Release Notes}. [Online]. Available: \url{https://github.com/FreeRTOS/FreeRTOS-Kernel/releases/tag/V11.2.0}. Accessed: 2026.
+
+% --- References cited in Chapter~\ref{chap:vs-ti} ---
+
+\bibitem{ti-about}
+Texas Instruments, \emph{About TI}. [Online]. Available: \url{https://www.ti.com/about-ti/company/company-overview.html}. Accessed: 2026.
+
+\bibitem{ti-mspm33-product}
+Texas Instruments, \emph{MSPM33C321A Product Page}. [Online]. Available: \url{https://www.ti.com/product/MSPM33C321A}. Accessed: 2026.
+
+\bibitem{ti-mspm33-ds}
+Texas Instruments, \emph{MSPM33C321A Datasheet}. [Online]. Available: \url{https://www.ti.com/document-viewer/MSPM33C321A/datasheet}. Accessed: 2026.
+
+\bibitem{ti-mspm33-sdk}
+Texas Instruments, \emph{MSPM33-SDK --- Software Development Kit for MSPM33}. [Online]. Available: \url{https://www.ti.com/tool/MSPM33-SDK}. Accessed: 2026.
+
+\bibitem{ti-launchpad}
+Texas Instruments, \emph{LP-MSPM33C321A LaunchPad Development Kit}. [Online]. Available: \url{https://www.ti.com/tool/LP-MSPM33C321A}. Accessed: 2026.
+
+\bibitem{ti-sysconfig}
+Texas Instruments, \emph{SysConfig --- System Configuration Tool}. [Online]. Available: \url{https://www.ti.com/tool/SYSCONFIG}. Accessed: 2026.
+
+\bibitem{ti-ccstudio}
+Texas Instruments, \emph{Code Composer Studio IDE}. [Online]. Available: \url{https://www.ti.com/tool/CCSTUDIO}. Accessed: 2026.
+
+\bibitem{ti-arm-cgt}
+Texas Instruments, \emph{TI Arm Clang Compiler Tools}. [Online]. Available: \url{https://www.ti.com/tool/ARM-CGT}. Accessed: 2026.
+
+\bibitem{stm32cubec5-sw}
+STMicroelectronics, \emph{STM32CubeC5 --- STM32Cube MCU Package for STM32C5 Series}. [Online]. Available: \url{https://www.st.com/en/embedded-software/stm32cubec5.html}. Accessed: 2026.
+
+\bibitem{stm32c5a3-product}
+STMicroelectronics, \emph{STM32C5A3ZG Product Page}. [Online]. Available: \url{https://www.st.com/en/microcontrollers-microprocessors/stm32c5a3zg.html}. Accessed: 2026.
+
+\bibitem{stm32-nucleo-c5a3}
+STMicroelectronics, \emph{NUCLEO-C5A3ZG Evaluation Board}. [Online]. Available: \url{https://www.st.com/en/evaluation-tools/nucleo-c5a3zg.html}. Accessed: 2026.
+
+\bibitem{stm32c5-series}
+STMicroelectronics, \emph{STM32C5 Series Overview}. [Online]. Available: \url{https://www.st.com/en/microcontrollers-microprocessors/stm32c5-series.html}. Accessed: 2026.
+
+\bibitem{cloc-tool}
+A.~Danial, \emph{cloc --- Count Lines of Code}, version~2.08. [Online]. Available: \url{https://github.com/AlDanial/cloc}. Accessed: 2026.
+
+\bibitem{cppcheck-tool}
+D.~Marjam\"{a}ki \emph{et~al.}, \emph{Cppcheck --- A Static Analysis Tool for C/C++ Code}. [Online]. Available: \url{https://cppcheck.sourceforge.io/}. Accessed: 2026.
+
+\bibitem{lizard-tool}
+T.~Yin, \emph{Lizard --- A Code Complexity Analyser}. [Online]. Available: \url{https://github.com/terryyin/lizard}. Accessed: 2026.
+
+\bibitem{jscpd-tool}
+K.~Kravets, \emph{jscpd --- Copy/Paste Detector for Source Code}. [Online]. Available: \url{https://github.com/kucherenko/jscpd}. Accessed: 2026.
+
+\bibitem{misra-c2012}
+MISRA, \emph{MISRA C:2012 --- Guidelines for the Use of the C Language in Critical Systems}, 3rd~ed. Nuneaton, UK: MIRA Ltd., 2019.
+
+\bibitem{nist-pqc}
+National Institute of Standards and Technology, \emph{Post-Quantum Cryptography Standardization}. [Online]. Available: \url{https://csrc.nist.gov/projects/post-quantum-cryptography}. Accessed: 2026.
+
+\bibitem{arm-trustzone}
+Arm Ltd., \emph{TrustZone for Armv8-M}. [Online]. Available: \url{https://developer.arm.com/Architectures/TrustZone-for-Armv8-M}. Accessed: 2026.
+
+\bibitem{ti-energytrace}
+Texas Instruments, \emph{EnergyTrace Technology}. [Online]. Available: \url{https://www.ti.com/tool/ENERGYTRACE}. Accessed: 2026.
+
+\bibitem{doxygen}
+D.~van Heesch, \emph{Doxygen --- Generate Documentation from Annotated C/C++ Sources}. [Online]. Available: \url{https://www.doxygen.nl/}. Accessed: 2026.
+
+\bibitem{lvgl}
+LVGL, \emph{Light and Versatile Graphics Library}. [Online]. Available: \url{https://lvgl.io/}. Accessed: 2026.
+
+\bibitem{mbedtls}
+Arm Ltd., \emph{Mbed TLS --- An Open-Source SSL Library}. [Online]. Available: \url{https://www.trustedfirmware.org/projects/mbed-tls/}. Accessed: 2026.
+
+\bibitem{lwip}
+Swedish Institute of Computer Science, \emph{lwIP --- A Lightweight TCP/IP Stack}. [Online]. Available: \url{https://savannah.nongnu.org/projects/lwip/}. Accessed: 2026.
+
+\bibitem{ti-edgeai}
+Texas Instruments, \emph{Edge AI for Embedded Processors}. [Online]. Available: \url{https://www.ti.com/technologies/edge-ai.html}. Accessed: 2026.
+
+\end{thebibliography}
+
+\end{document}

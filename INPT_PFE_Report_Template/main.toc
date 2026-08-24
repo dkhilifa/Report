@@ -1,0 +1,117 @@
+\babel@toc {english}{}\relax 
+\contentsline {chapter}{Dedication}{i}{chapter*.1}%
+\contentsline {chapter}{Acknowledgments}{ii}{chapter*.2}%
+\contentsline {chapter}{Résumé}{iii}{chapter*.3}%
+\contentsline {chapter}{Summary}{v}{chapter*.4}%
+\contentsline {chapter}{Arabic Abstract}{vii}{chapter*.5}%
+\contentsline {chapter}{List of Figures}{ix}{chapter*.6}%
+\contentsline {chapter}{List of Tables}{xi}{chapter*.7}%
+\contentsline {chapter}{List of Listings}{xii}{chapter*.8}%
+\contentsline {chapter}{Table of Contents}{xvi}{chapter*.9}%
+\contentsline {chapter}{\numberline {1}General Description of the Project}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Host company}{1}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}Presentation}{1}{subsection.1.1.1}%
+\contentsline {subsection}{\numberline {1.1.2}STMicroelectronics vision and markets}{2}{subsection.1.1.2}%
+\contentsline {subsection}{\numberline {1.1.3}STMicroelectronics Tunis}{2}{subsection.1.1.3}%
+\contentsline {section}{\numberline {1.2}Project presentation}{3}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}Project framework}{3}{subsection.1.2.1}%
+\contentsline {subsection}{\numberline {1.2.2}Project context}{4}{subsection.1.2.2}%
+\contentsline {subsection}{\numberline {1.2.3}Problematic}{4}{subsection.1.2.3}%
+\contentsline {subsection}{\numberline {1.2.4}Proposed solution}{5}{subsection.1.2.4}%
+\contentsline {subsection}{\numberline {1.2.5}Mission and objectives}{5}{subsection.1.2.5}%
+\contentsline {section}{\numberline {1.3}Theoretical foundations}{6}{section.1.3}%
+\contentsline {subsection}{\numberline {1.3.1}STM32 microcontrollers}{6}{subsection.1.3.1}%
+\contentsline {subsubsection}{\numberline {1.3.1.1}Overview}{6}{subsubsection.1.3.1.1}%
+\contentsline {subsubsection}{\numberline {1.3.1.2}The STM32 family}{6}{subsubsection.1.3.1.2}%
+\contentsline {subsubsection}{\numberline {1.3.1.3}The STM32Cube ecosystem}{7}{subsubsection.1.3.1.3}%
+\contentsline {subsection}{\numberline {1.3.2}Firmware memory footprint}{7}{subsection.1.3.2}%
+\contentsline {subsection}{\numberline {1.3.3}Linker maps}{8}{subsection.1.3.3}%
+\contentsline {section}{\numberline {1.4}Work methodology}{8}{section.1.4}%
+\contentsline {chapter}{\numberline {2}A Cross-Vendor Firmware Footprint Analysis Tool}{10}{chapter.2}%
+\contentsline {section}{\numberline {2.1}The cross-vendor footprint problem}{10}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Design and architecture}{11}{section.2.2}%
+\contentsline {section}{\numberline {2.3}The benchmarking pipeline}{15}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Implementation}{16}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}Parsing linker maps and classifying layers}{17}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.4.2}The multi-signal mapping engine}{18}{subsection.2.4.2}%
+\contentsline {subsection}{\numberline {2.4.3}Optional AI assistance}{21}{subsection.2.4.3}%
+\contentsline {subsection}{\numberline {2.4.4}Persistence and learning}{22}{subsection.2.4.4}%
+\contentsline {subsection}{\numberline {2.4.5}Cross-vendor equivalence database}{22}{subsection.2.4.5}%
+\contentsline {subsection}{\numberline {2.4.6}Source-code signal provider}{23}{subsection.2.4.6}%
+\contentsline {subsection}{\numberline {2.4.7}Firmware quality metrics and grading}{23}{subsection.2.4.7}%
+\contentsline {subsection}{\numberline {2.4.8}Run manifest and reproducibility}{24}{subsection.2.4.8}%
+\contentsline {section}{\numberline {2.5}Integration into the benchmark workflow}{24}{section.2.5}%
+\contentsline {section}{\numberline {2.6}Usage and outputs}{24}{section.2.6}%
+\contentsline {section}{\numberline {2.7}Engineering value and limitations}{25}{section.2.7}%
+\contentsline {chapter}{\numberline {3}An Autonomous AI Agent for Benchmark Campaigns}{26}{chapter.3}%
+\contentsline {section}{\numberline {3.1}The benchmark engineering problem}{27}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Architecture}{27}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}The four specialist agents}{28}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}The six reusable skills}{30}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3}Automation tools}{31}{subsection.3.2.3}%
+\contentsline {subsection}{\numberline {3.2.4}Configuration registry}{32}{subsection.3.2.4}%
+\contentsline {section}{\numberline {3.3}Supported workflow directions}{33}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Autonomy model and approval gates}{34}{section.3.4}%
+\contentsline {section}{\numberline {3.5}Board firmware baseline immutability}{35}{section.3.5}%
+\contentsline {section}{\numberline {3.6}Always-on benchmark rules}{36}{section.3.6}%
+\contentsline {section}{\numberline {3.7}Semantic preservation in detail}{37}{section.3.7}%
+\contentsline {section}{\numberline {3.8}Deterministic campaign workflow}{37}{section.3.8}%
+\contentsline {section}{\numberline {3.9}IAR template resolution}{39}{section.3.9}%
+\contentsline {section}{\numberline {3.10}Source acquisition policy}{40}{section.3.10}%
+\contentsline {section}{\numberline {3.11}Campaign artifact model}{40}{section.3.11}%
+\contentsline {section}{\numberline {3.12}Prompt-driven usage}{41}{section.3.12}%
+\contentsline {section}{\numberline {3.13}Implementation}{42}{section.3.13}%
+\contentsline {section}{\numberline {3.14}Integration with the benchmarking workflow}{42}{section.3.14}%
+\contentsline {section}{\numberline {3.15}Engineering value and limitations}{43}{section.3.15}%
+\contentsline {chapter}{\numberline {4}Benchmarking ST against GD32}{45}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Hardware platforms}{45}{section.4.1}%
+\contentsline {section}{\numberline {4.2}USB device stack}{46}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Scenario design}{46}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Results}{47}{subsection.4.2.2}%
+\contentsline {subsubsection}{\numberline {4.2.2.1}HID scenario}{47}{subsubsection.4.2.2.1}%
+\contentsline {subsubsection}{\numberline {4.2.2.2}CDC scenario}{49}{subsubsection.4.2.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Interpretation}{50}{subsection.4.2.3}%
+\contentsline {section}{\numberline {4.3}FreeRTOS integration}{51}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Scenario design}{52}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Results}{52}{subsection.4.3.2}%
+\contentsline {subsubsection}{\numberline {4.3.2.1}Basic processing}{52}{subsubsection.4.3.2.1}%
+\contentsline {subsubsection}{\numberline {4.3.2.2}Cooperative processing}{53}{subsubsection.4.3.2.2}%
+\contentsline {subsubsection}{\numberline {4.3.2.3}Preemptive processing}{54}{subsubsection.4.3.2.3}%
+\contentsline {subsubsection}{\numberline {4.3.2.4}Per-layer ROM breakdown}{54}{subsubsection.4.3.2.4}%
+\contentsline {subsection}{\numberline {4.3.3}Interpretation}{55}{subsection.4.3.3}%
+\contentsline {chapter}{\numberline {5}Benchmarking ST against Texas Instruments}{57}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Hardware platforms}{58}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Static analysis of the driver layer}{58}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Scope and methodology}{58}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Lines of code}{59}{subsection.5.2.2}%
+\contentsline {subsection}{\numberline {5.2.3}Documentation coverage}{60}{subsection.5.2.3}%
+\contentsline {subsection}{\numberline {5.2.4}Code duplication}{60}{subsection.5.2.4}%
+\contentsline {subsection}{\numberline {5.2.5}Cyclomatic complexity}{61}{subsection.5.2.5}%
+\contentsline {subsection}{\numberline {5.2.6}API surface}{62}{subsection.5.2.6}%
+\contentsline {subsection}{\numberline {5.2.7}MISRA~C:2012 static-analysis findings}{64}{subsection.5.2.7}%
+\contentsline {section}{\numberline {5.3}SDK coverage comparison}{65}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Peripheral driver coverage}{65}{subsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.3.2}Middleware coverage}{66}{subsection.5.3.2}%
+\contentsline {subsection}{\numberline {5.3.3}Cryptographic algorithm coverage}{67}{subsection.5.3.3}%
+\contentsline {subsection}{\numberline {5.3.4}Communication protocol coverage}{68}{subsection.5.3.4}%
+\contentsline {section}{\numberline {5.4}Static-analysis summary}{69}{section.5.4}%
+\contentsline {section}{\numberline {5.5}Functional analysis of the driver layer}{70}{section.5.5}%
+\contentsline {subsection}{\numberline {5.5.1}Benchmark design and observables}{70}{subsection.5.5.1}%
+\contentsline {subsection}{\numberline {5.5.2}Results and interpretation}{72}{subsection.5.5.2}%
+\contentsline {section}{\numberline {5.6}FreeRTOS middleware benchmark}{75}{section.5.6}%
+\contentsline {subsection}{\numberline {5.6.1}Scenario design and configuration}{76}{subsection.5.6.1}%
+\contentsline {subsection}{\numberline {5.6.2}Measurement method and fairness}{77}{subsection.5.6.2}%
+\contentsline {subsection}{\numberline {5.6.3}Results}{77}{subsection.5.6.3}%
+\contentsline {subsection}{\numberline {5.6.4}Takeaway}{78}{subsection.5.6.4}%
+\contentsline {chapter}{General Conclusion and Perspectives}{81}{section*.73}%
+\contentsline {chapter}{\numberline {A}Glossary}{83}{chapter.A}%
+\contentsline {chapter}{\numberline {B}Acronyms}{85}{chapter.B}%
+\contentsline {chapter}{\numberline {C}Complementary Code Listings}{88}{chapter.C}%
+\contentsline {section}{\numberline {C.1}IAR EWARM linker map excerpt}{88}{section.C.1}%
+\contentsline {section}{\numberline {C.2}ST--TI functional footprint reproducibility record}{90}{section.C.2}%
+\contentsline {section}{\numberline {C.3}ST--TI FreeRTOS reproducibility record}{91}{section.C.3}%
+\contentsline {section}{\numberline {C.4}Agent configuration file}{92}{section.C.4}%
+\contentsline {section}{\numberline {C.5}FreeRTOS cooperative benchmark scenario}{94}{section.C.5}%
+\contentsline {section}{\numberline {C.6}Footprint tool CLI output}{96}{section.C.6}%
+\contentsline {section}{\numberline {C.7}Static-analysis automation script (ST vs.\ TI)}{97}{section.C.7}%
+\contentsline {chapter}{Bibliography}{99}{appendix*.77}%

@@ -1,0 +1,64 @@
+\chapter*{General Conclusion and Perspectives}
+\phantomsection
+\addcontentsline{toc}{chapter}{General Conclusion and Perspectives} %adds to the table of contents 
+\label{chap:general-conclusion}
+
+This project addressed the need for comparative evidence that separates measurable
+software-stack behaviour from assumptions about vendor ecosystems. We defined a
+scenario-based method in which ST serves as the reference, equivalent observable behaviour
+is established before comparison, build and measurement conditions are recorded, and
+footprint or runtime results are interpreted at the relevant architectural layer. MCU
+Workflow Studio and the MCU Benchmark Copilot Agent support this method by structuring
+linker-map analysis, project preparation, provenance tracking, fairness review, and
+semantic-equivalence checks. Their contribution lies in formalising and assisting the
+workflow; the validity of each benchmark still depends on its source artifacts, build
+records, and hardware evidence.
+
+The completed ST--GD32 comparison provided footprint and reported runtime observations for
+five USB and FreeRTOS scenarios. It revealed a recurring trade-off rather than a uniform
+advantage for either ecosystem. STM32 used more flash, with much of the classified
+difference associated with HAL components such as RCC, but required substantially less RAM
+in the USB scenarios. It also showed a lower reported USB initialisation time, while
+steady-state USB and FreeRTOS observations remained close. These results support targeted
+investigation of RCC footprint and finer USB feature selection, but they do not establish
+that the same pattern applies to other devices, compiler settings, or software stacks.
+
+The ST--TI work provided a different type of evidence. Static analysis characterised the
+two low-level driver sets, while twelve matched bare-metal projects produced whole-image
+flash and RAM measurements. The aggregate result slightly favoured MSPM33 in flash and
+STM32C5 in RAM, with scenario-level outcomes varying according to startup costs, retained
+handlers, buffers, and application-owned configuration. The comparison therefore cannot be
+reduced to a single ecosystem ranking. The FreeRTOS extension produced the opposite flash
+pattern: STM32C5 used 27.9--29.6\,\% less flash in all three scenarios, while MSPM33 retained
+a 56--76-byte RAM advantage. Runtime observations were collected, but the 144\,MHz versus
+32\,MHz clock difference explains nearly all of the basic-processing gap. Different kernel
+versions, configuration options, and preemptive primitives limit the cooperative and
+preemptive interpretation, so the current evidence does not establish a scheduler-efficiency
+ranking.
+
+Several limitations define the scope of these findings. The evaluated boards, SDK versions,
+scenarios, IAR configuration, and linker-map accounting rules form part of each result and
+limit its generalisation. Static-analysis findings depend on the selected source sets and
+tool configurations, while heuristic classifications or quality indicators are not
+substitutes for expert review. Aggregate footprint totals across independent projects are
+portfolio summaries, not the memory requirement of one deployable application. Finally, the
+supporting tools were designed to improve consistency and traceability, but this report does
+not contain a controlled productivity study or a complete cross-environment reproducibility
+assessment.
+
+Future work should first repeat the ST--TI runtime phase under the controls identified in
+Chapter~\ref{chap:vs-ti}. Each scenario should use equal documented clocks, the same FreeRTOS
+version and configuration, equivalent synchronisation primitives, a common measurement
+interval, equal sample counts, a warm-up policy, and reported dispersion. Energy measurements
+may then be added using the same functional boundaries. The benchmark set can subsequently be
+extended to additional middleware and vendor platforms, provided that each new comparison
+preserves the same evidence and fairness requirements.
+
+The supporting tools also require further validation. MCU Workflow Studio should be tested
+against a larger labelled set of linker maps, with mapping accuracy and repeatability
+reported separately, and its parser may be extended beyond IAR EWARM. The MCU Benchmark
+Copilot Agent should be evaluated through recorded campaigns that distinguish successful
+automation, manual intervention, unresolved unknowns, and hardware-dependent steps. These
+extensions would broaden the evidence base without weakening the central rule established
+by this work: no comparative conclusion should exceed the measurements and controls that
+support it.

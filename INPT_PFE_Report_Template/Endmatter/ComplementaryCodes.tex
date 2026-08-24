@@ -1,0 +1,405 @@
+\chapter{Complementary Code Listings}
+\label{chap:complementary-codes}
+
+This appendix provides representative code excerpts that complement the tool and benchmark
+descriptions in the main chapters. They illustrate the formats consumed and produced by our
+tools and the firmware structure of the benchmark scenarios.
+
+\lstset{style=mystyle}
+
+% ====================================================================
+\section{IAR EWARM linker map excerpt}
+\label{sec:appendix-linker-map}
+
+Listing~\ref{lst:linker-map} shows an abbreviated IAR EWARM linker map for a USB HID
+project. This is the format parsed by MCU Workflow Studio
+(Chapter~\ref{chap:footprint-tool}). Each entry lists a module, its read-only code size,
+read-only data, and read-write data --- the three quantities from which flash and RAM
+footprint are derived.
+
+\begin{lstlisting}[language={}, caption={Abbreviated IAR EWARM linker map (USB HID, STM32U575).}, label={lst:linker-map}]
+*******************************************************************************
+*** MODULE SUMMARY
+***
+
+    Module               ro code  ro data  rw data
+    ------               -------  -------  -------
+    main.o                   164       --       --
+    stm32u5xx_hal.o          212       --        4
+    stm32u5xx_hal_gpio.o     456       --       --
+    stm32u5xx_hal_rcc.o    4 560       16       --
+    stm32u5xx_hal_pcd.o    2 496       --       --
+    stm32u5xx_ll_usb.o     2 492       --       --
+    usbd_core.o            1 048       --       --
+    usbd_ctlreq.o            876       --       --
+    usbd_hid.o               620       --       --
+    usbd_conf.o              524       --       32
+    usbd_desc.o              461      268       --
+    system_stm32u5xx.o       128       16        4
+    startup_stm32u575xx.o    394      512       --
+    ------               -------  -------  -------
+    Total:               14 431      812       40
+
+*******************************************************************************
+*** ENTRY LIST
+***
+
+    Entry                 Address    Size  Type  Object
+    -----                 -------    ----  ----  ------
+    HAL_Init             0x0800'1234   52  Code  stm32u5xx_hal.o
+    HAL_RCC_OscConfig    0x0800'2000  1024  Code  stm32u5xx_hal_rcc.o
+    HAL_RCC_ClockConfig  0x0800'2400   896  Code  stm32u5xx_hal_rcc.o
+    USBD_Init            0x0800'3000   128  Code  usbd_core.o
+    USBD_HID_Init        0x0800'3200    96  Code  usbd_hid.o
+    ...
+\end{lstlisting}
+
+\pagebreak
+
+% ====================================================================
+\section{ST--TI functional footprint reproducibility record}
+\label{sec:appendix-ti-functional-footprint}
+
+This appendix records the build and accounting conditions behind the ST-versus-TI functional
+footprint results in Chapter~\ref{chap:vs-ti}. The TI projects are MSPM33 SDK driverlib
+examples~\cite{ti-mspm33-sdk}; their counterparts are STM32CubeC5 LL examples~\cite{stm32cubec5-sw}.
+All twelve pairs were rebuilt with IAR EWARM~9.60.3 using high optimisation for size
+(\texttt{CCOptLevel=3}, \texttt{CCOptStrategy=1}). The IAR linker map reports read-only code,
+read-only data, and read-write data~\cite{iar-ewarm}. We use the following whole-image accounting:
+
+\[
+\text{Flash} = \text{RO code} + \text{RO data}, \qquad
+\text{RAM} = \text{RW data}.
+\]
+
+Both projects in every pair reserve a 512-byte stack in the linker map. The table is therefore
+reproducible from the matching IAR map files and includes the deployable image's startup and
+vector-table cost. It is a portfolio of independent images, not the footprint of one firmware
+that combines all scenarios.
+
+\begin{table}[H]
+\centering
+\scriptsize
+\caption{Reproducibility record for the ST--MSPM33 high/size functional footprint study (bytes).}
+\label{tab:appendix-ti-functional-footprint}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{l r r r r r r}
+\toprule
+\textbf{Scenario} & \textbf{MSPM33 flash} & \textbf{STM32 flash} & \textbf{Delta} & \textbf{MSPM33 RAM} & \textbf{STM32 RAM} & \textbf{Delta} \\
+\midrule
+ADC timer trigger & 1\,476 & 1\,416 & -60 & 513 & 513 & 0 \\
+GPIO toggle & 656 & 772 & +116 & 512 & 512 & 0 \\
+I\textsuperscript{2}C DMA controller & 1\,928 & 1\,840 & -88 & 553 & 517 & -36 \\
+I\textsuperscript{2}C DMA responder & 1\,744 & 1\,687 & -57 & 593 & 556 & -37 \\
+I\textsuperscript{2}C interrupt controller & 1\,580 & 1\,732 & +152 & 557 & 514 & -43 \\
+I\textsuperscript{2}C interrupt responder & 1\,388 & 1\,460 & +72 & 600 & 553 & -47 \\
+I\textsuperscript{2}C polling controller & 1\,420 & 1\,376 & -44 & 556 & 513 & -43 \\
+I\textsuperscript{2}C polling responder & 1\,412 & 1\,340 & -72 & 608 & 552 & -56 \\
+SPI DMA controller & 1\,704 & 2\,151 & +447 & 592 & 556 & -36 \\
+SPI DMA peripheral & 1\,876 & 1\,940 & +64 & 592 & 552 & -40 \\
+UART printf & 1\,326 & 1\,318 & -8 & 512 & 512 & 0 \\
+USART loopback & 1\,588 & 1\,580 & -8 & 532 & 532 & 0 \\
+\midrule
+\textbf{Total, 12 independent images} & \textbf{18\,098} & \textbf{18\,612} & \textbf{+514} & \textbf{6\,720} & \textbf{6\,382} & \textbf{-338} \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+Negative deltas favour STM32C5. The corresponding interpretation, fairness limits, and
+scenario-flow diagrams are presented in Section~\ref{sec:ti-functional-analysis}; this appendix
+is intentionally limited to reproducibility facts and raw whole-image totals.
+
+\pagebreak
+
+% ====================================================================
+\section{ST--TI FreeRTOS reproducibility record}
+\label{sec:appendix-ti-freertos}
+
+The FreeRTOS middleware benchmark in Section~\ref{sec:ti-freertos} uses three matched project
+pairs from STM32CubeC5 and MSPM33 SDK~1.04.00.00~\cite{stm32cubec5-sw,ti-mspm33-sdk}. All six
+images were built with IAR EWARM~9.60.3 at high optimisation for size
+(\texttt{CCOptLevel=3}, \texttt{CCOptStrategy=1})~\cite{iar-ewarm}. The common configuration
+includes a 1\,kHz tick, preemption enabled, time slicing disabled, dynamic allocation, ten
+priorities, and an 8\,KiB FreeRTOS heap. STM32C5 was configured at 144\,MHz and MSPM33 at
+32\,MHz; these are source configuration values rather than independent clock measurements.
+Project manifests identify FreeRTOS Kernel~V11.2.0 for STM32C5 and V11.1.0 for MSPM33. In the
+preemptive scenario, STM32 uses \texttt{vTaskSuspend()}/\texttt{vTaskResume()}, whereas MSPM33
+uses direct task notifications and a final acknowledgement.
+
+\begin{table}[H]
+\centering
+\caption{Raw UART observation windows for the ST--TI FreeRTOS benchmark.}
+\label{tab:appendix-ti-freertos-runtime}
+\small
+\begin{tabularx}{\textwidth}{l l X}
+\toprule
+\textbf{Scenario} & \textbf{Platform} & \textbf{Recorded 30-second deltas} \\
+\midrule
+Basic & STM32C5 & 1\,295\,358; 1\,295\,330; 1\,295\,351. Elapsed: 30\,000; 30\,005; 30\,006\,ms. \\
+Basic & MSPM33 & 287\,141; 287\,135. Elapsed: 30\,000; 30\,005\,ms. \\
+Cooperative & STM32C5 & 33\,998\,170; 33\,997\,657 total worker iterations \\
+Cooperative & MSPM33 & 5\,367\,603; 5\,367\,557; 5\,367\,559; 5\,367\,490 total worker iterations \\
+Preemptive & STM32C5 & 8\,252\,379; 8\,252\,277 total completed chains \\
+Preemptive & MSPM33 & 1\,066\,661; 1\,066\,639; 1\,066\,639; 1\,066\,637; 1\,066\,635; 1\,066\,655 total completed chains \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{IAR high/size map totals for the ST--TI FreeRTOS projects (bytes).}
+\label{tab:appendix-ti-freertos-footprint}
+\begin{tabular}{l r r r r}
+\toprule
+\textbf{Scenario} & \textbf{STM32 flash} & \textbf{MSPM33 flash} & \textbf{STM32 RAM} & \textbf{MSPM33 RAM} \\
+\midrule
+Basic & 9\,052 & 12\,854 & 10\,196 & 10\,140 \\
+Cooperative & 9\,640 & 13\,430 & 9\,188 & 9\,132 \\
+Preemptive & 10\,012 & 13\,894 & 9\,188 & 9\,112 \\
+\midrule
+\textbf{Total} & \textbf{28\,704} & \textbf{40\,178} & \textbf{28\,572} & \textbf{28\,384} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The runtime record is not a controlled equal-clock experiment. Sample counts differ, no
+warm-up policy is documented, and the preemptive implementations use different synchronisation
+primitives. The tables preserve the raw evidence so that later equal-clock measurements can be
+compared without replacing or silently reinterpreting the original observations.
+
+\pagebreak
+
+% ====================================================================
+\section{Agent configuration file}
+\label{sec:appendix-agent-config}
+
+Listing~\ref{lst:agent-config} shows the configuration of the Creation-Porting specialist
+agent from the MCU Benchmark Copilot Agent system
+(Chapter~\ref{chap:benchmark-agent}). The YAML frontmatter declares metadata, description,
+argument hints, and tool permissions; the Markdown body contains the behavioural
+instructions, autonomy contract, and supported workflow directions.
+
+\begin{lstlisting}[language={}, caption={Creation-Porting agent configuration (abbreviated).}, label={lst:agent-config}]
+---
+name: Creation-Porting
+description: "Create benchmark projects from scratch or port existing
+  benchmarks in any direction (STM32->competitor, competitor->STM32,
+  vendor->vendor, board->board). Use when: generating target project
+  files, creating from a scenario description, separating
+  portable/RTOS/board logic, or acquiring missing reference firmware."
+argument-hint: A benchmark requirement, scenario description, scenario
+  name, firmware name, or a reference project plus target platform.
+tools: ['read', 'search', 'edit', 'vscode', 'todo', 'web', 'execute']
+---
+
+# Creation-Porting Agent
+
+## Supported Directions
+- From scratch (scenario description only)
+- STM32 -> competitor
+- Competitor -> STM32
+- Vendor A -> Vendor B
+- Board A -> Board B
+- Name only (resolve, acquire, create)
+
+## Autonomy Contract
+- Operates autonomously for file generation, project creation, and
+  material acquisition (web fetches from official sources).
+- Asks only before flashing/programming/resetting hardware.
+- Acquires missing firmware, CMSIS, BSP, startup, linker from
+  official vendor GitHub repos and SDKs without confirmation.
+
+## IAR Template Resolution
+Before creating any project:
+1. Look up target board in config/iar_templates.yaml
+2. Follow resolution: exact board -> family fallback -> type fallback
+3. Acquire template if status == "needs_download"
+4. Use materialised template as read-only project baseline
+5. Place benchmark code through app_integration_points only
+
+## Multi-Layer Separation
+1. Portable application layer (writable) - benchmark logic
+2. RTOS / middleware layer (protected) - select, don't modify
+3. Board-specific layer (protected) - select existing vendor files
+4. Build surface (configure only) - .ewp references, defines, paths
+
+## Semantic Preservation Rule
+Preserve semantics and observable behaviors, not vendor API names.
+Map CMSIS-RTOS2 <-> native FreeRTOS <-> ThreadX as needed via
+app-level adapter files. Never modify vendor HAL source.
+\end{lstlisting}
+
+\pagebreak
+
+% ====================================================================
+\section{FreeRTOS cooperative benchmark scenario}
+\label{sec:appendix-freertos-coop}
+
+Listing~\ref{lst:freertos-coop} shows the core task logic of the cooperative processing
+benchmark scenario from Chapter~\ref{chap:vs-gd32}. Five equal-priority threads each
+increment a counter and yield; a reporter thread prints the results every 30~seconds.
+
+\begin{lstlisting}[language=C, caption={FreeRTOS cooperative scenario --- task functions (STM32, simplified).}, label={lst:freertos-coop}]
+/* Shared counters for the five worker threads */
+volatile uint32_t counters[5] = {0};
+
+/* Worker task: increment own counter, then yield */
+void WorkerTask(void *param)
+{
+    uint32_t id = (uint32_t)param;
+    for (;;)
+    {
+        counters[id]++;
+        taskYIELD();
+    }
+}
+
+/* Reporter task: print all counters every 30 s */
+void ReporterTask(void *param)
+{
+    (void)param;
+    for (;;)
+    {
+        vTaskDelay(pdMS_TO_TICKS(30000));
+        printf("Counters: %lu %lu %lu %lu %lu\r\n",
+               counters[0], counters[1], counters[2],
+               counters[3], counters[4]);
+        /* Reset for next interval */
+        for (int i = 0; i < 5; i++)
+            counters[i] = 0;
+    }
+}
+
+/* Task creation (in main, after HAL and kernel init) */
+void CreateBenchmarkTasks(void)
+{
+    for (uint32_t i = 0; i < 5; i++)
+    {
+        xTaskCreate(WorkerTask, "Worker", 128,
+                    (void *)i, tskIDLE_PRIORITY + 1, NULL);
+    }
+    xTaskCreate(ReporterTask, "Reporter", 256,
+                NULL, tskIDLE_PRIORITY + 2, NULL);
+    vTaskStartScheduler();
+}
+\end{lstlisting}
+
+\pagebreak
+
+% ====================================================================
+\section{Footprint tool CLI output}
+\label{sec:appendix-tool-output}
+
+Listing~\ref{lst:tool-output} shows a representative terminal output from a footprint
+benchmark run using the MCU Workflow Studio command-line interface
+(Chapter~\ref{chap:footprint-tool}).
+
+\begin{lstlisting}[language={}, caption={MCU Workflow Studio CLI --- benchmark summary output.}, label={lst:tool-output}]
+$ mcu-workflow-cli benchmark \
+    --source stm32_usb_hid.map --source-vendor stm32 \
+    --target gd32_usb_hid.map  --target-vendor gd32 \
+    --out results/
+
+[INFO] Parsing source map: stm32_usb_hid.map (IAR EWARM)
+[INFO] Parsing target map: gd32_usb_hid.map (IAR EWARM)
+[INFO] Classifying 47 source symbols into layers...
+[INFO] Classifying 31 target symbols into layers...
+[INFO] Mapping engine: 42 pairs scored, 38 accepted (confidence >= 0.72)
+[INFO] 4 pairs queued for review (confidence 0.55-0.72)
+
+=== FOOTPRINT COMPARISON (USB HID) ===
+
+Layer           | STM32 ROM | GD32 ROM  | Diff
+----------------|-----------|-----------|--------
+Application     |   2 580 B |   1 942 B | +33%
+HAL drivers     |  10 426 B |     820 B | +1171%
+MW stack        |   2 859 B |   5 743 B | -50%
+----------------|-----------|-----------|--------
+TOTAL ROM       |  16 269 B |   9 175 B | +77%
+TOTAL RAM       |   3 446 B |   9 608 B | -65%
+
+Verdict: STM32 uses +77% more ROM but -65% less RAM.
+Largest classified STM32 modules:
+    HAL RCC:       4560 B
+    HAL/LL USB:    4988 B
+Causal attribution: unresolved without complete maps and classification diagnostics.
+
+[INFO] Results written to results/benchmark_results.xlsx
+[INFO] Mapping diagnostics: results/mapping_diagnostics.json
+[INFO] Review queue (4 items): results/review_queue.csv
+\end{lstlisting}
+
+\pagebreak
+
+% ====================================================================
+\section{Static-analysis automation script (ST vs.\ TI)}
+\label{sec:appendix-analyze-firmware}
+
+Listing~\ref{lst:analyze-firmware} shows an abbreviated version of the Python script used
+to extract API surface and documentation coverage metrics for the ST-versus-TI static
+analysis (Chapter~\ref{chap:vs-ti}). The full script analyses duplication, documentation,
+and API design in a single pass over the driver source trees.
+
+\begin{lstlisting}[language=Python, caption={Abbreviated \texttt{analyze\_firmware.py} --- API and documentation extraction.}, label={lst:analyze-firmware}]
+"""
+Firmware benchmark analysis script:
+- Code duplication detection (sliding-window hash)
+- Documentation coverage (Doxygen tag extraction)
+- API surface area analysis (functions, macros, enums)
+"""
+import os, re, json, hashlib
+from collections import defaultdict, Counter
+from pathlib import Path
+
+TI_DIR = r"mspm33_sdk/source/ti/driverlib"
+ST_DIR = r"STM32CubeC5/stm32c5xx_drivers/ll"
+
+def get_c_files(directory):
+    files = []
+    for root, _, filenames in os.walk(directory):
+        for f in filenames:
+            if f.endswith(('.c', '.h')):
+                files.append(os.path.join(root, f))
+    return files
+
+def analyze_api(files):
+    """Extract API surface metrics from C source files."""
+    result = {
+        'public_functions': 0, 'static_functions': 0,
+        'inline_functions': 0, 'macros_functional': 0,
+        'macros_constant': 0, 'enums': 0, 'typedefs': 0,
+        'param_distribution': Counter(),
+    }
+    for filepath in files:
+        with open(filepath, 'r', errors='ignore') as f:
+            content = f.read()
+        # Count public functions (not static)
+        pub = re.findall(
+            r'(?<!static\s)(?:__STATIC_INLINE\s+|inline\s+)?'
+            r'(?:void|bool|uint\w+|int\w+|DL_\w+|LL_\w+)\s+'
+            r'(\w+)\s*\(([^)]*)\)', content)
+        for name, params in pub:
+            result['public_functions'] += 1
+            n = len([p for p in params.split(',')
+                     if p.strip()]) if params.strip() else 0
+            result['param_distribution'][n] += 1
+        # Count enums, typedefs, macros
+        result['enums'] += len(re.findall(
+            r'\benum\s+\w*\s*\{', content))
+        result['typedefs'] += len(re.findall(
+            r'\btypedef\s+', content))
+        result['macros_functional'] += len(re.findall(
+            r'#define\s+\w+\([^)]*\)', content))
+        result['macros_constant'] += len(re.findall(
+            r'#define\s+\w+\s+[^(]', content))
+    return result
+
+if __name__ == '__main__':
+    for label, path in [("TI", TI_DIR), ("ST", ST_DIR)]:
+        files = get_c_files(path)
+        api = analyze_api(files)
+        print(f"\n=== {label} API Surface ===")
+        for k, v in api.items():
+            print(f"  {k}: {v}")
+\end{lstlisting}
