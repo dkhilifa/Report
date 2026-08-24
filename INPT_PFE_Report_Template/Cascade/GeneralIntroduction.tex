@@ -1,0 +1,33 @@
+\chapter*{General Introduction}
+\phantomsection
+\addcontentsline{toc}{chapter}{General Introduction}
+\label{chap:cascade-general-introduction}
+
+The internship comprised several related contributions, but not every assignment fed
+directly into the benchmark campaigns. The first documented task was an independent board
+equivalence search: the host team provided a list of competitor boards and asked us to find
+their nearest STM32 counterparts. This product-comparison deliverable did not determine the
+boards or scenarios used later in the project.
+
+The experimental work began separately with a pilot Universal Serial Bus (USB) device
+campaign on ST, Renesas, and NXP platforms. The pilot combined footprint and initialisation
+measurements with an optimisation pass on the STM32 reference projects. It also exposed
+repeated manual work in map-file reconciliation, project preparation, and evidence
+tracking. We developed MCU Workflow Studio and the MCU Benchmark Copilot Agent in response
+to those limitations, then applied the broader methodology in the later GD32 and Texas
+Instruments campaigns.
+
+The objective is not to produce a universal vendor ranking. Processor architecture,
+memory organisation, clock configuration, compiler output, middleware boundaries, and
+scenario design all affect the result. We consequently compare ST with one competing
+vendor at a time and restrict each conclusion to the recorded board pair, configuration,
+and scenario. Where internal workbook cells disagree with reviewed result images, the
+report uses the displayed presentation values and records that source decision explicitly.
+
+Chapter~\ref{chap:general-description} presents the industrial context and requirements.
+Chapter~\ref{chap:cascade-board-equivalence} documents the standalone board-equivalence
+assignment. Chapter~\ref{chap:cascade-usb-pilot} then begins the independent experimental
+work. The two
+supporting-tool chapters follow because their requirements emerged from that pilot. The
+GD32 and TI chapters then show how the work expanded beyond the initial USB studies, and
+the conclusion returns to the limits that govern all of these comparisons.

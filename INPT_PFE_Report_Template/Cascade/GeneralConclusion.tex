@@ -1,0 +1,61 @@
+\chapter*{General Conclusion and Perspectives}
+\phantomsection
+\addcontentsline{toc}{chapter}{General Conclusion and Perspectives}
+\label{chap:cascade-general-conclusion}
+
+This internship produced one standalone product-comparison assignment followed by an
+independent sequence of benchmark and tooling contributions. Keeping those workstreams
+separate avoids implying a methodological dependency that did not exist.
+
+For the board-equivalence assignment, the host team supplied the competitor-board list and
+asked us to identify the nearest STM32 counterparts. The resulting mappings are useful only
+when their criteria are stated, particularly where
+the paired boards use different Cortex-M architectures or expose different memory,
+peripheral, and software environments. The official ST product page confirms that the
+``SM32H735G-DK'' spelling in the internal summary refers to
+STM32H735G-DK~\cite{st-stm32h735g-dk}. This assignment did not
+select or constrain the boards used in the later benchmark chapters.
+
+The independent benchmark work began with the USB pilot. Optimising the STM32H573I-DK reference
+reduced RAM and initialisation time in HID, CDC, and MSC, while ROM remained almost
+unchanged in two scenarios. In the recorded Renesas comparison, the optimised STM32 project
+has lower summary ROM, RAM, and initialisation values than RA6M5 in all three scenarios.
+This is an implementation-level result, not a universal vendor ranking.
+
+The NXP pilot exposed a different trade-off. The workbook lists an average STM32 ROM gap
+of $+26.22\,\%$ when RCC is included and $+4.16\,\%$ when it is removed. MCX-N9 retains
+the lower summary RAM values and lower recorded initialisation values, while the HID ROM
+ordering changes with the measurement boundary. The reviewed presentation resolves the
+conflicting workbook cells: its tables confirm the reported HID and CDC ROM values and the
+MSC RAM values, while its flowchart identifies the timing case as MSC host initialisation.
+
+The manual reconciliation required by these pilots motivated MCU Workflow Studio and the
+MCU Benchmark Copilot Agent. The first structures linker-map analysis and cross-vendor
+classification; the second assists project preparation, campaign execution, provenance,
+and fairness review. Their value lies in formalising and supporting the method. They do not
+replace source artifacts, hardware evidence, or engineering judgement.
+
+The later GD32 and TI campaigns broadened the experimental scope. The GD32 work combined
+USB and FreeRTOS observations and revealed different flash, RAM, and reported timing
+trade-offs rather than a uniform ecosystem advantage. The TI work combined static driver
+analysis, matched bare-metal projects, and FreeRTOS scenarios. Across twelve independently
+linked bare-metal images, STM32C5 used 2.8\,\% more aggregate flash and 5.0\,\% less
+aggregate RAM. In the three FreeRTOS images, STM32C5 used 27.9--29.6\,\% less flash,
+whereas MSPM33 retained a 56--76-byte RAM advantage. Unequal clocks and differing kernel
+configurations still prevent a scheduler-efficiency conclusion.
+
+\section*{Perspectives}
+
+Runtime experiments should be repeated with documented equal clocks, software versions,
+synchronisation primitives, intervals, warm-up policy, and sample counts, with dispersion
+reported alongside central values. The internal evidence register should also be completed
+with archived map files, project configurations, and hashes for every published result.
+
+Tool validation forms a second workstream. MCU Workflow Studio should be evaluated on a
+larger labelled collection of linker maps, while the MCU Benchmark Copilot Agent should be
+assessed through recorded campaigns that distinguish successful automation, manual
+intervention, and hardware-dependent steps. Finally, the campaign can be extended to new
+middleware and vendors only when each addition preserves explicit measurement boundaries
+and fairness limitations. These steps would broaden the evidence without weakening the
+central rule established by this work: no comparative conclusion should exceed the
+measurements and controls that support it.

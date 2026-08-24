@@ -1,0 +1,49 @@
+\chapter*{Abstract}
+\phantomsection
+\addcontentsline{toc}{chapter}{Abstract}
+
+This report presents an end-of-studies project carried out at STMicroelectronics Tunis to
+study the STM32Cube ecosystem alongside competing microcontroller ecosystems. As an
+independent trainee assignment, we first mapped a host-provided list of competitor boards
+to their nearest STM32 counterparts; this product study did not determine the later
+benchmark platforms. The experimental work then began with USB HID, CDC, and MSC pilots on
+STM32 versus Renesas and NXP platforms. Optimising the STM32 reference reduced RAM and
+initialisation time in all three Renesas scenarios. In the NXP study, the footprint outcome
+depended strongly on whether RCC was included, while MCX-N9 retained lower reported RAM and
+initialisation values in the reviewed result tables.
+
+We established a benchmarking method based on matched functionality, documented build
+conditions, firmware footprint extracted from linker maps, runtime measurements where
+hardware evidence was available, and an explicit review of semantic equivalence and
+fairness. We also designed two supporting tools: \emph{MCU Workflow Studio}, which
+structures cross-vendor linker-map analysis, and the \emph{MCU Benchmark Copilot Agent},
+which encodes the project-creation, porting, build, provenance, and validation workflow.
+
+The completed ST--GD32 campaign covered the USB device stack through Human Interface Device
+(HID) and Communication Device Class (CDC) scenarios, and FreeRTOS through basic,
+cooperative, and preemptive scheduling scenarios. STM32 required 35--88\,\% more flash across
+these scenarios, mainly because of the Hardware Abstraction Layer (HAL), while it used
+57--65\,\% less RAM in the USB scenarios. The reported USB initialisation time was
+61.7\,\% lower on STM32, steady-state USB measurements were close, and the FreeRTOS
+measurements differed by at most 3.3\,\%. These results led us to identify the HAL Reset and
+Clock Control (RCC) module and USB compile-time feature selection as targeted areas for
+controlled investigation rather than demonstrated optimisations.
+
+The ST--Texas Instruments comparison combined static analysis of the STM32CubeC5 Low-Layer
+drivers and the MSPM33 driver library with twelve matched bare-metal projects covering
+analog-to-digital conversion, general-purpose input/output, I\textsuperscript{2}C, SPI, and
+UART. Across these twelve independently linked images, STM32C5 used 2.8\,\% more aggregate
+flash and 5.0\,\% less aggregate RAM. We then compared FreeRTOS through basic, cooperative,
+and preemptive scenarios. The three STM32C5 images used 27.9--29.6\,\% less flash, while
+MSPM33 used 56--76 fewer RAM bytes. Runtime observations were also collected, but STM32C5
+ran at 144\,MHz and MSPM33 at 32\,MHz. The basic result became nearly equal after clock
+normalisation; the cooperative and preemptive results remained affected by kernel
+configuration and non-equivalent synchronisation primitives. These constraints prevent a
+general scheduler-efficiency conclusion from the current measurements.
+
+\noindent\rule[2pt]{\textwidth}{0.5pt}
+
+{\textbf{Key Words:}}
+STM32Cube, benchmarking, firmware footprint, microcontroller, FreeRTOS, USB, GD32, Texas Instruments, low-level drivers, cross-vendor comparison.
+\\
+\noindent\rule[2pt]{\textwidth}{0.5pt}

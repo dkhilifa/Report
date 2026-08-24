@@ -1,0 +1,182 @@
+\chapter{Pilot USB Middleware Optimisation and Benchmarking}
+\label{chap:cascade-usb-pilot}
+
+The Universal Serial Bus (USB) device stack served as the first experimental test of our
+method. We selected Human Interface Device (HID), Communications Device Class (CDC), and
+Mass Storage Class (MSC) scenarios because the internal workbook records footprint and
+initialisation measurements for all three. The pilot had two objectives: optimise the STM32
+reference before comparison and determine which evidence controls were needed for later
+campaigns.
+
+\section{Evidence base and validation rules}
+\label{sec:cascade-pilot-evidence}
+
+The main Renesas tables use the clearly labelled \emph{Summary} sheet in the supplied pilot
+workbook. The \emph{Renesas} sheet provides detailed cross-checks, and
+\emph{Initialization Execution time} provides cycle-level traceability for STM32. For the
+NXP study, slides~23--25 of the supplied \emph{ST Competitors MW Benchmark} presentation
+are the authoritative record because they show the reviewed result tables and scenario
+flowcharts. Where those images conflict with workbook cells, we retain the values visible
+in the presentation.
+
+The boards for this independent pilot campaign were:
+\begin{itemize}
+\item Renesas pilot: RA6M5 and STM32H573I-DK;
+\item NXP pilot: MCX-N9 and STM32U575.
+\end{itemize}
+They were selected within the pilot work and are the only platforms to which the results in
+this chapter apply.
+
+\section{STM32 baseline-to-optimised results}
+\label{sec:cascade-stm32-optimisation}
+
+Table~\ref{tab:cascade-stm32-optimisation} separates the original STM32 USB projects from
+their low-footprint configurations. This step prevents avoidable reference-project overhead
+from being attributed to the competing platform.
+
+\begin{table}[H]
+\centering
+\small
+\caption{STM32 USB baseline and optimised results from the workbook Summary sheet.}
+\label{tab:cascade-stm32-optimisation}
+\begin{tabular}{lrrrrrr}
+\toprule
+& \multicolumn{2}{c}{ROM (bytes)} & \multicolumn{2}{c}{RAM (bytes)} & \multicolumn{2}{c}{Initialisation (ms)} \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-7}
+Scenario & Base & Opt. & Base & Opt. & Base & Opt. \\
+\midrule
+HID & 54,095 & 52,655 & 43,733 & 36,657 & 0.97 & 0.71 \\
+CDC & 33,260 & 33,284 & 18,830 & 17,422 & 0.60 & 0.50 \\
+MSC & 70,480 & 70,476 & 108,109 & 69,197 & 2.77 & 2.24 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The optimisation does not produce a uniform ROM reduction. CDC increases by 24~bytes and
+MSC changes by only 4~bytes. Its stronger effect is visible in RAM and initialisation time,
+especially for MSC, whose reported RAM falls from 108,109 to 69,197~bytes. The detailed
+initialisation sheet records the corresponding STM32 cycle totals and permits the rounded
+times in Table~\ref{tab:cascade-stm32-optimisation} to be traced to the captures.
+
+\section{Optimised STM32 versus Renesas RA6M5}
+\label{sec:cascade-pilot-renesas}
+
+\begin{table}[H]
+\centering
+\small
+\caption{RA6M5 and optimised STM32H573I-DK USB results from the workbook Summary sheet.}
+\label{tab:cascade-renesas-results}
+\begin{tabular}{lrrrrrr}
+\toprule
+& \multicolumn{2}{c}{ROM (bytes)} & \multicolumn{2}{c}{RAM (bytes)} & \multicolumn{2}{c}{Initialisation (ms)} \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-7}
+Scenario & RA6M5 & STM32 & RA6M5 & STM32 & RA6M5 & STM32 \\
+\midrule
+HID & 61,380 & 52,655 & 77,896 & 36,657 & 1.59 & 0.71 \\
+CDC & 45,224 & 33,284 & 53,090 & 17,422 & 10.98 & 0.50 \\
+MSC & 132,712 & 70,476 & 121,252 & 69,197 & 3.84 & 2.24 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+For these three implementations, the optimised STM32 project has the lower reported ROM,
+RAM, and initialisation value in every summary row. The largest timing separation appears
+in CDC. The table does not isolate one cause: board choice, generated startup code,
+middleware configuration, compiler output, and optimisation decisions remain part of the
+measured implementations. The result therefore applies to the recorded RA6M5 and
+STM32H573I-DK projects rather than to all Renesas and ST devices.
+
+\section{STM32U575 versus NXP MCX-N9}
+\label{sec:cascade-pilot-nxp}
+
+The NXP summary reports two footprint boundaries. Table~\ref{tab:cascade-nxp-with-rcc}
+includes the STM32 Reset and Clock Control (RCC) contribution, while
+Table~\ref{tab:cascade-nxp-without-rcc} removes it. Presenting both prevents clock setup
+from being hidden inside a nominal USB-stack comparison.
+
+\begin{table}[H]
+\centering
+\small
+\caption{STM32U575 and MCX-N9 footprint with STM32 RCC included, as shown in the reviewed presentation.}
+\label{tab:cascade-nxp-with-rcc}
+\begin{tabular}{lrrrr}
+\toprule
+& \multicolumn{2}{c}{ROM (bytes)} & \multicolumn{2}{c}{RAM (bytes)} \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}
+Scenario & STM32 & MCX-N9 & STM32 & MCX-N9 \\
+\midrule
+HID & 16,377 & 13,728 & 2,422 & 1,702 \\
+CDC & 17,013 & 13,549 & 3,065 & 1,360 \\
+MSC & 35,025 & 26,177 & 13,556 & 11,859 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\small
+\caption{STM32U575 and MCX-N9 footprint with STM32 RCC excluded, as shown in the reviewed presentation.}
+\label{tab:cascade-nxp-without-rcc}
+\begin{tabular}{lrrrr}
+\toprule
+& \multicolumn{2}{c}{ROM (bytes)} & \multicolumn{2}{c}{RAM (bytes)} \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}
+Scenario & STM32 & MCX-N9 & STM32 & MCX-N9 \\
+\midrule
+HID & 11,817 & 12,282 & 2,422 & 1,590 \\
+CDC & 12,453 & 12,087 & 3,065 & 1,352 \\
+MSC & 27,841 & 24,584 & 13,556 & 11,747 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The Summary sheet lists an average STM32 ROM gap of $+26.22\,\%$ with RCC and
+$+4.16\,\%$ without RCC. We preserve those reported aggregates rather than infer an
+unstated averaging rule. Removing RCC changes the HID ROM ordering, while MCX-N9 retains
+the lower reported RAM in all rows. The recorded STM32 RCC ROM contributions are 4,560,
+4,560, and 7,184~bytes for HID, CDC, and MSC. The corresponding MCX-N9 clock/configuration
+entries are 1,446/112, 1,462/8, and 1,593/112~bytes of ROM/RAM.
+
+\subsection{Initialisation measurements}
+
+\begin{table}[H]
+\centering
+\small
+\caption{STM32U575 and MCX-N9 initialisation times shown in the reviewed presentation.}
+\label{tab:cascade-nxp-timing}
+\begin{tabular}{lrr}
+\toprule
+Scenario & STM32U575 (ms) & MCX-N9 (ms) \\
+\midrule
+HID device & 10 & 5 \\
+CDC device & 9.993 & 8.159 \\
+MSC host & 112 & 100.03 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+MCX-N9 has the lower displayed initialisation time in each scenario. The presentation
+resolves the workbook's ambiguous MSC label: slide~24 identifies the case as a bare-metal
+USB MSC host and shows the measured initialisation path through clock configuration, USB
+configuration, and FATFS initialisation before the flash-disk insertion check. We therefore
+report it as MSC host initialisation rather than as \texttt{MX\_USB\_Device\_Init()}.
+
+\subsection{Resolution of workbook conflicts}
+
+The workbook contains conflicting alternatives for three footprint entries. The reviewed
+presentation resolves them: slide~23 shows 16,377~bytes for STM32 HID ROM and
+13,549~bytes for MCX-N9 CDC ROM, while slide~24 shows MSC RAM of 13,556~bytes for
+STM32U575 and 11,859~bytes for MCX-N9 with RCC included. The same slide shows
+11,747~bytes for MCX-N9 after its clock-configuration RAM is removed. These displayed
+values are used in Tables~\ref{tab:cascade-nxp-with-rcc} and
+\ref{tab:cascade-nxp-without-rcc}; the contradictory workbook cells are not used.
+
+\section{Pilot synthesis and tool motivation}
+\label{sec:cascade-pilot-synthesis}
+
+The pilot established three controls for the later work. We must optimise and document the
+reference before comparing it, report the software boundary explicitly, and preserve
+conflicts between source artifacts. It also exposed how much repeated effort was required
+to classify linker-map content, align projects, and track provenance. Those limitations
+became the requirements for MCU Workflow Studio in Chapter~\ref{chap:footprint-tool} and
+the MCU Benchmark Copilot Agent in Chapter~\ref{chap:benchmark-agent}.

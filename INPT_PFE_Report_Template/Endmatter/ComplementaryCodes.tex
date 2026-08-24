@@ -116,10 +116,12 @@ is intentionally limited to reproducibility facts and raw whole-image totals.
 \section{ST--TI FreeRTOS reproducibility record}
 \label{sec:appendix-ti-freertos}
 
-The FreeRTOS middleware benchmark in Section~\ref{sec:ti-freertos} uses three matched project
-pairs from STM32CubeC5 and MSPM33 SDK~1.04.00.00~\cite{stm32cubec5-sw,ti-mspm33-sdk}. All six
-images were built with IAR EWARM~9.60.3 at high optimisation for size
-(\texttt{CCOptLevel=3}, \texttt{CCOptStrategy=1})~\cite{iar-ewarm}. The common configuration
+The FreeRTOS middleware benchmark in Section~\ref{sec:ti-freertos} uses three matched
+project pairs. They come from STM32CubeC5 and MSPM33 SDK~1.04.00.00
+~\cite{stm32cubec5-sw,ti-mspm33-sdk}.
+All six images were built with IAR EWARM~9.60.3 at high optimisation for size
+~\cite{iar-ewarm}. The recorded options are \texttt{CCOptLevel=3} and
+\texttt{CCOptStrategy=1}. The common configuration
 includes a 1\,kHz tick, preemption enabled, time slicing disabled, dynamic allocation, ten
 priorities, and an 8\,KiB FreeRTOS heap. STM32C5 was configured at 144\,MHz and MSPM33 at
 32\,MHz; these are source configuration values rather than independent clock measurements.

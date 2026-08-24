@@ -1,0 +1,42 @@
+\babel@toc {english}{}\relax 
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {1.1}{\ignorespaces STMicroelectronics logo.}}{3}{figure.caption.18}%
+\contentsline {figure}{\numberline {1.2}{\ignorespaces Organisational structure of the Microcontroller Division (MCD) at ST Tunis. The Maintenance team (highlighted) is the host team of this project.}}{4}{figure.caption.19}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Layered architecture of the footprint-analysis tool. A deterministic comparison core (ingestion, classification, mapping, comparison, export) is wrapped by the user interfaces and backed by an SQLite knowledge base; an optional, off-by-default AI-assistance column refines the mapping without ever sitting on the critical path.}}{19}{figure.caption.26}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces UML use-case diagram of MCU Workflow Studio~v0.2.0. Five actors interact with twenty use cases grouped by concern: the benchmark engineer drives the core analysis, the technical reviewer validates low-confidence mappings, the CI/CD pipeline runs scripted headless benchmarks, the LLM service (optional, dashed) enriches the mapping, and the equivalence miner maintains the cross-vendor knowledge base.}}{20}{figure.caption.27}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces UML sequence diagram of a complete footprint benchmark run. The workflow service orchestrates twelve steps: parsing both linker maps, classifying symbols into layers, querying the equivalence database, scoring candidates with twelve weighted signals, computing per-layer deltas, evaluating firmware quality metrics, and emitting the run manifest alongside all export artefacts.}}{21}{figure.caption.28}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Main MCU Workflow Studio analysis window after a cross-vendor footprint run.}}{22}{figure.caption.30}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces End-to-end benchmark pipeline, from linker-map ingestion to report generation. Dashed stages are optional AI-assisted steps that are disabled by default; the solid deterministic path runs end to end on its own.}}{23}{figure.caption.31}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Layer-classification decision flow. Each symbol's tokens are matched against priority-ordered lexicons (system, middleware, low-level, application); the first match determines the layer with an associated confidence.}}{25}{figure.caption.33}%
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Relative weights of the signals combined by the deterministic mapping scorer. Role and alias similarity carry the largest individual weights; the optional LLM-similarity signal (highlighted) is capped so that AI assistance can shift a candidate's confidence by at most twelve percent.}}{26}{figure.caption.34}%
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Detailed signal computation and penalty system. The deterministic evidence signals are combined with knowledge-base priors for each candidate pair; penalties for size mismatch and layer conflict reduce the composite score before the acceptance threshold is applied.}}{27}{figure.caption.35}%
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Candidate generation, ranking, and threshold flow. The Cartesian product of source and target items is pruned by fast rejection filters, scored on all signals, and bucketed into accepted, review, alternative, and unmatched categories by confidence thresholds.}}{28}{figure.caption.36}%
+\contentsline {figure}{\numberline {4.10}{\ignorespaces Mapping review queue and confidence diagnostics for a low-confidence symbol pair.}}{28}{figure.caption.37}%
+\contentsline {figure}{\numberline {4.11}{\ignorespaces AI integration flow. A common protocol abstracts all back-ends; an auto-detection chain probes them in priority order (Copilot, OpenAI, Ollama) and falls back gracefully to purely deterministic operation if none is available.}}{29}{figure.caption.38}%
+\contentsline {figure}{\numberline {4.12}{\ignorespaces Generated footprint report showing the global and per-layer comparison outputs.}}{32}{figure.caption.40}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Architecture of the MCU Benchmark Copilot Agent system. The coordinator resolves scenarios and delegates to specialist agents; automation tools handle deterministic build/measurement operations; all layers operate under the shared always-on benchmark rules and consult the configuration registry.}}{36}{figure.caption.41}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces UML use case diagram of the MCU Benchmark Copilot Agent system. Blue ellipses represent autonomous use cases; yellow ellipses require user approval; green indicates external acquisition. External actors include the user, physical board, vendor source repositories, IAR EWARM toolchain, and the report engine scripts.}}{38}{figure.caption.43}%
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Designed end-to-end benchmark lifecycle. The MCU Benchmark Copilot Agent is configured to handle steps~1 through~11, subject to a hardware gate at step~9; once semantic equivalence is confirmed, the validated linker map is handed to MCU Workflow Studio for footprint analysis.}}{46}{figure.caption.49}%
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Benchmark campaign initiated through the custom agent in VS Code Copilot Chat.}}{47}{figure.caption.50}%
+\contentsline {figure}{\numberline {5.5}{\ignorespaces IAR EWARM build evidence produced during an agent-assisted benchmark campaign.}}{47}{figure.caption.51}%
+\contentsline {figure}{\numberline {5.6}{\ignorespaces UML sequence diagram of a deterministic benchmark campaign. The coordinator delegates to specialist agents (benchmark-analysis, Creation-Porting, Build-Project, Debugger) and interacts with external actors (Vendor Source, Board/IAR). The hardware approval gate (steps~9--10, highlighted) is the only point requiring user confirmation; all other steps execute autonomously.}}{48}{figure.caption.52}%
+\contentsline {figure}{\numberline {5.7}{\ignorespaces Structured campaign dossier retained for traceability and fairness review.}}{50}{figure.caption.53}%
+\contentsline {figure}{\numberline {5.8}{\ignorespaces Agent-system workspace and a board configuration registry entry in VS Code.}}{52}{figure.caption.56}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {6.1}{\ignorespaces ST and GD32 benchmark platforms and their matched project configurations.}}{56}{figure.caption.58}%
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Runtime evidence captured for the matched ST and GD32 USB device scenarios.}}{58}{figure.caption.60}%
+\contentsline {figure}{\numberline {6.3}{\ignorespaces UART observations for a matched ST and GD32 FreeRTOS scheduling scenario.}}{64}{figure.caption.68}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {7.1}{\ignorespaces Static-analysis evidence generated for the STM32CubeC5 LL and MSPM33 driverlib source sets.}}{71}{figure.caption.77}%
+\contentsline {figure}{\numberline {7.2}{\ignorespaces Functional flows of the eight low-level-driver scenario families. I\textsuperscript {2}C and SPI panels represent their paired controller/target and master/slave projects, respectively; the flows define functional behaviour and not a timing window.}}{84}{figure.caption.89}%
+\contentsline {figure}{\numberline {7.3}{\ignorespaces Matched functional scenario builds and linker-map memory totals in IAR EWARM.}}{85}{figure.caption.91}%
+\contentsline {figure}{\numberline {7.4}{\ignorespaces Task architecture of the three ST--TI FreeRTOS scenarios. The preemptive scenario deliberately shows the non-equivalent synchronisation paths found in the measured projects.}}{89}{figure.caption.94}%
+\contentsline {figure}{\numberline {7.5}{\ignorespaces Recorded build and FreeRTOS configuration for the STM32C5 and MSPM33 targets.}}{90}{figure.caption.96}%
+\contentsline {figure}{\numberline {7.6}{\ignorespaces Raw UART reporting windows used for the ST--TI FreeRTOS runtime comparison.}}{91}{figure.caption.98}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }

@@ -1,0 +1,75 @@
+\chapter{STM32 Board Equivalence Search}
+\label{chap:cascade-board-equivalence}
+
+As a separate assignment during the internship, the host team provided us with a list of
+competitor development boards and asked us to identify the nearest STM32 equivalent for
+each one. This task was an independent market and product-positioning study. It did not
+select the platforms used by the benchmark campaigns presented in the other chapters and
+had no direct effect on their scenarios, measurements, or conclusions.
+
+We recorded the outcome in the internal project artifact \emph{board equivalence.pdf}.
+The proposed mappings identify the nearest STM32 board according to the characteristics
+available for comparison; they are not claims that two boards are interchangeable.
+
+\section{Meaning of board proximity}
+\label{sec:cascade-equivalence-method}
+
+For this assignment, \emph{near} means similar according to a combination of product
+characteristics. We considered processing class, memory capacity, peripheral support,
+development-board capabilities, and intended use. No single candidate matches every
+characteristic. Architecture, memory organisation, peripheral implementation, security
+features, package, price, and development tooling may remain different.
+
+\section{Candidate mappings}
+\label{sec:cascade-equivalence-mappings}
+
+Table~\ref{tab:cascade-board-mappings} records the final candidate mappings in the internal
+summary. We retain their status as proposed correspondences and do not attach measurements
+to them.
+
+\begin{table}[H]
+\centering
+\caption{Candidate board mappings recorded in the internal equivalence study. Official product and device sources support the subsequent identifier and lifecycle checks~\cite{nxp-imxrt1060-evk,st-stm32h735g-dk,nxp-frdm-mcxa156,st-nucleo-l552ze-q,renesas-fpb-ra0e1,st-nucleo-l031k6,renesas-fpb-ra8e1,st-nucleo-h743zi2,ti-lp-mspm0c1104,gd32e507-ds,st-nucleo-f429zi}.}
+\label{tab:cascade-board-mappings}
+\begin{tabular}{lll}
+\toprule
+Vendor & Candidate board & STM32 candidate \\
+\midrule
+NXP & MIMXRT1060-EVKC & STM32H735G-DK \\
+NXP & FRDM-MCXA156 & NUCLEO-L552ZE-Q \\
+Renesas & FPB-RA0E1 & NUCLEO-L031K6 \\
+Renesas & FPB-RA8E1 & NUCLEO-H743ZI2 \\
+Texas Instruments & LP-MSPM0C1104 & NUCLEO-L031K6 \\
+GigaDevice & GD32E507Z-EVAL & NUCLEO-F429ZI \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The internal summary identifies the first NXP board as MIMXRT1060-EVKC. NXP's current
+catalog page is filed under MIMXRT1060-EVKB~\cite{nxp-imxrt1060-evk}; we use it to support
+the product-family check, not to assert that the two board revisions are interchangeable.
+
+The source summary spells the first STM32 board as ``SM32H735G-DK''. The official ST
+product page confirms that the intended identifier is STM32H735G-DK~\cite{st-stm32h735g-dk}.
+
+\section{Interpretation and limitations}
+\label{sec:cascade-equivalence-caveats}
+
+Several mappings cross processor-architecture boundaries. The FPB-RA0E1 and
+NUCLEO-L031K6 pair relates Cortex-M23 and Cortex-M0+ platforms; FPB-RA8E1 and
+NUCLEO-H743ZI2 relate Cortex-M85 and Cortex-M7 platforms; and GD32E507Z-EVAL and
+NUCLEO-F429ZI relate Cortex-M33 and Cortex-M4 platforms. Substantial memory, peripheral,
+and software-ecosystem differences may also remain. The mappings should therefore be read
+as the result of a nearest-match search within the STM32 portfolio, not as declarations of
+technical identity or drop-in compatibility. The current ST product pages also mark the
+original NUCLEO-H743ZI and NUCLEO-F429ZI boards obsolete; lifecycle status must therefore
+be considered before reusing these historical proposals~\cite{st-nucleo-h743zi2,st-nucleo-f429zi}.
+
+\section{Assignment outcome}
+\label{sec:cascade-equivalence-outcome}
+
+The assignment produced six documented competitor-to-STM32 proposals and made the
+selection criteria and mismatches explicit. This deliverable was returned to the host team
+as a standalone product-comparison study. The work ends at this point; the subsequent USB,
+GD32, and TI benchmark campaigns use their own independently selected boards and
+experimental controls.
