@@ -1,0 +1,835 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>STM32Cube Ecosystem Benchmark - PFE Defense</title>
+  <style>
+    :root {
+      --ink: #f4f1e9;
+      --muted: #b8c3c5;
+      --night: #081216;
+      --deep: #10242a;
+      --panel: rgba(17, 39, 45, 0.88);
+      --line: rgba(218, 231, 230, 0.18);
+      --teal: #36c2b4;
+      --yellow: #f3c969;
+      --coral: #ef7d64;
+      --blue: #71a7e8;
+      --green: #74c991;
+      --radius: 8px;
+      --shadow: 0 18px 55px rgba(0, 0, 0, 0.34);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      background:
+        linear-gradient(135deg, rgba(54, 194, 180, 0.09), transparent 32%),
+        linear-gradient(315deg, rgba(239, 125, 100, 0.08), transparent 28%),
+        var(--night);
+      color: var(--ink);
+      font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+    }
+
+    button { font: inherit; }
+
+    .deck {
+      height: 100%;
+      display: grid;
+      grid-template-rows: 5px 1fr 52px;
+    }
+
+    .progress {
+      background: rgba(255, 255, 255, 0.08);
+      overflow: hidden;
+    }
+
+    .progress > span {
+      display: block;
+      width: 0;
+      height: 100%;
+      background: linear-gradient(90deg, var(--teal), var(--yellow), var(--coral));
+      transition: width 220ms ease;
+    }
+
+    .viewport { position: relative; overflow: hidden; }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: clamp(14px, 2vh, 24px);
+      padding: clamp(24px, 4vw, 64px) clamp(28px, 5vw, 78px);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateX(24px);
+      transition: opacity 220ms ease, transform 220ms ease, visibility 220ms;
+      background:
+        linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+        linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px);
+      background-size: 44px 44px;
+    }
+
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(0);
+      z-index: 2;
+    }
+
+    .slide-header {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 14px;
+    }
+
+    .section-tag {
+      margin: 0 0 7px;
+      color: var(--teal);
+      font-size: clamp(12px, 1vw, 15px);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1, h2 {
+      margin-bottom: 0;
+      font-family: "Palatino Linotype", Georgia, serif;
+      font-weight: 700;
+      letter-spacing: 0;
+      line-height: 1.04;
+    }
+
+    h1 { font-size: clamp(40px, 6.2vw, 88px); }
+    h2 { font-size: clamp(30px, 4vw, 56px); }
+    h3 { margin-bottom: 9px; font-size: clamp(18px, 1.5vw, 24px); }
+
+    p, li, td, th {
+      font-size: clamp(15px, 1.25vw, 21px);
+      line-height: 1.42;
+    }
+
+    .muted, .source { color: var(--muted); }
+    .source { font-size: clamp(11px, 0.8vw, 13px); }
+    .accent { color: var(--yellow); }
+    .teal { color: var(--teal); }
+    .coral { color: var(--coral); }
+
+    .slide-body { min-height: 0; display: grid; gap: 18px; }
+    .cols-2 { grid-template-columns: 1fr 1fr; }
+    .cols-3 { grid-template-columns: repeat(3, 1fr); }
+    .wide-left { grid-template-columns: 1.15fr 0.85fr; }
+    .wide-right { grid-template-columns: 0.82fr 1.18fr; }
+    .center { place-items: center; text-align: center; }
+    .align-center { align-items: center; }
+
+    .panel {
+      min-width: 0;
+      padding: clamp(18px, 2vw, 30px);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+
+    .panel.light {
+      background: #eef3f1;
+      color: #10242a;
+    }
+
+    .panel > :last-child { margin-bottom: 0; }
+
+    .hero {
+      grid-template-columns: 1.22fr 0.78fr;
+      align-items: stretch;
+    }
+
+    .hero-copy {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-right: 3vw;
+    }
+
+    .hero-copy .subtitle {
+      max-width: 46ch;
+      margin: 24px 0 30px;
+      color: var(--muted);
+      font-size: clamp(18px, 1.8vw, 28px);
+      line-height: 1.45;
+    }
+
+    .identity {
+      display: grid;
+      grid-template-rows: 1fr auto;
+      gap: 14px;
+    }
+
+    .identity-visual {
+      display: grid;
+      place-items: center;
+      background:
+        linear-gradient(145deg, rgba(54, 194, 180, 0.22), rgba(113, 167, 232, 0.08)),
+        #10242a;
+      border: 1px solid rgba(54, 194, 180, 0.35);
+      border-radius: var(--radius);
+    }
+
+    .chip-mark {
+      width: min(24vw, 270px);
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      border: 8px solid var(--yellow);
+      color: var(--ink);
+      font-family: "Palatino Linotype", Georgia, serif;
+      font-size: clamp(28px, 4vw, 56px);
+      font-weight: 800;
+      box-shadow: 18px 18px 0 rgba(239, 125, 100, 0.35);
+    }
+
+    .meta-row, .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .pill {
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: clamp(12px, 0.9vw, 14px);
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .metric {
+      padding: 18px;
+      border-top: 4px solid var(--teal);
+      background: rgba(255, 255, 255, 0.045);
+    }
+
+    .metric.yellow { border-color: var(--yellow); }
+    .metric.coral-border { border-color: var(--coral); }
+    .metric strong { display: block; font-size: clamp(25px, 3vw, 44px); line-height: 1; }
+    .metric span { display: block; margin-top: 9px; color: var(--muted); font-size: clamp(12px, 0.95vw, 16px); }
+
+    ul.clean { margin: 0; padding: 0; list-style: none; }
+    ul.clean li { position: relative; padding-left: 24px; }
+    ul.clean li + li { margin-top: 12px; }
+    ul.clean li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.55em;
+      width: 9px;
+      height: 9px;
+      background: var(--teal);
+    }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0;
+      align-items: start;
+    }
+
+    .phase { position: relative; padding: 46px 14px 0; text-align: center; }
+    .phase::before {
+      content: "";
+      position: absolute;
+      top: 17px;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--line);
+    }
+    .phase:first-child::before { left: 50%; }
+    .phase:last-child::before { right: 50%; }
+    .phase::after {
+      content: "";
+      position: absolute;
+      top: 8px;
+      left: calc(50% - 10px);
+      width: 20px;
+      height: 20px;
+      border: 4px solid var(--night);
+      background: var(--teal);
+      border-radius: 50%;
+    }
+    .phase:nth-child(2)::after { background: var(--yellow); }
+    .phase:nth-child(3)::after { background: var(--coral); }
+    .phase:nth-child(4)::after { background: var(--blue); }
+    .phase:nth-child(5)::after { background: var(--green); }
+    .phase h3 { font-size: clamp(15px, 1.3vw, 21px); }
+    .phase p { color: var(--muted); font-size: clamp(12px, 0.95vw, 16px); }
+
+    .flowline {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+      align-items: stretch;
+    }
+
+    .flow-step {
+      position: relative;
+      display: grid;
+      align-content: center;
+      min-height: 125px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-top: 4px solid var(--teal);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .flow-step:not(:last-child)::after {
+      content: ">";
+      position: absolute;
+      right: -11px;
+      top: calc(50% - 15px);
+      z-index: 2;
+      color: var(--yellow);
+      font-size: 24px;
+      font-weight: 800;
+    }
+
+    .flow-step strong { font-size: clamp(16px, 1.3vw, 21px); }
+    .flow-step span { color: var(--muted); font-size: clamp(12px, 0.95vw, 15px); }
+
+    .figure {
+      width: 100%;
+      height: 100%;
+      min-height: 0;
+      object-fit: contain;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+
+    .chart { display: grid; gap: 13px; }
+    .bar-row { display: grid; grid-template-columns: minmax(140px, 0.7fr) 1.6fr auto; align-items: center; gap: 12px; }
+    .bar-label { font-size: clamp(13px, 1vw, 16px); }
+    .bar-track { height: 18px; background: rgba(255, 255, 255, 0.08); overflow: hidden; }
+    .bar-fill { height: 100%; background: var(--teal); }
+    .bar-fill.yellow { background: var(--yellow); }
+    .bar-fill.coral-bg { background: var(--coral); }
+    .bar-value { min-width: 80px; text-align: right; color: var(--ink); font-weight: 700; font-size: clamp(13px, 1vw, 16px); }
+
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 10px 12px; border-bottom: 1px solid var(--line); text-align: left; }
+    th { color: var(--yellow); font-size: clamp(12px, 0.9vw, 15px); text-transform: uppercase; }
+    td { font-size: clamp(13px, 1vw, 17px); }
+
+    .verdict {
+      padding: 14px 18px;
+      border-left: 5px solid var(--yellow);
+      background: rgba(243, 201, 105, 0.08);
+      font-size: clamp(14px, 1.1vw, 18px);
+      line-height: 1.4;
+    }
+
+    .comparison {
+      display: grid;
+      grid-template-columns: 1fr 90px 1fr;
+      gap: 18px;
+      align-items: center;
+    }
+
+    .versus { text-align: center; color: var(--yellow); font-size: clamp(24px, 3vw, 42px); font-weight: 800; }
+    .side { min-height: 250px; padding: 24px; border: 1px solid var(--line); background: var(--panel); }
+    .side.st { border-top: 5px solid var(--teal); }
+    .side.competitor { border-top: 5px solid var(--yellow); }
+
+    .closing-line {
+      max-width: 24ch;
+      margin: 0 auto;
+      font-family: "Palatino Linotype", Georgia, serif;
+      font-size: clamp(30px, 4.5vw, 64px);
+      line-height: 1.13;
+    }
+
+    .notes {
+      display: none;
+      position: absolute;
+      left: 5vw;
+      right: 5vw;
+      bottom: 18px;
+      z-index: 10;
+      max-height: 35%;
+      overflow: auto;
+      padding: 14px 18px;
+      border: 1px solid var(--yellow);
+      border-radius: var(--radius);
+      background: rgba(5, 13, 16, 0.97);
+      color: #f7e8bd;
+      box-shadow: var(--shadow);
+      font-size: 15px;
+      line-height: 1.4;
+    }
+
+    body.notes-on .slide.active .notes { display: block; }
+
+    .footer {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 14px;
+      padding: 7px 18px;
+      border-top: 1px solid var(--line);
+      background: rgba(5, 13, 16, 0.92);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .footer-center { display: flex; align-items: center; gap: 8px; }
+    .footer-right { justify-self: end; display: flex; align-items: center; gap: 8px; }
+
+    .control {
+      min-width: 36px;
+      height: 34px;
+      padding: 0 11px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--ink);
+      cursor: pointer;
+    }
+
+    .control:hover, .control:focus-visible { border-color: var(--teal); outline: none; }
+    .control:disabled { opacity: 0.35; cursor: default; }
+    #timer { color: var(--yellow); font-variant-numeric: tabular-nums; }
+
+    @media (max-width: 900px), (max-height: 650px) {
+      html, body { overflow: auto; }
+      .deck { min-height: 100%; height: auto; display: block; }
+      .progress, .footer { position: fixed; left: 0; right: 0; z-index: 30; }
+      .progress { top: 0; height: 5px; }
+      .footer { bottom: 0; }
+      .viewport { min-height: 100vh; }
+      .slide { padding: 34px 22px 72px; overflow-y: auto; }
+      .cols-2, .cols-3, .wide-left, .wide-right, .hero, .comparison { grid-template-columns: 1fr; }
+      .timeline, .flowline { grid-template-columns: 1fr; }
+      .phase { padding-top: 10px; text-align: left; }
+      .phase::before, .phase::after, .flow-step::after { display: none; }
+      .metric-grid { grid-template-columns: 1fr; }
+      .identity-visual { min-height: 260px; }
+      .versus { padding: 4px; }
+      .slide-header { align-items: start; }
+    }
+
+    @media print {
+      html, body { overflow: visible; background: #fff; color: #111; }
+      .deck, .viewport { display: block; height: auto; overflow: visible; }
+      .progress, .footer, .notes { display: none !important; }
+      .slide {
+        position: relative;
+        display: grid;
+        visibility: visible;
+        opacity: 1;
+        transform: none;
+        width: 297mm;
+        height: 167mm;
+        page-break-after: always;
+        color: #111;
+        background: #fff;
+      }
+      .panel, .side { color: #111; background: #f4f7f6; box-shadow: none; }
+      .muted, .source, p, li { color: #37474b; }
+    }
+  </style>
+</head>
+<body>
+  <div class="deck">
+    <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+    <main class="viewport" id="viewport">
+
+      <section class="slide active" data-title="Title" data-time="45">
+        <div></div>
+        <div class="slide-body hero">
+          <div class="hero-copy">
+            <p class="section-tag">End-of-studies project - STMicroelectronics Tunis</p>
+            <h1>STM32Cube<br><span class="teal">Ecosystem Benchmark</span></h1>
+            <p class="subtitle">From isolated cross-vendor measurements to a repeatable benchmark engineering workflow.</p>
+            <div class="meta-row">
+              <span class="pill">Fares Dkhili</span>
+              <span class="pill">Computer Engineering</span>
+              <span class="pill">2026</span>
+            </div>
+          </div>
+          <div class="identity">
+            <div class="identity-visual"><div class="chip-mark">PFE</div></div>
+            <div class="panel">
+              <strong>Defense route</strong>
+              <p class="muted">Problem -> method -> pilot -> tools -> GD32/TI results -> perspectives</p>
+            </div>
+          </div>
+        </div>
+        <aside class="notes"><strong>0:45.</strong> Introduce yourself and the host site. State the project in one sentence: we benchmarked STM32Cube against competitor ecosystems and built tools to make those comparisons more reproducible. Do not start with detailed numbers yet.</aside>
+      </section>
+
+      <section class="slide" data-title="Context" data-time="60">
+        <header class="slide-header">
+          <div><p class="section-tag">01 - Industrial context</p><h2>Why ecosystem evidence matters</h2></div>
+          <span class="source">Report: Chapter 1</span>
+        </header>
+        <div class="slide-body wide-left align-center">
+          <div class="panel">
+            <h3>The selection problem</h3>
+            <ul class="clean">
+              <li>An MCU choice depends on more than CPU frequency and memory capacity.</li>
+              <li>Drivers, middleware, project templates, build tools, and documentation affect engineering cost.</li>
+              <li>Cross-vendor claims need scenario-level measurements that can be reviewed and reproduced.</li>
+            </ul>
+            <div class="verdict" style="margin-top: 24px;">The goal is not a universal vendor ranking. It is bounded evidence for a specific board pair, software stack, and configuration.</div>
+          </div>
+          <div class="panel light"><img class="figure" src="presentation-assets/st-organization.png" alt="ST Tunis MCD organization with the Maintenance team highlighted"></div>
+        </div>
+        <aside class="notes"><strong>1:00.</strong> Explain that the project took place in the Technical Marketing and Application Support environment. Emphasize that customers compare complete ecosystems, not only silicon. Set the core rule: every conclusion remains bounded by the experiment.</aside>
+      </section>
+
+      <section class="slide" data-title="Problem" data-time="60">
+        <header class="slide-header">
+          <div><p class="section-tag">02 - Problem statement</p><h2>The starting point was fragmented</h2></div>
+          <span class="source">Manual campaigns, heterogeneous artifacts</span>
+        </header>
+        <div class="slide-body cols-3 align-center">
+          <div class="panel"><h3>Manual comparison</h3><p>Linker maps, workbooks, build projects, and captures were reconciled by hand.</p></div>
+          <div class="panel"><h3>Different ecosystems</h3><p>Equivalent behavior is split across different APIs, files, software layers, and project structures.</p></div>
+          <div class="panel"><h3>Evidence risk</h3><p>A result can become misleading when clocks, boundaries, versions, or scenario semantics differ.</p></div>
+          <div class="panel" style="grid-column: 1 / -1;">
+            <div class="metric-grid">
+              <div class="metric"><strong>Fair</strong><span>Match observable behavior and document residual differences.</span></div>
+              <div class="metric yellow"><strong>Traceable</strong><span>Retain maps, configurations, captures, and source decisions.</span></div>
+              <div class="metric coral-border"><strong>Repeatable</strong><span>Fix toolchain, options, inputs, and measurement boundary.</span></div>
+            </div>
+          </div>
+        </div>
+        <aside class="notes"><strong>1:00.</strong> Present the three problems. Avoid saying that all experiments achieved perfect equivalence; the report explicitly records remaining fairness limitations. Transition: this led to a staged project rather than one monolithic benchmark.</aside>
+      </section>
+
+      <section class="slide" data-title="Chronology" data-time="60">
+        <header class="slide-header">
+          <div><p class="section-tag">03 - Project chronology</p><h2>Five contributions, one coherent progression</h2></div>
+          <span class="source">February-September 2026</span>
+        </header>
+        <div class="slide-body center">
+          <div class="timeline">
+            <div class="phase"><h3>Board search</h3><p>Standalone host assignment: nearest STM32 candidates.</p></div>
+            <div class="phase"><h3>USB pilot</h3><p>ST, Renesas, and NXP; first evidence controls.</p></div>
+            <div class="phase"><h3>Workflow Studio</h3><p>Automated linker-map classification and comparison.</p></div>
+            <div class="phase"><h3>Copilot Agent</h3><p>Assisted project creation, build, debug, and provenance.</p></div>
+            <div class="phase"><h3>Extended studies</h3><p>USB/FreeRTOS with GD32; driver and FreeRTOS analysis with TI.</p></div>
+          </div>
+          <p class="verdict">Important distinction: the board-equivalence search was independent and did not select the boards used in later campaigns.</p>
+        </div>
+        <aside class="notes"><strong>1:00.</strong> Walk left to right. Explicitly separate the first board search from the experimental chain. The actual causal progression starts with the USB pilot; its manual pain points motivated the two tools, which then support broader campaign thinking.</aside>
+      </section>
+
+      <section class="slide" data-title="Method" data-time="75">
+        <header class="slide-header">
+          <div><p class="section-tag">04 - Benchmark method</p><h2>Measure only after defining fairness</h2></div>
+          <span class="source">Scenario-level evidence model</span>
+        </header>
+        <div class="slide-body">
+          <div class="flowline">
+            <div class="flow-step"><strong>1. Define scenario</strong><span>Same intended workload and observable output.</span></div>
+            <div class="flow-step"><strong>2. Record controls</strong><span>Board, clock, compiler, options, versions, and boundary.</span></div>
+            <div class="flow-step"><strong>3. Build & capture</strong><span>Linker maps, UART output, debugger or host evidence.</span></div>
+            <div class="flow-step"><strong>4. Classify</strong><span>Application, middleware, driver/HAL, and runtime.</span></div>
+            <div class="flow-step"><strong>5. Interpret</strong><span>State result, confounders, and valid scope.</span></div>
+          </div>
+          <div class="cols-2" style="display:grid; gap:18px;">
+            <div class="panel"><h3>Core metrics</h3><div class="pill-row"><span class="pill">Flash / ROM</span><span class="pill">RAM</span><span class="pill">Initialization</span><span class="pill">Runtime counters</span><span class="pill">Static quality</span></div></div>
+            <div class="panel"><h3>Evidence hierarchy</h3><p>Reviewed presentation images were used when they conflicted with workbook cells; the conflict and decision remain documented.</p></div>
+          </div>
+        </div>
+        <aside class="notes"><strong>1:15.</strong> This is the methodology slide. Spend most time on controls and evidence. Mention that semantic equivalence is a degree supported by checks, not an automatic assumption. Explain why reviewed images outranked contradictory workbook cells in the pilot.</aside>
+      </section>
+
+      <section class="slide" data-title="USB Pilot" data-time="90">
+        <header class="slide-header">
+          <div><p class="section-tag">05 - First experimental phase</p><h2>The USB pilot established the controls</h2></div>
+          <span class="source">HID - CDC - MSC</span>
+        </header>
+        <div class="slide-body wide-left">
+          <div class="panel">
+            <h3>STM32 baseline -> optimized</h3>
+            <div class="chart">
+              <div class="bar-row"><span class="bar-label">HID RAM</span><div class="bar-track"><div class="bar-fill" style="width:84%"></div></div><span class="bar-value">-16.2%</span></div>
+              <div class="bar-row"><span class="bar-label">CDC RAM</span><div class="bar-track"><div class="bar-fill yellow" style="width:92%"></div></div><span class="bar-value">-7.5%</span></div>
+              <div class="bar-row"><span class="bar-label">MSC RAM</span><div class="bar-track"><div class="bar-fill coral-bg" style="width:64%"></div></div><span class="bar-value">-36.0%</span></div>
+            </div>
+            <p class="muted" style="margin-top:18px;">ROM changed little in CDC and MSC; the strongest optimization effect was RAM and initialization time.</p>
+          </div>
+          <div class="panel">
+            <h3>What the pilot taught us</h3>
+            <ul class="clean">
+              <li><strong>Renesas:</strong> optimized STM32 had lower summary ROM, RAM, and initialization values in all three recorded rows.</li>
+              <li><strong>NXP:</strong> average STM32 ROM gap was +26.22% with RCC and +4.16% without RCC.</li>
+              <li>The measurement boundary can change the ordering; it must be visible.</li>
+            </ul>
+            <div class="verdict" style="margin-top:18px;">Outcome: optimize the reference first, expose the software boundary, and preserve source conflicts.</div>
+          </div>
+        </div>
+        <aside class="notes"><strong>1:30.</strong> Explain the two parts. First, optimizing the STM32 reference avoided attributing avoidable overhead to competitors. Second, NXP showed why RCC inclusion matters: the aggregate ROM gap changes dramatically, and HID ordering changes. Do not universalize the Renesas result.</aside>
+      </section>
+
+      <section class="slide" data-title="Toolchain" data-time="60">
+        <header class="slide-header">
+          <div><p class="section-tag">06 - Engineering response</p><h2>Two tools address two different bottlenecks</h2></div>
+          <span class="source">Build production + result analysis</span>
+        </header>
+        <div class="slide-body comparison">
+          <div class="side st"><h3>MCU Benchmark Copilot Agent</h3><p class="muted">Before the linker map exists</p><ul class="clean"><li>Resolve and acquire scenarios</li><li>Create or port projects</li><li>Build and diagnose failures</li><li>Track provenance and fairness</li></ul></div>
+          <div class="versus">+</div>
+          <div class="side competitor"><h3>MCU Workflow Studio</h3><p class="muted">After comparable builds exist</p><ul class="clean"><li>Parse linker maps</li><li>Classify architectural layers</li><li>Map equivalent symbols</li><li>Export explainable comparisons</li></ul></div>
+        </div>
+        <aside class="notes"><strong>1:00.</strong> Clarify complementarity. The agent does not replace engineering validation, and Workflow Studio does not create benchmark projects. One helps produce candidate builds and evidence; the other analyzes footprint after review.</aside>
+      </section>
+
+      <section class="slide" data-title="Workflow Studio" data-time="90">
+        <header class="slide-header">
+          <div><p class="section-tag">07 - Contribution A</p><h2>MCU Workflow Studio</h2></div>
+          <span class="source">Deterministic core, optional AI assistance</span>
+        </header>
+        <div class="slide-body wide-right align-center">
+          <div class="panel">
+            <h3>Design choices</h3>
+            <ul class="clean"><li>Two IAR map files are the only required inputs.</li><li>Symbols are classified by software layer.</li><li>Candidate matches carry confidence and signal diagnostics.</li><li>SQLite retains vendor knowledge and confirmed mappings.</li><li>XLSX, CSV, JSON, and optional PDF outputs support review.</li></ul>
+            <div class="verdict" style="margin-top:18px;">The deterministic path runs end to end with language-model features disabled.</div>
+          </div>
+          <img class="figure" src="presentation-assets/workflow-pipeline.png" alt="MCU Workflow Studio pipeline from map ingestion to exports">
+        </div>
+        <aside class="notes"><strong>1:30.</strong> Start with the pain: reading maps side by side is slow and subjective. Explain the pipeline from ingestion to classification, mapping, aggregation, and export. Stress explainability and deterministic operation. Optional AI is bounded and off by default.</aside>
+      </section>
+
+      <section class="slide" data-title="Benchmark Agent" data-time="90">
+        <header class="slide-header">
+          <div><p class="section-tag">08 - Contribution B</p><h2>MCU Benchmark Copilot Agent</h2></div>
+          <span class="source">Agents - skills - scripts - registries</span>
+        </header>
+        <div class="slide-body wide-left align-center">
+          <img class="figure" src="presentation-assets/agent-architecture.png" alt="Layered architecture of the benchmark Copilot agent">
+          <div class="panel">
+            <div class="metric-grid" style="grid-template-columns:1fr;">
+              <div class="metric"><strong>4</strong><span>Specialist agents: coordination, creation/porting, build, and debug.</span></div>
+              <div class="metric yellow"><strong>6</strong><span>Reusable skills encoding benchmark workflows and checks.</span></div>
+              <div class="metric coral-border"><strong>12</strong><span>Automation scripts for deterministic operations.</span></div>
+            </div>
+            <p style="margin-top:18px;"><strong>Safety boundary:</strong> workspace operations can be automated, but physical hardware programming requires approval.</p>
+          </div>
+        </div>
+        <aside class="notes"><strong>1:30.</strong> Explain why a general-purpose assistant is insufficient: it lacks domain checklists, board/toolchain ground truth, and refusal rules. Point out the four layers. State that success still requires real build and hardware evidence; the system organizes and assists the campaign.</aside>
+      </section>
+
+      <section class="slide" data-title="GD32 Results" data-time="90">
+        <header class="slide-header">
+          <div><p class="section-tag">09 - Extended campaign</p><h2>STM32U575 vs GD32E507</h2></div>
+          <span class="source">USB + FreeRTOS, 5 scenarios</span>
+        </header>
+        <div class="slide-body wide-left">
+          <div class="panel">
+            <h3>Recorded whole-image pattern</h3>
+            <div class="chart">
+              <div class="bar-row"><span class="bar-label">USB flash</span><div class="bar-track"><div class="bar-fill coral-bg" style="width:88%"></div></div><span class="bar-value">ST +35-88%</span></div>
+              <div class="bar-row"><span class="bar-label">USB RAM</span><div class="bar-track"><div class="bar-fill" style="width:42%"></div></div><span class="bar-value">ST -57-65%</span></div>
+              <div class="bar-row"><span class="bar-label">USB init</span><div class="bar-track"><div class="bar-fill yellow" style="width:38%"></div></div><span class="bar-value">ST -61.7%</span></div>
+              <div class="bar-row"><span class="bar-label">FreeRTOS RAM</span><div class="bar-track"><div class="bar-fill" style="width:51%"></div></div><span class="bar-value">near equal</span></div>
+            </div>
+          </div>
+          <div class="panel">
+            <h3>Interpretation</h3>
+            <ul class="clean"><li>STM32 assigned more ROM to HAL; GD32 USB images assigned more to middleware.</li><li>The middleware totals themselves were comparatively close.</li><li>No repeated samples or dispersion were available for the timing claim.</li><li>RCC is a priority for map inspection and controlled rebuilds, not a proven universal root cause.</li></ul>
+            <div class="verdict" style="margin-top:18px;">The campaign reveals trade-offs, not a uniform ecosystem winner.</div>
+          </div>
+        </div>
+        <aside class="notes"><strong>1:30.</strong> Present flash, RAM, and initialization as separate dimensions. Be explicit that -61.7% means the recorded initialization value was lower for STM32, not a statistically established platform speedup. End with the bounded RCC follow-up.</aside>
+      </section>
+
+      <section class="slide" data-title="TI Scope" data-time="75">
+        <header class="slide-header">
+          <div><p class="section-tag">10 - Extended campaign</p><h2>STM32C5 vs TI MSPM33</h2></div>
+          <span class="source">Static analysis + 12 functional pairs + 3 FreeRTOS pairs</span>
+        </header>
+        <div class="slide-body cols-3 align-center">
+          <div class="panel"><h3>Driver source study</h3><p>Lines, documentation, duplication, complexity, API structure, MISRA-addon findings, and SDK inventory.</p></div>
+          <div class="panel"><h3>Functional portfolio</h3><p>Twelve independently linked pairs across ADC, GPIO, I2C, SPI, and UART behavior.</p></div>
+          <div class="panel"><h3>FreeRTOS portfolio</h3><p>Basic, cooperative, and preemptive scenarios with runtime and whole-image footprint.</p></div>
+          <div class="panel" style="grid-column:1 / -1;"><p><strong>Key fairness limit:</strong> STM32 ran at 144 MHz and MSPM33 at 32 MHz; kernel versions and preemptive synchronization semantics also differed.</p></div>
+        </div>
+        <aside class="notes"><strong>1:15.</strong> Correct the old presentation narrative: TI is not only static analysis. It includes static driver analysis, 12 functional image pairs, and three FreeRTOS pairs. State the fairness limitations before showing results.</aside>
+      </section>
+
+      <section class="slide" data-title="TI Static" data-time="90">
+        <header class="slide-header">
+          <div><p class="section-tag">11 - TI source analysis</p><h2>Different strengths in selected SDK releases</h2></div>
+          <span class="source">Results describe analyzed source sets, not overall maturity</span>
+        </header>
+        <div class="slide-body cols-2">
+          <div class="panel">
+            <h3 class="teal">STM32CubeC5 observations</h3>
+            <table><tbody>
+              <tr><td>Code lines</td><td><strong>22,292</strong> vs 27,972</td></tr>
+              <tr><td>Documentation</td><td><strong>97.3%</strong> vs 82.6%</td></tr>
+              <tr><td>Duplication</td><td><strong>2.19%</strong> vs 7.25%</td></tr>
+              <tr><td>Avg. complexity</td><td><strong>4.44</strong> vs 7.35</td></tr>
+            </tbody></table>
+            <p class="muted">Broader selected-release inventory in several connectivity and security categories.</p>
+          </div>
+          <div class="panel">
+            <h3 class="accent">MSPM33 observations</h3>
+            <ul class="clean"><li>Wider use of enums and typedefs.</li><li>Distinct analog integration in the selected device.</li><li>Selected SDK inventory includes AI, graphics, automotive, and post-quantum components.</li><li>These are structural, inventory, and datasheet observations, not measured application advantages.</li></ul>
+          </div>
+        </div>
+        <aside class="notes"><strong>1:30.</strong> Avoid the phrase "ST has stronger SDK maturity." Say exactly what was measured. Explain that lower lines, higher measured documentation, lower duplication, and lower average complexity characterize these selected source sets. TI has different structural and inventory strengths.</aside>
+      </section>
+
+      <section class="slide" data-title="TI Runtime" data-time="90">
+        <header class="slide-header">
+          <div><p class="section-tag">12 - TI linked images and FreeRTOS</p><h2>Footprint is conclusive; runtime remains bounded</h2></div>
+          <span class="source">Whole-image results</span>
+        </header>
+        <div class="slide-body wide-left align-center">
+          <div class="panel">
+            <div class="metric-grid">
+              <div class="metric coral-border"><strong>+2.8%</strong><span>STM32C5 aggregate flash across 12 functional images.</span></div>
+              <div class="metric"><strong>-5.0%</strong><span>STM32C5 aggregate RAM across those 12 images.</span></div>
+              <div class="metric yellow"><strong>-27.9 to -29.6%</strong><span>STM32C5 flash across 3 FreeRTOS images.</span></div>
+            </div>
+            <p style="margin-top:20px;">MSPM33 retained a small <strong>56-76 byte RAM advantage</strong> in the FreeRTOS images.</p>
+            <div class="verdict">The basic runtime result becomes nearly equal after clock normalization. Cooperative and preemptive results remain confounded.</div>
+          </div>
+          <img class="figure" src="presentation-assets/ti-freertos.png" alt="Architecture of the three TI and STM32 FreeRTOS scenarios">
+        </div>
+        <aside class="notes"><strong>1:30.</strong> Separate footprint from runtime. Footprint is based on independently linked images and supports direct image-level statements. Runtime cannot support scheduler-efficiency conclusions because clocks, kernels, options, sample counts, and preemptive primitives differ. The basic normalized ratio is approximately 1.002.</aside>
+      </section>
+
+      <section class="slide" data-title="Synthesis" data-time="60">
+        <header class="slide-header">
+          <div><p class="section-tag">13 - Synthesis</p><h2>What the project actually establishes</h2></div>
+          <span class="source">No universal winner</span>
+        </header>
+        <div class="slide-body cols-3 align-center">
+          <div class="panel"><h3>Technical evidence</h3><p>Footprint and source-structure differences are scenario- and release-dependent.</p></div>
+          <div class="panel"><h3>Methodological evidence</h3><p>Boundary definition, provenance, and semantic checks are as important as the final number.</p></div>
+          <div class="panel"><h3>Engineering contribution</h3><p>The two tools convert recurring campaign work into a reusable, reviewable process.</p></div>
+          <div class="verdict" style="grid-column:1 / -1; text-align:center;">No comparative conclusion should exceed the measurements and controls that support it.</div>
+        </div>
+        <aside class="notes"><strong>1:00.</strong> This is the central synthesis. The value is both in the measured findings and in the capability to produce better future evidence. Repeat the rule in the highlighted band slowly.</aside>
+      </section>
+
+      <section class="slide" data-title="Perspectives" data-time="60">
+        <header class="slide-header">
+          <div><p class="section-tag">14 - Perspectives</p><h2>How to turn observations into stronger conclusions</h2></div>
+          <span class="source">Controlled follow-up plan</span>
+        </header>
+        <div class="slide-body cols-2">
+          <div class="panel"><h3>Experimental controls</h3><ul class="clean"><li>Equal clocks and one documented software configuration.</li><li>Common primitives and measurement boundaries.</li><li>Warm-up policy, repeated samples, and dispersion.</li><li>Archived maps, captures, configurations, and hashes.</li></ul></div>
+          <div class="panel"><h3>Tool validation and scale</h3><ul class="clean"><li>Validate Workflow Studio on a larger labeled map collection.</li><li>Record agent campaigns and distinguish automation from manual intervention.</li><li>Extend to new middleware and vendors only with the same evidence controls.</li><li>Investigate retained RCC and USB paths through map inspection and controlled rebuilds.</li></ul></div>
+        </div>
+        <aside class="notes"><strong>1:00.</strong> Present this as the next engineering plan, not as missing work hidden from the report. The current study identified where controls matter most. Prioritize equal-clock runtime campaigns and labeled validation data for the tools.</aside>
+      </section>
+
+      <section class="slide" data-title="Conclusion" data-time="45">
+        <div></div>
+        <div class="slide-body center">
+          <p class="section-tag">Conclusion</p>
+          <p class="closing-line">We did not build a single scoreboard.<br><span class="teal">We built a way to produce credible benchmark evidence repeatedly.</span></p>
+          <div class="pill-row" style="justify-content:center; margin-top:20px;"><span class="pill">Scenario-based comparisons</span><span class="pill">Two engineering tools</span><span class="pill">Bounded conclusions</span></div>
+          <h2 style="margin-top:22px; color:var(--yellow);">Thank you - Questions?</h2>
+        </div>
+        <aside class="notes"><strong>0:45.</strong> Close with the contribution: a benchmark method, two supporting tools, and bounded findings across the pilot, GD32, and TI studies. Thank the jury and invite questions.</aside>
+      </section>
+
+    </main>
+
+    <footer class="footer">
+      <div><span id="slideTitle">Title</span> <span class="muted">| N: notes</span></div>
+      <div class="footer-center">
+        <button class="control" id="prev" type="button" aria-label="Previous slide">Previous</button>
+        <strong id="counter">1 / 16</strong>
+        <button class="control" id="next" type="button" aria-label="Next slide">Next</button>
+      </div>
+      <div class="footer-right"><span id="timer">00:00</span><button class="control" id="resetTimer" type="button">Reset</button><button class="control" id="fullscreen" type="button">Fullscreen</button></div>
+    </footer>
+  </div>
+
+  <script>
+    const slides = [...document.querySelectorAll('.slide')];
+    const progressBar = document.getElementById('progressBar');
+    const counter = document.getElementById('counter');
+    const slideTitle = document.getElementById('slideTitle');
+    const prev = document.getElementById('prev');
+    const next = document.getElementById('next');
+    const timer = document.getElementById('timer');
+    let index = 0;
+    let startedAt = Date.now();
+
+    function show(target) {
+      index = Math.max(0, Math.min(slides.length - 1, target));
+      slides.forEach((slide, position) => slide.classList.toggle('active', position === index));
+      progressBar.style.width = `${((index + 1) / slides.length) * 100}%`;
+      counter.textContent = `${index + 1} / ${slides.length}`;
+      slideTitle.textContent = slides[index].dataset.title;
+      prev.disabled = index === 0;
+      next.disabled = index === slides.length - 1;
+      history.replaceState(null, '', `#${index + 1}`);
+      document.title = `${slides[index].dataset.title} - STM32Cube PFE Defense`;
+    }
+
+    function step(delta) { show(index + delta); }
+    function resetTimer() { startedAt = Date.now(); }
+    function updateTimer() {
+      const elapsed = Math.floor((Date.now() - startedAt) / 1000);
+      const minutes = String(Math.floor(elapsed / 60)).padStart(2, '0');
+      const seconds = String(elapsed % 60).padStart(2, '0');
+      timer.textContent = `${minutes}:${seconds}`;
+    }
+
+    prev.addEventListener('click', () => step(-1));
+    next.addEventListener('click', () => step(1));
+    document.getElementById('resetTimer').addEventListener('click', resetTimer);
+    document.getElementById('fullscreen').addEventListener('click', () => {
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+      else document.exitFullscreen();
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (['ArrowRight', 'PageDown', ' '].includes(event.key)) { event.preventDefault(); step(1); }
+      if (['ArrowLeft', 'PageUp'].includes(event.key)) { event.preventDefault(); step(-1); }
+      if (event.key === 'Home') show(0);
+      if (event.key === 'End') show(slides.length - 1);
+      if (event.key.toLowerCase() === 'n') document.body.classList.toggle('notes-on');
+      if (event.key.toLowerCase() === 'f') document.getElementById('fullscreen').click();
+    });
+
+    let touchStart = 0;
+    document.getElementById('viewport').addEventListener('touchstart', event => { touchStart = event.changedTouches[0].clientX; }, { passive: true });
+    document.getElementById('viewport').addEventListener('touchend', event => {
+      const delta = event.changedTouches[0].clientX - touchStart;
+      if (Math.abs(delta) > 60) step(delta < 0 ? 1 : -1);
+    }, { passive: true });
+
+    const requested = Number(location.hash.slice(1));
+    show(Number.isInteger(requested) && requested > 0 ? requested - 1 : 0);
+    setInterval(updateTimer, 1000);
+  </script>
+</body>
+</html>
