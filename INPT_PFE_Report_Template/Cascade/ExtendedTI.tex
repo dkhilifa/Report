@@ -112,12 +112,6 @@ tools and their roles are:
         \texttt{@param}, \texttt{@return} tags, file headers).
 \end{itemize}
 
-\reportscreenshot
-      {Figures/ti-static/screenshots/analysis-reports.png}
-      {Open the generated static-analysis output for the pinned ST and TI SDK releases. Capture the tool and version metadata plus representative cloc, Lizard, Cppcheck MISRA, and jscpd results, using a report dashboard or a clean terminal collage.}
-      {Static-analysis evidence generated for the STM32CubeC5 LL and MSPM33 driverlib source sets.}
-      {fig:ti-screenshot-static-analysis}
-
 % --------------------------------------------------------------------
 \subsection{Lines of code}
 \label{subsec:ti-loc}
@@ -820,12 +814,6 @@ Preemptive & Five workers use priorities 1--5 and a priority-6 reporter. STM32 u
 \bottomrule
 \end{tabularx}
 \end{table}
-
-\reportscreenshot
-      {Figures/ti-freertos/screenshots/project-configuration.png}
-      {Capture the IAR project options or generated configuration for both FreeRTOS targets. Make the device, optimisation level, core clock, FreeRTOS version, heap size, tick rate, and key scheduler options legible.}
-      {Recorded build and FreeRTOS configuration for the STM32C5 and MSPM33 targets.}
-      {fig:ti-screenshot-freertos-config}
 
 The basic and cooperative scenarios preserve the same worker count, creation order, priorities,
 and counter semantics on both platforms. The preemptive projects do not preserve the same

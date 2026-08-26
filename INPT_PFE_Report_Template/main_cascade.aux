@@ -146,10 +146,8 @@
 \newlabel{tab:tool-io}{{4.1}{22}{Principal inputs and outputs of the tool}{table.caption.29}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4.4}{\ignorespaces Main MCU Workflow Studio analysis window after a cross-vendor footprint run.}}{22}{figure.caption.30}\protected@file@percent }
 \newlabel{fig:tool-screenshot-main}{{4.4}{22}{Main MCU Workflow Studio analysis window after a cross-vendor footprint run}{figure.caption.30}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.3}The benchmarking pipeline}{22}{section.4.3}\protected@file@percent }
-\newlabel{sec:tool-pipeline}{{4.3}{22}{The benchmarking pipeline}{section.4.3}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.5}{\ignorespaces End-to-end benchmark pipeline, from linker-map ingestion to report generation. Dashed stages are optional AI-assisted steps that are disabled by default; the solid deterministic path runs end to end on its own.}}{23}{figure.caption.31}\protected@file@percent }
-\newlabel{fig:tool-pipeline}{{4.5}{23}{End-to-end benchmark pipeline, from linker-map ingestion to report generation. Dashed stages are optional AI-assisted steps that are disabled by default; the solid deterministic path runs end to end on its own}{figure.caption.31}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.3}The benchmarking pipeline}{23}{section.4.3}\protected@file@percent }
+\newlabel{sec:tool-pipeline}{{4.3}{23}{The benchmarking pipeline}{section.4.3}{}}
 \citation{python}
 \citation{sqlite}
 \citation{pyinstaller}
@@ -160,219 +158,215 @@
 \citation{matplotlib}
 \citation{sqlite}
 \citation{pyinstaller}
-\citation{iar-ewarm}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.5}{\ignorespaces End-to-end benchmark pipeline, from linker-map ingestion to report generation. Dashed stages are optional AI-assisted steps that are disabled by default; the solid deterministic path runs end to end on its own.}}{24}{figure.caption.31}\protected@file@percent }
+\newlabel{fig:tool-pipeline}{{4.5}{24}{End-to-end benchmark pipeline, from linker-map ingestion to report generation. Dashed stages are optional AI-assisted steps that are disabled by default; the solid deterministic path runs end to end on its own}{figure.caption.31}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {4.4}Implementation}{24}{section.4.4}\protected@file@percent }
 \newlabel{sec:tool-implementation}{{4.4}{24}{Implementation}{section.4.4}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {4.2}{\ignorespaces Implementation stack and the role of each external dependency.}}{24}{table.caption.32}\protected@file@percent }
-\newlabel{tab:tool-stack}{{4.2}{24}{Implementation stack and the role of each external dependency}{table.caption.32}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.1}Parsing linker maps and classifying layers}{24}{subsection.4.4.1}\protected@file@percent }
-\newlabel{sec:tool-parsing}{{4.4.1}{24}{Parsing linker maps and classifying layers}{subsection.4.4.1}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.6}{\ignorespaces Layer-classification decision flow. Each symbol's tokens are matched against priority-ordered lexicons (system, middleware, low-level, application); the first match determines the layer with an associated confidence.}}{25}{figure.caption.33}\protected@file@percent }
-\newlabel{fig:tool-layer-classification}{{4.6}{25}{Layer-classification decision flow. Each symbol's tokens are matched against priority-ordered lexicons (system, middleware, low-level, application); the first match determines the layer with an associated confidence}{figure.caption.33}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.2}The multi-signal mapping engine}{25}{subsection.4.4.2}\protected@file@percent }
-\newlabel{sec:tool-mapping}{{4.4.2}{25}{The multi-signal mapping engine}{subsection.4.4.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.7}{\ignorespaces Relative weights of the signals combined by the deterministic mapping scorer. Role and alias similarity carry the largest individual weights; the optional LLM-similarity signal (highlighted) is capped so that AI assistance can shift a candidate's confidence by at most twelve percent.}}{26}{figure.caption.34}\protected@file@percent }
-\newlabel{fig:tool-weights}{{4.7}{26}{Relative weights of the signals combined by the deterministic mapping scorer. Role and alias similarity carry the largest individual weights; the optional LLM-similarity signal (highlighted) is capped so that AI assistance can shift a candidate's confidence by at most twelve percent}{figure.caption.34}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.8}{\ignorespaces Detailed signal computation and penalty system. The deterministic evidence signals are combined with knowledge-base priors for each candidate pair; penalties for size mismatch and layer conflict reduce the composite score before the acceptance threshold is applied.}}{27}{figure.caption.35}\protected@file@percent }
-\newlabel{fig:tool-scoring-signals}{{4.8}{27}{Detailed signal computation and penalty system. The deterministic evidence signals are combined with knowledge-base priors for each candidate pair; penalties for size mismatch and layer conflict reduce the composite score before the acceptance threshold is applied}{figure.caption.35}{}}
+\citation{iar-ewarm}
+\@writefile{lot}{\contentsline {table}{\numberline {4.2}{\ignorespaces Implementation stack and the role of each external dependency.}}{25}{table.caption.32}\protected@file@percent }
+\newlabel{tab:tool-stack}{{4.2}{25}{Implementation stack and the role of each external dependency}{table.caption.32}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.1}Parsing linker maps and classifying layers}{25}{subsection.4.4.1}\protected@file@percent }
+\newlabel{sec:tool-parsing}{{4.4.1}{25}{Parsing linker maps and classifying layers}{subsection.4.4.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.6}{\ignorespaces Layer-classification decision flow. Each symbol's tokens are matched against priority-ordered lexicons (system, middleware, low-level, application); the first match determines the layer with an associated confidence.}}{26}{figure.caption.33}\protected@file@percent }
+\newlabel{fig:tool-layer-classification}{{4.6}{26}{Layer-classification decision flow. Each symbol's tokens are matched against priority-ordered lexicons (system, middleware, low-level, application); the first match determines the layer with an associated confidence}{figure.caption.33}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.2}The multi-signal mapping engine}{26}{subsection.4.4.2}\protected@file@percent }
+\newlabel{sec:tool-mapping}{{4.4.2}{26}{The multi-signal mapping engine}{subsection.4.4.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.7}{\ignorespaces Relative weights of the signals combined by the deterministic mapping scorer. Role and alias similarity carry the largest individual weights; the optional LLM-similarity signal (highlighted) is capped so that AI assistance can shift a candidate's confidence by at most twelve percent.}}{27}{figure.caption.34}\protected@file@percent }
+\newlabel{fig:tool-weights}{{4.7}{27}{Relative weights of the signals combined by the deterministic mapping scorer. Role and alias similarity carry the largest individual weights; the optional LLM-similarity signal (highlighted) is capped so that AI assistance can shift a candidate's confidence by at most twelve percent}{figure.caption.34}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.8}{\ignorespaces Detailed signal computation and penalty system. The deterministic evidence signals are combined with knowledge-base priors for each candidate pair; penalties for size mismatch and layer conflict reduce the composite score before the acceptance threshold is applied.}}{28}{figure.caption.35}\protected@file@percent }
+\newlabel{fig:tool-scoring-signals}{{4.8}{28}{Detailed signal computation and penalty system. The deterministic evidence signals are combined with knowledge-base priors for each candidate pair; penalties for size mismatch and layer conflict reduce the composite score before the acceptance threshold is applied}{figure.caption.35}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.9}{\ignorespaces Candidate generation, ranking, and threshold flow. The Cartesian product of source and target items is pruned by fast rejection filters, scored on all signals, and bucketed into accepted, review, alternative, and unmatched categories by confidence thresholds.}}{29}{figure.caption.36}\protected@file@percent }
+\newlabel{fig:tool-candidate-ranking}{{4.9}{29}{Candidate generation, ranking, and threshold flow. The Cartesian product of source and target items is pruned by fast rejection filters, scored on all signals, and bucketed into accepted, review, alternative, and unmatched categories by confidence thresholds}{figure.caption.36}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.10}{\ignorespaces Mapping review queue and confidence diagnostics for a low-confidence symbol pair.}}{29}{figure.caption.37}\protected@file@percent }
+\newlabel{fig:tool-screenshot-mapping-review}{{4.10}{29}{Mapping review queue and confidence diagnostics for a low-confidence symbol pair}{figure.caption.37}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.3}Optional AI assistance}{29}{subsection.4.4.3}\protected@file@percent }
+\newlabel{sec:tool-ai}{{4.4.3}{29}{Optional AI assistance}{subsection.4.4.3}{}}
 \citation{github-copilot}
 \citation{ollama}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.9}{\ignorespaces Candidate generation, ranking, and threshold flow. The Cartesian product of source and target items is pruned by fast rejection filters, scored on all signals, and bucketed into accepted, review, alternative, and unmatched categories by confidence thresholds.}}{28}{figure.caption.36}\protected@file@percent }
-\newlabel{fig:tool-candidate-ranking}{{4.9}{28}{Candidate generation, ranking, and threshold flow. The Cartesian product of source and target items is pruned by fast rejection filters, scored on all signals, and bucketed into accepted, review, alternative, and unmatched categories by confidence thresholds}{figure.caption.36}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.10}{\ignorespaces Mapping review queue and confidence diagnostics for a low-confidence symbol pair.}}{28}{figure.caption.37}\protected@file@percent }
-\newlabel{fig:tool-screenshot-mapping-review}{{4.10}{28}{Mapping review queue and confidence diagnostics for a low-confidence symbol pair}{figure.caption.37}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.3}Optional AI assistance}{28}{subsection.4.4.3}\protected@file@percent }
-\newlabel{sec:tool-ai}{{4.4.3}{28}{Optional AI assistance}{subsection.4.4.3}{}}
 \citation{github-copilot}
 \citation{anthropic}
 \citation{openai-api}
 \citation{ollama}
 \citation{github-models}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.11}{\ignorespaces AI integration flow. A common protocol abstracts all back-ends; an auto-detection chain probes them in priority order (Copilot, OpenAI, Ollama) and falls back gracefully to purely deterministic operation if none is available.}}{29}{figure.caption.38}\protected@file@percent }
-\newlabel{fig:tool-ai-integration}{{4.11}{29}{AI integration flow. A common protocol abstracts all back-ends; an auto-detection chain probes them in priority order (Copilot, OpenAI, Ollama) and falls back gracefully to purely deterministic operation if none is available}{figure.caption.38}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {4.3}{\ignorespaces Optional language-model back-ends. All are disabled by default; the tool runs fully without them.}}{29}{table.caption.39}\protected@file@percent }
-\newlabel{tab:tool-ai}{{4.3}{29}{Optional language-model back-ends. All are disabled by default; the tool runs fully without them}{table.caption.39}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.4}Persistence and learning}{29}{subsection.4.4.4}\protected@file@percent }
-\newlabel{sec:tool-persistence}{{4.4.4}{29}{Persistence and learning}{subsection.4.4.4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.5}Cross-vendor equivalence database}{30}{subsection.4.4.5}\protected@file@percent }
-\newlabel{sec:tool-equivalence}{{4.4.5}{30}{Cross-vendor equivalence database}{subsection.4.4.5}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.6}Source-code signal provider}{30}{subsection.4.4.6}\protected@file@percent }
-\newlabel{sec:tool-source-code}{{4.4.6}{30}{Source-code signal provider}{subsection.4.4.6}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.7}Firmware quality metrics and grading}{30}{subsection.4.4.7}\protected@file@percent }
-\newlabel{sec:tool-quality}{{4.4.7}{30}{Firmware quality metrics and grading}{subsection.4.4.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.11}{\ignorespaces AI integration flow. A common protocol abstracts all back-ends; an auto-detection chain probes them in priority order (Copilot, OpenAI, Ollama) and falls back gracefully to purely deterministic operation if none is available.}}{30}{figure.caption.38}\protected@file@percent }
+\newlabel{fig:tool-ai-integration}{{4.11}{30}{AI integration flow. A common protocol abstracts all back-ends; an auto-detection chain probes them in priority order (Copilot, OpenAI, Ollama) and falls back gracefully to purely deterministic operation if none is available}{figure.caption.38}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4.3}{\ignorespaces Optional language-model back-ends. All are disabled by default; the tool runs fully without them.}}{30}{table.caption.39}\protected@file@percent }
+\newlabel{tab:tool-ai}{{4.3}{30}{Optional language-model back-ends. All are disabled by default; the tool runs fully without them}{table.caption.39}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.4}Persistence and learning}{31}{subsection.4.4.4}\protected@file@percent }
+\newlabel{sec:tool-persistence}{{4.4.4}{31}{Persistence and learning}{subsection.4.4.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.5}Cross-vendor equivalence database}{31}{subsection.4.4.5}\protected@file@percent }
+\newlabel{sec:tool-equivalence}{{4.4.5}{31}{Cross-vendor equivalence database}{subsection.4.4.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.6}Source-code signal provider}{31}{subsection.4.4.6}\protected@file@percent }
+\newlabel{sec:tool-source-code}{{4.4.6}{31}{Source-code signal provider}{subsection.4.4.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.7}Firmware quality metrics and grading}{32}{subsection.4.4.7}\protected@file@percent }
+\newlabel{sec:tool-quality}{{4.4.7}{32}{Firmware quality metrics and grading}{subsection.4.4.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.8}Run manifest and reproducibility}{32}{subsection.4.4.8}\protected@file@percent }
+\newlabel{sec:tool-manifest}{{4.4.8}{32}{Run manifest and reproducibility}{subsection.4.4.8}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.5}Integration into the benchmark workflow}{32}{section.4.5}\protected@file@percent }
+\newlabel{sec:tool-integration}{{4.5}{32}{Integration into the benchmark workflow}{section.4.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.6}Usage and outputs}{32}{section.4.6}\protected@file@percent }
+\newlabel{sec:tool-usage}{{4.6}{32}{Usage and outputs}{section.4.6}{}}
 \citation{nxp-mcuxpresso}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.8}Run manifest and reproducibility}{31}{subsection.4.4.8}\protected@file@percent }
-\newlabel{sec:tool-manifest}{{4.4.8}{31}{Run manifest and reproducibility}{subsection.4.4.8}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.5}Integration into the benchmark workflow}{31}{section.4.5}\protected@file@percent }
-\newlabel{sec:tool-integration}{{4.5}{31}{Integration into the benchmark workflow}{section.4.5}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.6}Usage and outputs}{31}{section.4.6}\protected@file@percent }
-\newlabel{sec:tool-usage}{{4.6}{31}{Usage and outputs}{section.4.6}{}}
-\newlabel{lst:tool-cli}{{4.1}{31}{Command-line invocation of a footprint benchmark}{lstlisting.4.1}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {4.1}{\ignorespaces Command-line invocation of a footprint benchmark.}}{31}{lstlisting.4.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {4.12}{\ignorespaces Generated footprint report showing the global and per-layer comparison outputs.}}{32}{figure.caption.40}\protected@file@percent }
-\newlabel{fig:tool-screenshot-export}{{4.12}{32}{Generated footprint report showing the global and per-layer comparison outputs}{figure.caption.40}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.7}Engineering value and limitations}{32}{section.4.7}\protected@file@percent }
-\newlabel{sec:tool-value}{{4.7}{32}{Engineering value and limitations}{section.4.7}{}}
+\newlabel{lst:tool-cli}{{4.1}{33}{Command-line invocation of a footprint benchmark}{lstlisting.4.1}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {4.1}{\ignorespaces Command-line invocation of a footprint benchmark.}}{33}{lstlisting.4.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.12}{\ignorespaces Generated footprint report showing the global and per-layer comparison outputs.}}{33}{figure.caption.40}\protected@file@percent }
+\newlabel{fig:tool-screenshot-export}{{4.12}{33}{Generated footprint report showing the global and per-layer comparison outputs}{figure.caption.40}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.7}Engineering value and limitations}{33}{section.4.7}\protected@file@percent }
+\newlabel{sec:tool-value}{{4.7}{33}{Engineering value and limitations}{section.4.7}{}}
 \citation{vscode,github-copilot}
-\@writefile{toc}{\contentsline {chapter}{\numberline {5}An Autonomous AI Agent for Benchmark Campaigns}{34}{chapter.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {5}An Autonomous AI Agent for Benchmark Campaigns}{35}{chapter.5}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{loa}{\addvspace {10\p@ }}
-\newlabel{chap:benchmark-agent}{{5}{34}{An Autonomous AI Agent for Benchmark Campaigns}{chapter.5}{}}
+\newlabel{chap:benchmark-agent}{{5}{35}{An Autonomous AI Agent for Benchmark Campaigns}{chapter.5}{}}
 \citation{iar-ewarm}
 \citation{vscode-agent-mode}
 \citation{github-copilot}
-\@writefile{toc}{\contentsline {section}{\numberline {5.1}The benchmark engineering problem}{35}{section.5.1}\protected@file@percent }
-\newlabel{sec:agent-problem}{{5.1}{35}{The benchmark engineering problem}{section.5.1}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.2}Architecture}{35}{section.5.2}\protected@file@percent }
-\newlabel{sec:agent-architecture}{{5.2}{35}{Architecture}{section.5.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.1}{\ignorespaces Architecture of the MCU Benchmark Copilot Agent system. The coordinator resolves scenarios and delegates to specialist agents; automation tools handle deterministic build/measurement operations; all layers operate under the shared always-on benchmark rules and consult the configuration registry.}}{36}{figure.caption.41}\protected@file@percent }
-\newlabel{fig:agent-architecture}{{5.1}{36}{Architecture of the MCU Benchmark Copilot Agent system. The coordinator resolves scenarios and delegates to specialist agents; automation tools handle deterministic build/measurement operations; all layers operate under the shared always-on benchmark rules and consult the configuration registry}{figure.caption.41}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.1}The four specialist agents}{36}{subsection.5.2.1}\protected@file@percent }
-\newlabel{sec:agent-specialists}{{5.2.1}{36}{The four specialist agents}{subsection.5.2.1}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {5.1}{\ignorespaces Specialist agents and their responsibilities.}}{37}{table.caption.42}\protected@file@percent }
-\newlabel{tab:agent-roles}{{5.1}{37}{Specialist agents and their responsibilities}{table.caption.42}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.2}{\ignorespaces UML use case diagram of the MCU Benchmark Copilot Agent system. Blue ellipses represent autonomous use cases; yellow ellipses require user approval; green indicates external acquisition. External actors include the user, physical board, vendor source repositories, IAR EWARM toolchain, and the report engine scripts.}}{38}{figure.caption.43}\protected@file@percent }
-\newlabel{fig:agent-use-case}{{5.2}{38}{UML use case diagram of the MCU Benchmark Copilot Agent system. Blue ellipses represent autonomous use cases; yellow ellipses require user approval; green indicates external acquisition. External actors include the user, physical board, vendor source repositories, IAR EWARM toolchain, and the report engine scripts}{figure.caption.43}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.2}The six reusable skills}{38}{subsection.5.2.2}\protected@file@percent }
-\newlabel{sec:agent-skills}{{5.2.2}{38}{The six reusable skills}{subsection.5.2.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.1}The benchmark engineering problem}{36}{section.5.1}\protected@file@percent }
+\newlabel{sec:agent-problem}{{5.1}{36}{The benchmark engineering problem}{section.5.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.2}Architecture}{36}{section.5.2}\protected@file@percent }
+\newlabel{sec:agent-architecture}{{5.2}{36}{Architecture}{section.5.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.1}{\ignorespaces Architecture of the MCU Benchmark Copilot Agent system. The coordinator resolves scenarios and delegates to specialist agents; automation tools handle deterministic build/measurement operations; all layers operate under the shared always-on benchmark rules and consult the configuration registry.}}{37}{figure.caption.41}\protected@file@percent }
+\newlabel{fig:agent-architecture}{{5.1}{37}{Architecture of the MCU Benchmark Copilot Agent system. The coordinator resolves scenarios and delegates to specialist agents; automation tools handle deterministic build/measurement operations; all layers operate under the shared always-on benchmark rules and consult the configuration registry}{figure.caption.41}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.1}The four specialist agents}{37}{subsection.5.2.1}\protected@file@percent }
+\newlabel{sec:agent-specialists}{{5.2.1}{37}{The four specialist agents}{subsection.5.2.1}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5.1}{\ignorespaces Specialist agents and their responsibilities.}}{38}{table.caption.42}\protected@file@percent }
+\newlabel{tab:agent-roles}{{5.1}{38}{Specialist agents and their responsibilities}{table.caption.42}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.2}{\ignorespaces UML use case diagram of the MCU Benchmark Copilot Agent system. Blue ellipses represent autonomous use cases; yellow ellipses require user approval; green indicates external acquisition. External actors include the user, physical board, vendor source repositories, IAR EWARM toolchain, and the report engine scripts.}}{39}{figure.caption.43}\protected@file@percent }
+\newlabel{fig:agent-use-case}{{5.2}{39}{UML use case diagram of the MCU Benchmark Copilot Agent system. Blue ellipses represent autonomous use cases; yellow ellipses require user approval; green indicates external acquisition. External actors include the user, physical board, vendor source repositories, IAR EWARM toolchain, and the report engine scripts}{figure.caption.43}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.2}The six reusable skills}{39}{subsection.5.2.2}\protected@file@percent }
+\newlabel{sec:agent-skills}{{5.2.2}{39}{The six reusable skills}{subsection.5.2.2}{}}
 \citation{iar-cspybat}
-\@writefile{lot}{\contentsline {table}{\numberline {5.2}{\ignorespaces Reusable skills and their purposes.}}{39}{table.caption.44}\protected@file@percent }
-\newlabel{tab:agent-skills}{{5.2}{39}{Reusable skills and their purposes}{table.caption.44}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.3}Automation tools}{39}{subsection.5.2.3}\protected@file@percent }
-\newlabel{sec:agent-tools}{{5.2.3}{39}{Automation tools}{subsection.5.2.3}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {5.3}{\ignorespaces Automation tools in the agent system.}}{40}{table.caption.45}\protected@file@percent }
-\newlabel{tab:agent-automation-tools}{{5.3}{40}{Automation tools in the agent system}{table.caption.45}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.4}Configuration registry}{40}{subsection.5.2.4}\protected@file@percent }
-\newlabel{sec:agent-config-registry}{{5.2.4}{40}{Configuration registry}{subsection.5.2.4}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {5.4}{\ignorespaces Configuration registry files.}}{41}{table.caption.46}\protected@file@percent }
-\newlabel{tab:agent-config-files}{{5.4}{41}{Configuration registry files}{table.caption.46}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.3}Supported workflow directions}{41}{section.5.3}\protected@file@percent }
-\newlabel{sec:agent-directions}{{5.3}{41}{Supported workflow directions}{section.5.3}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.4}Autonomy model and approval gates}{42}{section.5.4}\protected@file@percent }
-\newlabel{sec:agent-autonomy}{{5.4}{42}{Autonomy model and approval gates}{section.5.4}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {5.5}{\ignorespaces Autonomy model: autonomous actions versus approval-required actions.}}{42}{table.caption.47}\protected@file@percent }
-\newlabel{tab:agent-autonomy}{{5.5}{42}{Autonomy model: autonomous actions versus approval-required actions}{table.caption.47}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.5}Board firmware baseline immutability}{43}{section.5.5}\protected@file@percent }
-\newlabel{sec:agent-baseline}{{5.5}{43}{Board firmware baseline immutability}{section.5.5}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {5.6}{\ignorespaces Surface classification under the baseline immutability rule.}}{43}{table.caption.48}\protected@file@percent }
-\newlabel{tab:agent-surfaces}{{5.6}{43}{Surface classification under the baseline immutability rule}{table.caption.48}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.6}Always-on benchmark rules}{44}{section.5.6}\protected@file@percent }
-\newlabel{sec:agent-rules}{{5.6}{44}{Always-on benchmark rules}{section.5.6}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.7}Semantic preservation in detail}{45}{section.5.7}\protected@file@percent }
-\newlabel{sec:agent-semantics}{{5.7}{45}{Semantic preservation in detail}{section.5.7}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.8}Deterministic campaign workflow}{45}{section.5.8}\protected@file@percent }
-\newlabel{sec:agent-workflow}{{5.8}{45}{Deterministic campaign workflow}{section.5.8}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.3}{\ignorespaces Designed end-to-end benchmark lifecycle. The MCU Benchmark Copilot Agent is configured to handle steps~1 through~11, subject to a hardware gate at step~9; once semantic equivalence is confirmed, the validated linker map is handed to MCU Workflow Studio for footprint analysis.}}{46}{figure.caption.49}\protected@file@percent }
-\newlabel{fig:agent-workflow}{{5.3}{46}{Designed end-to-end benchmark lifecycle. The MCU Benchmark Copilot Agent is configured to handle steps~1 through~11, subject to a hardware gate at step~9; once semantic equivalence is confirmed, the validated linker map is handed to MCU Workflow Studio for footprint analysis}{figure.caption.49}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.4}{\ignorespaces Benchmark campaign initiated through the custom agent in VS Code Copilot Chat.}}{47}{figure.caption.50}\protected@file@percent }
-\newlabel{fig:agent-screenshot-campaign}{{5.4}{47}{Benchmark campaign initiated through the custom agent in VS Code Copilot Chat}{figure.caption.50}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.5}{\ignorespaces IAR EWARM build evidence produced during an agent-assisted benchmark campaign.}}{47}{figure.caption.51}\protected@file@percent }
-\newlabel{fig:agent-screenshot-iar-build}{{5.5}{47}{IAR EWARM build evidence produced during an agent-assisted benchmark campaign}{figure.caption.51}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.6}{\ignorespaces UML sequence diagram of a deterministic benchmark campaign. The coordinator delegates to specialist agents (benchmark-analysis, Creation-Porting, Build-Project, Debugger) and interacts with external actors (Vendor Source, Board/IAR). The hardware approval gate (steps~9--10, highlighted) is the only point requiring user confirmation; all other steps execute autonomously.}}{48}{figure.caption.52}\protected@file@percent }
-\newlabel{fig:agent-sequence}{{5.6}{48}{UML sequence diagram of a deterministic benchmark campaign. The coordinator delegates to specialist agents (benchmark-analysis, Creation-Porting, Build-Project, Debugger) and interacts with external actors (Vendor Source, Board/IAR). The hardware approval gate (steps~9--10, highlighted) is the only point requiring user confirmation; all other steps execute autonomously}{figure.caption.52}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.9}IAR template resolution}{48}{section.5.9}\protected@file@percent }
-\newlabel{sec:agent-iar-templates}{{5.9}{48}{IAR template resolution}{section.5.9}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.10}Source acquisition policy}{49}{section.5.10}\protected@file@percent }
-\newlabel{sec:agent-acquisition}{{5.10}{49}{Source acquisition policy}{section.5.10}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.11}Campaign artifact model}{49}{section.5.11}\protected@file@percent }
-\newlabel{sec:agent-artifacts}{{5.11}{49}{Campaign artifact model}{section.5.11}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.7}{\ignorespaces Structured campaign dossier retained for traceability and fairness review.}}{50}{figure.caption.53}\protected@file@percent }
-\newlabel{fig:agent-screenshot-dossier}{{5.7}{50}{Structured campaign dossier retained for traceability and fairness review}{figure.caption.53}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.12}Prompt-driven usage}{50}{section.5.12}\protected@file@percent }
-\newlabel{sec:agent-prompts}{{5.12}{50}{Prompt-driven usage}{section.5.12}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5.2}{\ignorespaces Reusable skills and their purposes.}}{40}{table.caption.44}\protected@file@percent }
+\newlabel{tab:agent-skills}{{5.2}{40}{Reusable skills and their purposes}{table.caption.44}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.3}Automation tools}{40}{subsection.5.2.3}\protected@file@percent }
+\newlabel{sec:agent-tools}{{5.2.3}{40}{Automation tools}{subsection.5.2.3}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5.3}{\ignorespaces Automation tools in the agent system.}}{41}{table.caption.45}\protected@file@percent }
+\newlabel{tab:agent-automation-tools}{{5.3}{41}{Automation tools in the agent system}{table.caption.45}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.4}Configuration registry}{41}{subsection.5.2.4}\protected@file@percent }
+\newlabel{sec:agent-config-registry}{{5.2.4}{41}{Configuration registry}{subsection.5.2.4}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5.4}{\ignorespaces Configuration registry files.}}{42}{table.caption.46}\protected@file@percent }
+\newlabel{tab:agent-config-files}{{5.4}{42}{Configuration registry files}{table.caption.46}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.3}Supported workflow directions}{42}{section.5.3}\protected@file@percent }
+\newlabel{sec:agent-directions}{{5.3}{42}{Supported workflow directions}{section.5.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.4}Autonomy model and approval gates}{43}{section.5.4}\protected@file@percent }
+\newlabel{sec:agent-autonomy}{{5.4}{43}{Autonomy model and approval gates}{section.5.4}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5.5}{\ignorespaces Autonomy model: autonomous actions versus approval-required actions.}}{43}{table.caption.47}\protected@file@percent }
+\newlabel{tab:agent-autonomy}{{5.5}{43}{Autonomy model: autonomous actions versus approval-required actions}{table.caption.47}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.5}Board firmware baseline immutability}{44}{section.5.5}\protected@file@percent }
+\newlabel{sec:agent-baseline}{{5.5}{44}{Board firmware baseline immutability}{section.5.5}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5.6}{\ignorespaces Surface classification under the baseline immutability rule.}}{44}{table.caption.48}\protected@file@percent }
+\newlabel{tab:agent-surfaces}{{5.6}{44}{Surface classification under the baseline immutability rule}{table.caption.48}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.6}Always-on benchmark rules}{45}{section.5.6}\protected@file@percent }
+\newlabel{sec:agent-rules}{{5.6}{45}{Always-on benchmark rules}{section.5.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.7}Semantic preservation in detail}{46}{section.5.7}\protected@file@percent }
+\newlabel{sec:agent-semantics}{{5.7}{46}{Semantic preservation in detail}{section.5.7}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.8}Deterministic campaign workflow}{46}{section.5.8}\protected@file@percent }
+\newlabel{sec:agent-workflow}{{5.8}{46}{Deterministic campaign workflow}{section.5.8}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.3}{\ignorespaces Designed end-to-end benchmark lifecycle. The MCU Benchmark Copilot Agent is configured to handle steps~1 through~11, subject to a hardware gate at step~9; once semantic equivalence is confirmed, the validated linker map is handed to MCU Workflow Studio for footprint analysis.}}{47}{figure.caption.49}\protected@file@percent }
+\newlabel{fig:agent-workflow}{{5.3}{47}{Designed end-to-end benchmark lifecycle. The MCU Benchmark Copilot Agent is configured to handle steps~1 through~11, subject to a hardware gate at step~9; once semantic equivalence is confirmed, the validated linker map is handed to MCU Workflow Studio for footprint analysis}{figure.caption.49}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.4}{\ignorespaces Benchmark campaign initiated through the custom agent in VS Code Copilot Chat.}}{48}{figure.caption.50}\protected@file@percent }
+\newlabel{fig:agent-screenshot-campaign}{{5.4}{48}{Benchmark campaign initiated through the custom agent in VS Code Copilot Chat}{figure.caption.50}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.5}{\ignorespaces IAR EWARM build evidence produced during an agent-assisted benchmark campaign.}}{49}{figure.caption.51}\protected@file@percent }
+\newlabel{fig:agent-screenshot-iar-build}{{5.5}{49}{IAR EWARM build evidence produced during an agent-assisted benchmark campaign}{figure.caption.51}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.6}{\ignorespaces UML sequence diagram of a deterministic benchmark campaign. The coordinator delegates to specialist agents (benchmark-analysis, Creation-Porting, Build-Project, Debugger) and interacts with external actors (Vendor Source, Board/IAR). The hardware approval gate (steps~9--10, highlighted) is the only point requiring user confirmation; all other steps execute autonomously.}}{50}{figure.caption.52}\protected@file@percent }
+\newlabel{fig:agent-sequence}{{5.6}{50}{UML sequence diagram of a deterministic benchmark campaign. The coordinator delegates to specialist agents (benchmark-analysis, Creation-Porting, Build-Project, Debugger) and interacts with external actors (Vendor Source, Board/IAR). The hardware approval gate (steps~9--10, highlighted) is the only point requiring user confirmation; all other steps execute autonomously}{figure.caption.52}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.9}IAR template resolution}{50}{section.5.9}\protected@file@percent }
+\newlabel{sec:agent-iar-templates}{{5.9}{50}{IAR template resolution}{section.5.9}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.10}Source acquisition policy}{51}{section.5.10}\protected@file@percent }
+\newlabel{sec:agent-acquisition}{{5.10}{51}{Source acquisition policy}{section.5.10}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.11}Campaign artifact model}{51}{section.5.11}\protected@file@percent }
+\newlabel{sec:agent-artifacts}{{5.11}{51}{Campaign artifact model}{section.5.11}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.7}{\ignorespaces Structured campaign dossier retained for traceability and fairness review.}}{52}{figure.caption.53}\protected@file@percent }
+\newlabel{fig:agent-screenshot-dossier}{{5.7}{52}{Structured campaign dossier retained for traceability and fairness review}{figure.caption.53}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.12}Prompt-driven usage}{52}{section.5.12}\protected@file@percent }
+\newlabel{sec:agent-prompts}{{5.12}{52}{Prompt-driven usage}{section.5.12}{}}
 \citation{github-copilot,vscode-agent-mode,vscode-custom-agents}
-\@writefile{lot}{\contentsline {table}{\numberline {5.7}{\ignorespaces Pre-built prompt templates for common benchmark tasks.}}{51}{table.caption.54}\protected@file@percent }
-\newlabel{tab:agent-prompts}{{5.7}{51}{Pre-built prompt templates for common benchmark tasks}{table.caption.54}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.13}Implementation}{51}{section.5.13}\protected@file@percent }
-\newlabel{sec:agent-implementation}{{5.13}{51}{Implementation}{section.5.13}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {5.8}{\ignorespaces File structure of the agent system.}}{52}{table.caption.55}\protected@file@percent }
-\newlabel{tab:agent-impl}{{5.8}{52}{File structure of the agent system}{table.caption.55}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.8}{\ignorespaces Agent-system workspace and a board configuration registry entry in VS Code.}}{52}{figure.caption.56}\protected@file@percent }
-\newlabel{fig:agent-screenshot-workspace}{{5.8}{52}{Agent-system workspace and a board configuration registry entry in VS Code}{figure.caption.56}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.14}Integration with the benchmarking workflow}{53}{section.5.14}\protected@file@percent }
-\newlabel{sec:agent-integration}{{5.14}{53}{Integration with the benchmarking workflow}{section.5.14}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.15}Engineering value and limitations}{53}{section.5.15}\protected@file@percent }
-\newlabel{sec:agent-value}{{5.15}{53}{Engineering value and limitations}{section.5.15}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5.7}{\ignorespaces Pre-built prompt templates for common benchmark tasks.}}{53}{table.caption.54}\protected@file@percent }
+\newlabel{tab:agent-prompts}{{5.7}{53}{Pre-built prompt templates for common benchmark tasks}{table.caption.54}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.13}Implementation}{53}{section.5.13}\protected@file@percent }
+\newlabel{sec:agent-implementation}{{5.13}{53}{Implementation}{section.5.13}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5.8}{\ignorespaces File structure of the agent system.}}{54}{table.caption.55}\protected@file@percent }
+\newlabel{tab:agent-impl}{{5.8}{54}{File structure of the agent system}{table.caption.55}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.8}{\ignorespaces Agent-system workspace and a board configuration registry entry in VS Code.}}{54}{figure.caption.56}\protected@file@percent }
+\newlabel{fig:agent-screenshot-workspace}{{5.8}{54}{Agent-system workspace and a board configuration registry entry in VS Code}{figure.caption.56}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.14}Integration with the benchmarking workflow}{55}{section.5.14}\protected@file@percent }
+\newlabel{sec:agent-integration}{{5.14}{55}{Integration with the benchmarking workflow}{section.5.14}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.15}Engineering value and limitations}{55}{section.5.15}\protected@file@percent }
+\newlabel{sec:agent-value}{{5.15}{55}{Engineering value and limitations}{section.5.15}{}}
 \citation{gigadevice-gd32}
 \citation{gd32e507-ds,stm32u575-ds}
-\@writefile{toc}{\contentsline {chapter}{\numberline {6}Benchmarking ST against GD32}{55}{chapter.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {6}Benchmarking ST against GD32}{57}{chapter.6}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{loa}{\addvspace {10\p@ }}
-\newlabel{chap:vs-gd32}{{6}{55}{Benchmarking ST against GD32}{chapter.6}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6.1}Hardware platforms}{55}{section.6.1}\protected@file@percent }
-\newlabel{sec:gd32-boards}{{6.1}{55}{Hardware platforms}{section.6.1}{}}
+\newlabel{chap:vs-gd32}{{6}{57}{Benchmarking ST against GD32}{chapter.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.1}Hardware platforms}{57}{section.6.1}\protected@file@percent }
+\newlabel{sec:gd32-boards}{{6.1}{57}{Hardware platforms}{section.6.1}{}}
 \citation{stm32u575-ds}
 \citation{gd32e507-ds}
-\@writefile{lot}{\contentsline {table}{\numberline {6.1}{\ignorespaces Board characteristics: ST reference vs GigaDevice GD32.}}{56}{table.caption.57}\protected@file@percent }
-\newlabel{tab:gd32-boards}{{6.1}{56}{Board characteristics: ST reference vs GigaDevice GD32}{table.caption.57}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6.1}{\ignorespaces ST and GD32 benchmark platforms and their matched project configurations.}}{56}{figure.caption.58}\protected@file@percent }
-\newlabel{fig:gd32-screenshot-platforms}{{6.1}{56}{ST and GD32 benchmark platforms and their matched project configurations}{figure.caption.58}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6.2}USB device stack}{57}{section.6.2}\protected@file@percent }
-\newlabel{sec:gd32-usb}{{6.2}{57}{USB device stack}{section.6.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.1}Scenario design}{57}{subsection.6.2.1}\protected@file@percent }
-\newlabel{sec:gd32-usb-scenarios}{{6.2.1}{57}{Scenario design}{subsection.6.2.1}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {6.2}{\ignorespaces USB device stack benchmark scenarios.}}{57}{table.caption.59}\protected@file@percent }
-\newlabel{tab:gd32-usb-scenarios}{{6.2}{57}{USB device stack benchmark scenarios}{table.caption.59}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6.2}{\ignorespaces Runtime evidence captured for the matched ST and GD32 USB device scenarios.}}{58}{figure.caption.60}\protected@file@percent }
-\newlabel{fig:gd32-screenshot-usb-runtime}{{6.2}{58}{Runtime evidence captured for the matched ST and GD32 USB device scenarios}{figure.caption.60}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.2}Results}{58}{subsection.6.2.2}\protected@file@percent }
-\newlabel{sec:gd32-usb-results}{{6.2.2}{58}{Results}{subsection.6.2.2}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.2.1}HID scenario}{58}{subsubsection.6.2.2.1}\protected@file@percent }
-\newlabel{sec:gd32-usb-hid}{{6.2.2.1}{58}{HID scenario}{subsubsection.6.2.2.1}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {6.3}{\ignorespaces USB HID device footprint (bytes).}}{58}{table.caption.61}\protected@file@percent }
-\newlabel{tab:gd32-usb-hid-footprint}{{6.3}{58}{USB HID device footprint (bytes)}{table.caption.61}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {6.4}{\ignorespaces USB HID ROM breakdown by layer (bytes).}}{59}{table.caption.62}\protected@file@percent }
-\newlabel{tab:gd32-usb-hid-rom}{{6.4}{59}{USB HID ROM breakdown by layer (bytes)}{table.caption.62}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {6.5}{\ignorespaces USB HID execution time (ms).}}{59}{table.caption.63}\protected@file@percent }
-\newlabel{tab:gd32-usb-hid-exec}{{6.5}{59}{USB HID execution time (ms)}{table.caption.63}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.2.2}CDC scenario}{60}{subsubsection.6.2.2.2}\protected@file@percent }
-\newlabel{sec:gd32-usb-cdc}{{6.2.2.2}{60}{CDC scenario}{subsubsection.6.2.2.2}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {6.6}{\ignorespaces USB CDC device footprint (bytes).}}{60}{table.caption.64}\protected@file@percent }
-\newlabel{tab:gd32-usb-cdc-footprint}{{6.6}{60}{USB CDC device footprint (bytes)}{table.caption.64}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {6.7}{\ignorespaces USB CDC ROM breakdown by layer (bytes).}}{60}{table.caption.65}\protected@file@percent }
-\newlabel{tab:gd32-usb-cdc-rom}{{6.7}{60}{USB CDC ROM breakdown by layer (bytes)}{table.caption.65}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {6.8}{\ignorespaces USB CDC execution time (ms).}}{61}{table.caption.66}\protected@file@percent }
-\newlabel{tab:gd32-usb-cdc-exec}{{6.8}{61}{USB CDC execution time (ms)}{table.caption.66}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.3}Interpretation}{61}{subsection.6.2.3}\protected@file@percent }
-\newlabel{sec:gd32-usb-interp}{{6.2.3}{61}{Interpretation}{subsection.6.2.3}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {6.1}{\ignorespaces Board characteristics: ST reference vs GigaDevice GD32.}}{58}{table.caption.57}\protected@file@percent }
+\newlabel{tab:gd32-boards}{{6.1}{58}{Board characteristics: ST reference vs GigaDevice GD32}{table.caption.57}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.2}USB device stack}{58}{section.6.2}\protected@file@percent }
+\newlabel{sec:gd32-usb}{{6.2}{58}{USB device stack}{section.6.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.1}Scenario design}{58}{subsection.6.2.1}\protected@file@percent }
+\newlabel{sec:gd32-usb-scenarios}{{6.2.1}{58}{Scenario design}{subsection.6.2.1}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {6.2}{\ignorespaces USB device stack benchmark scenarios.}}{59}{table.caption.58}\protected@file@percent }
+\newlabel{tab:gd32-usb-scenarios}{{6.2}{59}{USB device stack benchmark scenarios}{table.caption.58}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.2}Results}{59}{subsection.6.2.2}\protected@file@percent }
+\newlabel{sec:gd32-usb-results}{{6.2.2}{59}{Results}{subsection.6.2.2}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.2.1}HID scenario}{59}{subsubsection.6.2.2.1}\protected@file@percent }
+\newlabel{sec:gd32-usb-hid}{{6.2.2.1}{59}{HID scenario}{subsubsection.6.2.2.1}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {6.3}{\ignorespaces USB HID device footprint (bytes).}}{59}{table.caption.59}\protected@file@percent }
+\newlabel{tab:gd32-usb-hid-footprint}{{6.3}{59}{USB HID device footprint (bytes)}{table.caption.59}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {6.4}{\ignorespaces USB HID ROM breakdown by layer (bytes).}}{60}{table.caption.60}\protected@file@percent }
+\newlabel{tab:gd32-usb-hid-rom}{{6.4}{60}{USB HID ROM breakdown by layer (bytes)}{table.caption.60}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {6.5}{\ignorespaces USB HID execution time (ms).}}{60}{table.caption.61}\protected@file@percent }
+\newlabel{tab:gd32-usb-hid-exec}{{6.5}{60}{USB HID execution time (ms)}{table.caption.61}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.2.2}CDC scenario}{61}{subsubsection.6.2.2.2}\protected@file@percent }
+\newlabel{sec:gd32-usb-cdc}{{6.2.2.2}{61}{CDC scenario}{subsubsection.6.2.2.2}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {6.6}{\ignorespaces USB CDC device footprint (bytes).}}{61}{table.caption.62}\protected@file@percent }
+\newlabel{tab:gd32-usb-cdc-footprint}{{6.6}{61}{USB CDC device footprint (bytes)}{table.caption.62}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {6.7}{\ignorespaces USB CDC ROM breakdown by layer (bytes).}}{61}{table.caption.63}\protected@file@percent }
+\newlabel{tab:gd32-usb-cdc-rom}{{6.7}{61}{USB CDC ROM breakdown by layer (bytes)}{table.caption.63}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {6.8}{\ignorespaces USB CDC execution time (ms).}}{62}{table.caption.64}\protected@file@percent }
+\newlabel{tab:gd32-usb-cdc-exec}{{6.8}{62}{USB CDC execution time (ms)}{table.caption.64}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.3}Interpretation}{62}{subsection.6.2.3}\protected@file@percent }
+\newlabel{sec:gd32-usb-interp}{{6.2.3}{62}{Interpretation}{subsection.6.2.3}{}}
 \citation{freertos}
 \citation{freertos-v11}
-\@writefile{toc}{\contentsline {section}{\numberline {6.3}FreeRTOS integration}{63}{section.6.3}\protected@file@percent }
-\newlabel{sec:gd32-freertos}{{6.3}{63}{FreeRTOS integration}{section.6.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.1}Scenario design}{63}{subsection.6.3.1}\protected@file@percent }
-\newlabel{sec:gd32-freertos-scenarios}{{6.3.1}{63}{Scenario design}{subsection.6.3.1}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {6.9}{\ignorespaces FreeRTOS benchmark scenarios.}}{63}{table.caption.67}\protected@file@percent }
-\newlabel{tab:gd32-freertos-scenarios}{{6.9}{63}{FreeRTOS benchmark scenarios}{table.caption.67}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6.3}{\ignorespaces UART observations for a matched ST and GD32 FreeRTOS scheduling scenario.}}{64}{figure.caption.68}\protected@file@percent }
-\newlabel{fig:gd32-screenshot-freertos-runtime}{{6.3}{64}{UART observations for a matched ST and GD32 FreeRTOS scheduling scenario}{figure.caption.68}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.2}Results}{64}{subsection.6.3.2}\protected@file@percent }
-\newlabel{sec:gd32-freertos-results}{{6.3.2}{64}{Results}{subsection.6.3.2}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.3.2.1}Basic processing}{64}{subsubsection.6.3.2.1}\protected@file@percent }
-\newlabel{sec:gd32-freertos-basic}{{6.3.2.1}{64}{Basic processing}{subsubsection.6.3.2.1}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {6.10}{\ignorespaces FreeRTOS basic processing --- performance.}}{64}{table.caption.69}\protected@file@percent }
-\newlabel{tab:gd32-freertos-basic-perf}{{6.10}{64}{FreeRTOS basic processing --- performance}{table.caption.69}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {6.11}{\ignorespaces FreeRTOS basic processing --- footprint (bytes).}}{64}{table.caption.70}\protected@file@percent }
-\newlabel{tab:gd32-freertos-basic-fp}{{6.11}{64}{FreeRTOS basic processing --- footprint (bytes)}{table.caption.70}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.3}FreeRTOS integration}{64}{section.6.3}\protected@file@percent }
+\newlabel{sec:gd32-freertos}{{6.3}{64}{FreeRTOS integration}{section.6.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.1}Scenario design}{64}{subsection.6.3.1}\protected@file@percent }
+\newlabel{sec:gd32-freertos-scenarios}{{6.3.1}{64}{Scenario design}{subsection.6.3.1}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {6.9}{\ignorespaces FreeRTOS benchmark scenarios.}}{64}{table.caption.65}\protected@file@percent }
+\newlabel{tab:gd32-freertos-scenarios}{{6.9}{64}{FreeRTOS benchmark scenarios}{table.caption.65}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.2}Results}{65}{subsection.6.3.2}\protected@file@percent }
+\newlabel{sec:gd32-freertos-results}{{6.3.2}{65}{Results}{subsection.6.3.2}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.3.2.1}Basic processing}{65}{subsubsection.6.3.2.1}\protected@file@percent }
+\newlabel{sec:gd32-freertos-basic}{{6.3.2.1}{65}{Basic processing}{subsubsection.6.3.2.1}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {6.10}{\ignorespaces FreeRTOS basic processing --- performance.}}{65}{table.caption.66}\protected@file@percent }
+\newlabel{tab:gd32-freertos-basic-perf}{{6.10}{65}{FreeRTOS basic processing --- performance}{table.caption.66}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {6.11}{\ignorespaces FreeRTOS basic processing --- footprint (bytes).}}{65}{table.caption.67}\protected@file@percent }
+\newlabel{tab:gd32-freertos-basic-fp}{{6.11}{65}{FreeRTOS basic processing --- footprint (bytes)}{table.caption.67}{}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {6.3.2.2}Cooperative processing}{65}{subsubsection.6.3.2.2}\protected@file@percent }
 \newlabel{sec:gd32-freertos-coop}{{6.3.2.2}{65}{Cooperative processing}{subsubsection.6.3.2.2}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {6.12}{\ignorespaces FreeRTOS cooperative processing --- performance.}}{65}{table.caption.71}\protected@file@percent }
-\newlabel{tab:gd32-freertos-coop-perf}{{6.12}{65}{FreeRTOS cooperative processing --- performance}{table.caption.71}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {6.13}{\ignorespaces FreeRTOS cooperative processing --- footprint (bytes).}}{65}{table.caption.72}\protected@file@percent }
-\newlabel{tab:gd32-freertos-coop-fp}{{6.13}{65}{FreeRTOS cooperative processing --- footprint (bytes)}{table.caption.72}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.3.2.3}Preemptive processing}{65}{subsubsection.6.3.2.3}\protected@file@percent }
-\newlabel{sec:gd32-freertos-preemptive}{{6.3.2.3}{65}{Preemptive processing}{subsubsection.6.3.2.3}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {6.14}{\ignorespaces FreeRTOS preemptive processing --- performance.}}{65}{table.caption.73}\protected@file@percent }
-\newlabel{tab:gd32-freertos-preemptive-perf}{{6.14}{65}{FreeRTOS preemptive processing --- performance}{table.caption.73}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {6.15}{\ignorespaces FreeRTOS preemptive processing --- footprint (bytes).}}{65}{table.caption.74}\protected@file@percent }
-\newlabel{tab:gd32-freertos-preemptive-fp}{{6.15}{65}{FreeRTOS preemptive processing --- footprint (bytes)}{table.caption.74}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {6.12}{\ignorespaces FreeRTOS cooperative processing --- performance.}}{65}{table.caption.68}\protected@file@percent }
+\newlabel{tab:gd32-freertos-coop-perf}{{6.12}{65}{FreeRTOS cooperative processing --- performance}{table.caption.68}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {6.13}{\ignorespaces FreeRTOS cooperative processing --- footprint (bytes).}}{65}{table.caption.69}\protected@file@percent }
+\newlabel{tab:gd32-freertos-coop-fp}{{6.13}{65}{FreeRTOS cooperative processing --- footprint (bytes)}{table.caption.69}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.3.2.3}Preemptive processing}{66}{subsubsection.6.3.2.3}\protected@file@percent }
+\newlabel{sec:gd32-freertos-preemptive}{{6.3.2.3}{66}{Preemptive processing}{subsubsection.6.3.2.3}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {6.14}{\ignorespaces FreeRTOS preemptive processing --- performance.}}{66}{table.caption.70}\protected@file@percent }
+\newlabel{tab:gd32-freertos-preemptive-perf}{{6.14}{66}{FreeRTOS preemptive processing --- performance}{table.caption.70}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {6.15}{\ignorespaces FreeRTOS preemptive processing --- footprint (bytes).}}{66}{table.caption.71}\protected@file@percent }
+\newlabel{tab:gd32-freertos-preemptive-fp}{{6.15}{66}{FreeRTOS preemptive processing --- footprint (bytes)}{table.caption.71}{}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {6.3.2.4}Per-layer ROM breakdown}{66}{subsubsection.6.3.2.4}\protected@file@percent }
 \newlabel{sec:gd32-freertos-rom-breakdown}{{6.3.2.4}{66}{Per-layer ROM breakdown}{subsubsection.6.3.2.4}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {6.16}{\ignorespaces FreeRTOS ROM breakdown by layer (bytes).}}{66}{table.caption.75}\protected@file@percent }
-\newlabel{tab:gd32-freertos-rom}{{6.16}{66}{FreeRTOS ROM breakdown by layer (bytes)}{table.caption.75}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.3}Interpretation}{66}{subsection.6.3.3}\protected@file@percent }
-\newlabel{sec:gd32-freertos-interp}{{6.3.3}{66}{Interpretation}{subsection.6.3.3}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {6.16}{\ignorespaces FreeRTOS ROM breakdown by layer (bytes).}}{66}{table.caption.72}\protected@file@percent }
+\newlabel{tab:gd32-freertos-rom}{{6.16}{66}{FreeRTOS ROM breakdown by layer (bytes)}{table.caption.72}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.3}Interpretation}{67}{subsection.6.3.3}\protected@file@percent }
+\newlabel{sec:gd32-freertos-interp}{{6.3.3}{67}{Interpretation}{subsection.6.3.3}{}}
 \citation{ti-about}
 \citation{ti-mspm33-product}
 \citation{stm32cubec5-sw}
@@ -391,8 +385,8 @@
 \citation{ti-mspm33-ds,stm32c5a3-product}
 \@writefile{toc}{\contentsline {section}{\numberline {7.1}Hardware platforms}{70}{section.7.1}\protected@file@percent }
 \newlabel{sec:ti-boards}{{7.1}{70}{Hardware platforms}{section.7.1}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {7.1}{\ignorespaces Board and MCU comparison --- STM32C5A3 vs.\ MSPM33C321A~\cite  {stm32c5a3-product,stm32-nucleo-c5a3,ti-mspm33-ds,ti-launchpad}.}}{70}{table.caption.76}\protected@file@percent }
-\newlabel{tab:ti-board-comparison}{{7.1}{70}{Board and MCU comparison --- STM32C5A3 vs.\ MSPM33C321A~\cite {stm32c5a3-product,stm32-nucleo-c5a3,ti-mspm33-ds,ti-launchpad}}{table.caption.76}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7.1}{\ignorespaces Board and MCU comparison --- STM32C5A3 vs.\ MSPM33C321A~\cite  {stm32c5a3-product,stm32-nucleo-c5a3,ti-mspm33-ds,ti-launchpad}.}}{70}{table.caption.73}\protected@file@percent }
+\newlabel{tab:ti-board-comparison}{{7.1}{70}{Board and MCU comparison --- STM32C5A3 vs.\ MSPM33C321A~\cite {stm32c5a3-product,stm32-nucleo-c5a3,ti-mspm33-ds,ti-launchpad}}{table.caption.73}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {7.2}Static analysis of the driver layer}{70}{section.7.2}\protected@file@percent }
 \newlabel{sec:ti-static-analysis}{{7.2}{70}{Static analysis of the driver layer}{section.7.2}{}}
 \citation{cloc-tool}
@@ -401,167 +395,163 @@
 \citation{jscpd-tool}
 \@writefile{toc}{\contentsline {subsection}{\numberline {7.2.1}Scope and methodology}{71}{subsection.7.2.1}\protected@file@percent }
 \newlabel{subsec:ti-scope}{{7.2.1}{71}{Scope and methodology}{subsection.7.2.1}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7.1}{\ignorespaces Static-analysis evidence generated for the STM32CubeC5 LL and MSPM33 driverlib source sets.}}{71}{figure.caption.77}\protected@file@percent }
-\newlabel{fig:ti-screenshot-static-analysis}{{7.1}{71}{Static-analysis evidence generated for the STM32CubeC5 LL and MSPM33 driverlib source sets}{figure.caption.77}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.2.2}Lines of code}{72}{subsection.7.2.2}\protected@file@percent }
-\newlabel{subsec:ti-loc}{{7.2.2}{72}{Lines of code}{subsection.7.2.2}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {7.2}{\ignorespaces Lines-of-code comparison --- ST LL vs.\ TI driverlib.}}{72}{table.caption.78}\protected@file@percent }
-\newlabel{tab:ti-loc}{{7.2}{72}{Lines-of-code comparison --- ST LL vs.\ TI driverlib}{table.caption.78}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.2.2}Lines of code}{71}{subsection.7.2.2}\protected@file@percent }
+\newlabel{subsec:ti-loc}{{7.2.2}{71}{Lines of code}{subsection.7.2.2}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7.2}{\ignorespaces Lines-of-code comparison --- ST LL vs.\ TI driverlib.}}{71}{table.caption.74}\protected@file@percent }
+\newlabel{tab:ti-loc}{{7.2}{71}{Lines-of-code comparison --- ST LL vs.\ TI driverlib}{table.caption.74}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {7.2.3}Documentation coverage}{72}{subsection.7.2.3}\protected@file@percent }
 \newlabel{subsec:ti-doc}{{7.2.3}{72}{Documentation coverage}{subsection.7.2.3}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {7.3}{\ignorespaces Documentation coverage --- ST LL vs.\ TI driverlib.}}{73}{table.caption.79}\protected@file@percent }
-\newlabel{tab:ti-doc}{{7.3}{73}{Documentation coverage --- ST LL vs.\ TI driverlib}{table.caption.79}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7.3}{\ignorespaces Documentation coverage --- ST LL vs.\ TI driverlib.}}{72}{table.caption.75}\protected@file@percent }
+\newlabel{tab:ti-doc}{{7.3}{72}{Documentation coverage --- ST LL vs.\ TI driverlib}{table.caption.75}{}}
+\citation{lizard-tool}
 \@writefile{toc}{\contentsline {subsection}{\numberline {7.2.4}Code duplication}{73}{subsection.7.2.4}\protected@file@percent }
 \newlabel{subsec:ti-dup}{{7.2.4}{73}{Code duplication}{subsection.7.2.4}{}}
-\citation{lizard-tool}
-\@writefile{lot}{\contentsline {table}{\numberline {7.4}{\ignorespaces Code duplication --- ST LL vs.\ TI driverlib.}}{74}{table.caption.80}\protected@file@percent }
-\newlabel{tab:ti-dup}{{7.4}{74}{Code duplication --- ST LL vs.\ TI driverlib}{table.caption.80}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.2.5}Cyclomatic complexity}{74}{subsection.7.2.5}\protected@file@percent }
-\newlabel{subsec:ti-complexity}{{7.2.5}{74}{Cyclomatic complexity}{subsection.7.2.5}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {7.5}{\ignorespaces Cyclomatic complexity comparison --- ST LL vs.\ TI driverlib.}}{75}{table.caption.81}\protected@file@percent }
-\newlabel{tab:ti-complexity}{{7.5}{75}{Cyclomatic complexity comparison --- ST LL vs.\ TI driverlib}{table.caption.81}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.2.6}API surface}{75}{subsection.7.2.6}\protected@file@percent }
-\newlabel{subsec:ti-api}{{7.2.6}{75}{API surface}{subsection.7.2.6}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7.4}{\ignorespaces Code duplication --- ST LL vs.\ TI driverlib.}}{73}{table.caption.76}\protected@file@percent }
+\newlabel{tab:ti-dup}{{7.4}{73}{Code duplication --- ST LL vs.\ TI driverlib}{table.caption.76}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.2.5}Cyclomatic complexity}{73}{subsection.7.2.5}\protected@file@percent }
+\newlabel{subsec:ti-complexity}{{7.2.5}{73}{Cyclomatic complexity}{subsection.7.2.5}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7.5}{\ignorespaces Cyclomatic complexity comparison --- ST LL vs.\ TI driverlib.}}{74}{table.caption.77}\protected@file@percent }
+\newlabel{tab:ti-complexity}{{7.5}{74}{Cyclomatic complexity comparison --- ST LL vs.\ TI driverlib}{table.caption.77}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.2.6}API surface}{74}{subsection.7.2.6}\protected@file@percent }
+\newlabel{subsec:ti-api}{{7.2.6}{74}{API surface}{subsection.7.2.6}{}}
 \citation{misra-c2012}
-\@writefile{lot}{\contentsline {table}{\numberline {7.6}{\ignorespaces API surface comparison --- ST LL vs.\ TI driverlib.}}{76}{table.caption.82}\protected@file@percent }
-\newlabel{tab:ti-api}{{7.6}{76}{API surface comparison --- ST LL vs.\ TI driverlib}{table.caption.82}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.2.7}MISRA~C:2012 static-analysis findings}{76}{subsection.7.2.7}\protected@file@percent }
-\newlabel{subsec:ti-misra}{{7.2.7}{76}{MISRA~C:2012 static-analysis findings}{subsection.7.2.7}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7.6}{\ignorespaces API surface comparison --- ST LL vs.\ TI driverlib.}}{75}{table.caption.78}\protected@file@percent }
+\newlabel{tab:ti-api}{{7.6}{75}{API surface comparison --- ST LL vs.\ TI driverlib}{table.caption.78}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.2.7}MISRA~C:2012 static-analysis findings}{75}{subsection.7.2.7}\protected@file@percent }
+\newlabel{subsec:ti-misra}{{7.2.7}{75}{MISRA~C:2012 static-analysis findings}{subsection.7.2.7}{}}
 \citation{stm32cubec5-sw,ti-mspm33-sdk}
-\@writefile{lot}{\contentsline {table}{\numberline {7.7}{\ignorespaces Cppcheck MISRA-addon findings --- ST LL vs.\ TI driverlib.}}{77}{table.caption.83}\protected@file@percent }
-\newlabel{tab:ti-misra}{{7.7}{77}{Cppcheck MISRA-addon findings --- ST LL vs.\ TI driverlib}{table.caption.83}{}}
-\citation{stm32cubec5-sw,ti-mspm33-sdk}
-\citation{stm32cubec5-sw,ti-mspm33-sdk}
-\@writefile{toc}{\contentsline {section}{\numberline {7.3}SDK coverage comparison}{78}{section.7.3}\protected@file@percent }
-\newlabel{sec:ti-sdk-coverage}{{7.3}{78}{SDK coverage comparison}{section.7.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.3.1}Peripheral driver coverage}{78}{subsection.7.3.1}\protected@file@percent }
-\newlabel{subsec:ti-periph-gaps}{{7.3.1}{78}{Peripheral driver coverage}{subsection.7.3.1}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7.7}{\ignorespaces Cppcheck MISRA-addon findings --- ST LL vs.\ TI driverlib.}}{76}{table.caption.79}\protected@file@percent }
+\newlabel{tab:ti-misra}{{7.7}{76}{Cppcheck MISRA-addon findings --- ST LL vs.\ TI driverlib}{table.caption.79}{}}
 \citation{stm32cubec5-sw,ti-mspm33-sdk}
 \citation{stm32cubec5-sw,ti-mspm33-sdk}
-\@writefile{lot}{\contentsline {table}{\numberline {7.8}{\ignorespaces Exclusive peripheral drivers in the selected SDK releases~\cite  {stm32cubec5-sw,ti-mspm33-sdk}.}}{79}{table.caption.84}\protected@file@percent }
-\newlabel{tab:ti-periph-exclusive}{{7.8}{79}{Exclusive peripheral drivers in the selected SDK releases~\cite {stm32cubec5-sw,ti-mspm33-sdk}}{table.caption.84}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.3.2}Middleware coverage}{79}{subsection.7.3.2}\protected@file@percent }
-\newlabel{subsec:ti-mw-gaps}{{7.3.2}{79}{Middleware coverage}{subsection.7.3.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7.3}SDK coverage comparison}{77}{section.7.3}\protected@file@percent }
+\newlabel{sec:ti-sdk-coverage}{{7.3}{77}{SDK coverage comparison}{section.7.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.3.1}Peripheral driver coverage}{77}{subsection.7.3.1}\protected@file@percent }
+\newlabel{subsec:ti-periph-gaps}{{7.3.1}{77}{Peripheral driver coverage}{subsection.7.3.1}{}}
 \citation{stm32cubec5-sw,ti-mspm33-sdk}
 \citation{stm32cubec5-sw,ti-mspm33-sdk}
-\@writefile{lot}{\contentsline {table}{\numberline {7.9}{\ignorespaces Exclusive middleware in the selected SDK releases~\cite  {stm32cubec5-sw,ti-mspm33-sdk}.}}{80}{table.caption.85}\protected@file@percent }
-\newlabel{tab:ti-mw-exclusive}{{7.9}{80}{Exclusive middleware in the selected SDK releases~\cite {stm32cubec5-sw,ti-mspm33-sdk}}{table.caption.85}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.3.3}Cryptographic algorithm coverage}{80}{subsection.7.3.3}\protected@file@percent }
-\newlabel{subsec:ti-crypto}{{7.3.3}{80}{Cryptographic algorithm coverage}{subsection.7.3.3}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7.8}{\ignorespaces Exclusive peripheral drivers in the selected SDK releases~\cite  {stm32cubec5-sw,ti-mspm33-sdk}.}}{78}{table.caption.80}\protected@file@percent }
+\newlabel{tab:ti-periph-exclusive}{{7.8}{78}{Exclusive peripheral drivers in the selected SDK releases~\cite {stm32cubec5-sw,ti-mspm33-sdk}}{table.caption.80}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.3.2}Middleware coverage}{78}{subsection.7.3.2}\protected@file@percent }
+\newlabel{subsec:ti-mw-gaps}{{7.3.2}{78}{Middleware coverage}{subsection.7.3.2}{}}
+\citation{stm32cubec5-sw,ti-mspm33-sdk}
+\citation{stm32cubec5-sw,ti-mspm33-sdk}
+\@writefile{lot}{\contentsline {table}{\numberline {7.9}{\ignorespaces Exclusive middleware in the selected SDK releases~\cite  {stm32cubec5-sw,ti-mspm33-sdk}.}}{79}{table.caption.81}\protected@file@percent }
+\newlabel{tab:ti-mw-exclusive}{{7.9}{79}{Exclusive middleware in the selected SDK releases~\cite {stm32cubec5-sw,ti-mspm33-sdk}}{table.caption.81}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.3.3}Cryptographic algorithm coverage}{79}{subsection.7.3.3}\protected@file@percent }
+\newlabel{subsec:ti-crypto}{{7.3.3}{79}{Cryptographic algorithm coverage}{subsection.7.3.3}{}}
 \citation{nist-pqc}
 \citation{stm32cubec5-sw,ti-mspm33-sdk}
 \citation{stm32cubec5-sw,ti-mspm33-sdk}
-\@writefile{lot}{\contentsline {table}{\numberline {7.10}{\ignorespaces Cryptographic algorithm inventory for the selected SDK releases~\cite  {stm32cubec5-sw,ti-mspm33-sdk}.}}{81}{table.caption.86}\protected@file@percent }
-\newlabel{tab:ti-crypto}{{7.10}{81}{Cryptographic algorithm inventory for the selected SDK releases~\cite {stm32cubec5-sw,ti-mspm33-sdk}}{table.caption.86}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.3.4}Communication protocol coverage}{81}{subsection.7.3.4}\protected@file@percent }
-\newlabel{subsec:ti-comm}{{7.3.4}{81}{Communication protocol coverage}{subsection.7.3.4}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {7.11}{\ignorespaces Communication protocol inventory for the selected SDK releases~\cite  {stm32cubec5-sw,ti-mspm33-sdk}.}}{82}{table.caption.87}\protected@file@percent }
-\newlabel{tab:ti-comm-protocols}{{7.11}{82}{Communication protocol inventory for the selected SDK releases~\cite {stm32cubec5-sw,ti-mspm33-sdk}}{table.caption.87}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {7.4}Static-analysis summary}{82}{section.7.4}\protected@file@percent }
-\newlabel{sec:ti-static-summary}{{7.4}{82}{Static-analysis summary}{section.7.4}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {7.12}{\ignorespaces Static-analysis scoreboard --- STM32CubeC5 LL vs.\ TI MSPM33 driverlib.}}{82}{table.caption.88}\protected@file@percent }
-\newlabel{tab:ti-summary-scoreboard}{{7.12}{82}{Static-analysis scoreboard --- STM32CubeC5 LL vs.\ TI MSPM33 driverlib}{table.caption.88}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7.10}{\ignorespaces Cryptographic algorithm inventory for the selected SDK releases~\cite  {stm32cubec5-sw,ti-mspm33-sdk}.}}{80}{table.caption.82}\protected@file@percent }
+\newlabel{tab:ti-crypto}{{7.10}{80}{Cryptographic algorithm inventory for the selected SDK releases~\cite {stm32cubec5-sw,ti-mspm33-sdk}}{table.caption.82}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.3.4}Communication protocol coverage}{80}{subsection.7.3.4}\protected@file@percent }
+\newlabel{subsec:ti-comm}{{7.3.4}{80}{Communication protocol coverage}{subsection.7.3.4}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7.11}{\ignorespaces Communication protocol inventory for the selected SDK releases~\cite  {stm32cubec5-sw,ti-mspm33-sdk}.}}{81}{table.caption.83}\protected@file@percent }
+\newlabel{tab:ti-comm-protocols}{{7.11}{81}{Communication protocol inventory for the selected SDK releases~\cite {stm32cubec5-sw,ti-mspm33-sdk}}{table.caption.83}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7.4}Static-analysis summary}{81}{section.7.4}\protected@file@percent }
+\newlabel{sec:ti-static-summary}{{7.4}{81}{Static-analysis summary}{section.7.4}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7.12}{\ignorespaces Static-analysis scoreboard --- STM32CubeC5 LL vs.\ TI MSPM33 driverlib.}}{81}{table.caption.84}\protected@file@percent }
+\newlabel{tab:ti-summary-scoreboard}{{7.12}{81}{Static-analysis scoreboard --- STM32CubeC5 LL vs.\ TI MSPM33 driverlib}{table.caption.84}{}}
 \citation{ti-mspm33-sdk}
 \citation{stm32cubec5-sw}
-\@writefile{toc}{\contentsline {section}{\numberline {7.5}Functional analysis of the driver layer}{83}{section.7.5}\protected@file@percent }
-\newlabel{sec:ti-functional-analysis}{{7.5}{83}{Functional analysis of the driver layer}{section.7.5}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.5.1}Benchmark design and observables}{83}{subsection.7.5.1}\protected@file@percent }
-\newlabel{subsec:ti-functional-design}{{7.5.1}{83}{Benchmark design and observables}{subsection.7.5.1}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7.2}{\ignorespaces Functional flows of the eight low-level-driver scenario families. I\textsuperscript  {2}C and SPI panels represent their paired controller/target and master/slave projects, respectively; the flows define functional behaviour and not a timing window.}}{84}{figure.caption.89}\protected@file@percent }
-\newlabel{fig:ti-functional-scenario-flows}{{7.2}{84}{Functional flows of the eight low-level-driver scenario families. I\textsuperscript {2}C and SPI panels represent their paired controller/target and master/slave projects, respectively; the flows define functional behaviour and not a timing window}{figure.caption.89}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {7.13}{\ignorespaces ST--TI low-level-driver functional scenario mapping.}}{85}{table.caption.90}\protected@file@percent }
-\newlabel{tab:ti-functional-scenarios}{{7.13}{85}{ST--TI low-level-driver functional scenario mapping}{table.caption.90}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7.3}{\ignorespaces Matched functional scenario builds and linker-map memory totals in IAR EWARM.}}{85}{figure.caption.91}\protected@file@percent }
-\newlabel{fig:ti-screenshot-functional-build}{{7.3}{85}{Matched functional scenario builds and linker-map memory totals in IAR EWARM}{figure.caption.91}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7.5}Functional analysis of the driver layer}{82}{section.7.5}\protected@file@percent }
+\newlabel{sec:ti-functional-analysis}{{7.5}{82}{Functional analysis of the driver layer}{section.7.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.5.1}Benchmark design and observables}{82}{subsection.7.5.1}\protected@file@percent }
+\newlabel{subsec:ti-functional-design}{{7.5.1}{82}{Benchmark design and observables}{subsection.7.5.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7.1}{\ignorespaces Functional flows of the eight low-level-driver scenario families. I\textsuperscript  {2}C and SPI panels represent their paired controller/target and master/slave projects, respectively; the flows define functional behaviour and not a timing window.}}{83}{figure.caption.85}\protected@file@percent }
+\newlabel{fig:ti-functional-scenario-flows}{{7.1}{83}{Functional flows of the eight low-level-driver scenario families. I\textsuperscript {2}C and SPI panels represent their paired controller/target and master/slave projects, respectively; the flows define functional behaviour and not a timing window}{figure.caption.85}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7.13}{\ignorespaces ST--TI low-level-driver functional scenario mapping.}}{84}{table.caption.86}\protected@file@percent }
+\newlabel{tab:ti-functional-scenarios}{{7.13}{84}{ST--TI low-level-driver functional scenario mapping}{table.caption.86}{}}
+\citation{iar-ewarm}
+\@writefile{lof}{\contentsline {figure}{\numberline {7.2}{\ignorespaces Matched functional scenario builds and linker-map memory totals in IAR EWARM.}}{85}{figure.caption.87}\protected@file@percent }
+\newlabel{fig:ti-screenshot-functional-build}{{7.2}{85}{Matched functional scenario builds and linker-map memory totals in IAR EWARM}{figure.caption.87}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.5.2}Results and interpretation}{85}{subsection.7.5.2}\protected@file@percent }
+\newlabel{subsec:ti-functional-results}{{7.5.2}{85}{Results and interpretation}{subsection.7.5.2}{}}
 \citation{iar-ewarm}
 \citation{iar-ewarm}
-\citation{iar-ewarm}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.5.2}Results and interpretation}{86}{subsection.7.5.2}\protected@file@percent }
-\newlabel{subsec:ti-functional-results}{{7.5.2}{86}{Results and interpretation}{subsection.7.5.2}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {7.14}{\ignorespaces Whole-image footprint results from IAR high/size linker maps (bytes). Flash is RO code plus RO data and RAM is RW data~\cite  {iar-ewarm}; negative deltas favour STM32C5.}}{86}{table.caption.92}\protected@file@percent }
-\newlabel{tab:ti-functional-footprint}{{7.14}{86}{Whole-image footprint results from IAR high/size linker maps (bytes). Flash is RO code plus RO data and RAM is RW data~\cite {iar-ewarm}; negative deltas favour STM32C5}{table.caption.92}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7.14}{\ignorespaces Whole-image footprint results from IAR high/size linker maps (bytes). Flash is RO code plus RO data and RAM is RW data~\cite  {iar-ewarm}; negative deltas favour STM32C5.}}{86}{table.caption.88}\protected@file@percent }
+\newlabel{tab:ti-functional-footprint}{{7.14}{86}{Whole-image footprint results from IAR high/size linker maps (bytes). Flash is RO code plus RO data and RAM is RW data~\cite {iar-ewarm}; negative deltas favour STM32C5}{table.caption.88}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7.15}{\ignorespaces Controls required before quantitative ST--TI functional results are compared.}}{87}{table.caption.89}\protected@file@percent }
+\newlabel{tab:ti-functional-controls}{{7.15}{87}{Controls required before quantitative ST--TI functional results are compared}{table.caption.89}{}}
 \citation{freertos}
 \citation{freertos-v11,stm32cubec5-sw,ti-mspm33-sdk}
-\@writefile{lot}{\contentsline {table}{\numberline {7.15}{\ignorespaces Controls required before quantitative ST--TI functional results are compared.}}{88}{table.caption.93}\protected@file@percent }
-\newlabel{tab:ti-functional-controls}{{7.15}{88}{Controls required before quantitative ST--TI functional results are compared}{table.caption.93}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {7.6}FreeRTOS middleware benchmark}{88}{section.7.6}\protected@file@percent }
 \newlabel{sec:ti-freertos}{{7.6}{88}{FreeRTOS middleware benchmark}{section.7.6}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.6.1}Scenario design and configuration}{89}{subsection.7.6.1}\protected@file@percent }
-\newlabel{subsec:ti-freertos-design}{{7.6.1}{89}{Scenario design and configuration}{subsection.7.6.1}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7.4}{\ignorespaces Task architecture of the three ST--TI FreeRTOS scenarios. The preemptive scenario deliberately shows the non-equivalent synchronisation paths found in the measured projects.}}{89}{figure.caption.94}\protected@file@percent }
-\newlabel{fig:ti-freertos-architecture}{{7.4}{89}{Task architecture of the three ST--TI FreeRTOS scenarios. The preemptive scenario deliberately shows the non-equivalent synchronisation paths found in the measured projects}{figure.caption.94}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {7.16}{\ignorespaces FreeRTOS scenario semantics and reported metric.}}{89}{table.caption.95}\protected@file@percent }
-\newlabel{tab:ti-freertos-scenarios}{{7.16}{89}{FreeRTOS scenario semantics and reported metric}{table.caption.95}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7.5}{\ignorespaces Recorded build and FreeRTOS configuration for the STM32C5 and MSPM33 targets.}}{90}{figure.caption.96}\protected@file@percent }
-\newlabel{fig:ti-screenshot-freertos-config}{{7.5}{90}{Recorded build and FreeRTOS configuration for the STM32C5 and MSPM33 targets}{figure.caption.96}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.6.2}Measurement method and fairness}{90}{subsection.7.6.2}\protected@file@percent }
-\newlabel{subsec:ti-freertos-method}{{7.6.2}{90}{Measurement method and fairness}{subsection.7.6.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.6.1}Scenario design and configuration}{88}{subsection.7.6.1}\protected@file@percent }
+\newlabel{subsec:ti-freertos-design}{{7.6.1}{88}{Scenario design and configuration}{subsection.7.6.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7.3}{\ignorespaces Task architecture of the three ST--TI FreeRTOS scenarios. The preemptive scenario deliberately shows the non-equivalent synchronisation paths found in the measured projects.}}{88}{figure.caption.90}\protected@file@percent }
+\newlabel{fig:ti-freertos-architecture}{{7.3}{88}{Task architecture of the three ST--TI FreeRTOS scenarios. The preemptive scenario deliberately shows the non-equivalent synchronisation paths found in the measured projects}{figure.caption.90}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7.16}{\ignorespaces FreeRTOS scenario semantics and reported metric.}}{89}{table.caption.91}\protected@file@percent }
+\newlabel{tab:ti-freertos-scenarios}{{7.16}{89}{FreeRTOS scenario semantics and reported metric}{table.caption.91}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.6.2}Measurement method and fairness}{89}{subsection.7.6.2}\protected@file@percent }
+\newlabel{subsec:ti-freertos-method}{{7.6.2}{89}{Measurement method and fairness}{subsection.7.6.2}{}}
 \citation{iar-ewarm}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.6.3}Results}{91}{subsection.7.6.3}\protected@file@percent }
-\newlabel{subsec:ti-freertos-results}{{7.6.3}{91}{Results}{subsection.7.6.3}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {7.17}{\ignorespaces Observed FreeRTOS runtime rates and clock-normalised STM32/MSPM33 ratio.}}{91}{table.caption.97}\protected@file@percent }
-\newlabel{tab:ti-freertos-runtime}{{7.17}{91}{Observed FreeRTOS runtime rates and clock-normalised STM32/MSPM33 ratio}{table.caption.97}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7.6}{\ignorespaces Raw UART reporting windows used for the ST--TI FreeRTOS runtime comparison.}}{91}{figure.caption.98}\protected@file@percent }
-\newlabel{fig:ti-screenshot-freertos-uart}{{7.6}{91}{Raw UART reporting windows used for the ST--TI FreeRTOS runtime comparison}{figure.caption.98}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {7.18}{\ignorespaces FreeRTOS whole-image footprint under IAR high/size optimisation (bytes).}}{92}{table.caption.99}\protected@file@percent }
-\newlabel{tab:ti-freertos-footprint}{{7.18}{92}{FreeRTOS whole-image footprint under IAR high/size optimisation (bytes)}{table.caption.99}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.6.4}Takeaway}{92}{subsection.7.6.4}\protected@file@percent }
-\newlabel{subsec:ti-freertos-takeaway}{{7.6.4}{92}{Takeaway}{subsection.7.6.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.6.3}Results}{90}{subsection.7.6.3}\protected@file@percent }
+\newlabel{subsec:ti-freertos-results}{{7.6.3}{90}{Results}{subsection.7.6.3}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7.17}{\ignorespaces Observed FreeRTOS runtime rates and clock-normalised STM32/MSPM33 ratio.}}{90}{table.caption.92}\protected@file@percent }
+\newlabel{tab:ti-freertos-runtime}{{7.17}{90}{Observed FreeRTOS runtime rates and clock-normalised STM32/MSPM33 ratio}{table.caption.92}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7.4}{\ignorespaces Raw UART reporting windows used for the ST--TI FreeRTOS runtime comparison.}}{90}{figure.caption.93}\protected@file@percent }
+\newlabel{fig:ti-screenshot-freertos-uart}{{7.4}{90}{Raw UART reporting windows used for the ST--TI FreeRTOS runtime comparison}{figure.caption.93}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7.18}{\ignorespaces FreeRTOS whole-image footprint under IAR high/size optimisation (bytes).}}{91}{table.caption.94}\protected@file@percent }
+\newlabel{tab:ti-freertos-footprint}{{7.18}{91}{FreeRTOS whole-image footprint under IAR high/size optimisation (bytes)}{table.caption.94}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.6.4}Takeaway}{91}{subsection.7.6.4}\protected@file@percent }
+\newlabel{subsec:ti-freertos-takeaway}{{7.6.4}{91}{Takeaway}{subsection.7.6.4}{}}
 \citation{st-stm32h735g-dk}
-\@writefile{toc}{\contentsline {chapter}{General Conclusion and Perspectives}{94}{section*.101}\protected@file@percent }
-\newlabel{chap:cascade-general-conclusion}{{7.6.4}{94}{General Conclusion and Perspectives}{section*.101}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {A}Glossary}{96}{chapter.A}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{General Conclusion and Perspectives}{93}{section*.96}\protected@file@percent }
+\newlabel{chap:cascade-general-conclusion}{{7.6.4}{93}{General Conclusion and Perspectives}{section*.96}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {A}Glossary}{95}{chapter.A}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{loa}{\addvspace {10\p@ }}
-\newlabel{chap:glossary}{{A}{96}{Glossary}{chapter.A}{}}
+\newlabel{chap:glossary}{{A}{95}{Glossary}{chapter.A}{}}
 \gdef \LT@i {\LT@entry 
     {1}{98.18318pt}\LT@entry 
     {1}{395.2309pt}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {B}Acronyms}{98}{chapter.B}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {B}Acronyms}{97}{chapter.B}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{loa}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {chapter}{\numberline {C}Complementary Code Listings}{101}{chapter.C}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {C}Complementary Code Listings}{100}{chapter.C}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{loa}{\addvspace {10\p@ }}
-\newlabel{chap:complementary-codes}{{C}{101}{Complementary Code Listings}{chapter.C}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {C.1}IAR EWARM linker map excerpt}{101}{section.C.1}\protected@file@percent }
-\newlabel{sec:appendix-linker-map}{{C.1}{101}{IAR EWARM linker map excerpt}{section.C.1}{}}
-\newlabel{lst:linker-map}{{C.1}{101}{Abbreviated IAR EWARM linker map (USB HID, STM32U575)}{lstlisting.C.1}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {C.1}{\ignorespaces Abbreviated IAR EWARM linker map (USB HID, STM32U575).}}{101}{lstlisting.C.1}\protected@file@percent }
+\newlabel{chap:complementary-codes}{{C}{100}{Complementary Code Listings}{chapter.C}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {C.1}IAR EWARM linker map excerpt}{100}{section.C.1}\protected@file@percent }
+\newlabel{sec:appendix-linker-map}{{C.1}{100}{IAR EWARM linker map excerpt}{section.C.1}{}}
+\newlabel{lst:linker-map}{{C.1}{100}{Abbreviated IAR EWARM linker map (USB HID, STM32U575)}{lstlisting.C.1}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {C.1}{\ignorespaces Abbreviated IAR EWARM linker map (USB HID, STM32U575).}}{100}{lstlisting.C.1}\protected@file@percent }
 \citation{ti-mspm33-sdk}
 \citation{stm32cubec5-sw}
 \citation{iar-ewarm}
-\@writefile{toc}{\contentsline {section}{\numberline {C.2}ST--TI functional footprint reproducibility record}{103}{section.C.2}\protected@file@percent }
-\newlabel{sec:appendix-ti-functional-footprint}{{C.2}{103}{ST--TI functional footprint reproducibility record}{section.C.2}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {C.1}{\ignorespaces Reproducibility record for the ST--MSPM33 high/size functional footprint study (bytes).}}{103}{table.caption.102}\protected@file@percent }
-\newlabel{tab:appendix-ti-functional-footprint}{{C.1}{103}{Reproducibility record for the ST--MSPM33 high/size functional footprint study (bytes)}{table.caption.102}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {C.2}ST--TI functional footprint reproducibility record}{102}{section.C.2}\protected@file@percent }
+\newlabel{sec:appendix-ti-functional-footprint}{{C.2}{102}{ST--TI functional footprint reproducibility record}{section.C.2}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {C.1}{\ignorespaces Reproducibility record for the ST--MSPM33 high/size functional footprint study (bytes).}}{102}{table.caption.97}\protected@file@percent }
+\newlabel{tab:appendix-ti-functional-footprint}{{C.1}{102}{Reproducibility record for the ST--MSPM33 high/size functional footprint study (bytes)}{table.caption.97}{}}
 \citation{stm32cubec5-sw,ti-mspm33-sdk}
 \citation{iar-ewarm}
-\@writefile{toc}{\contentsline {section}{\numberline {C.3}ST--TI FreeRTOS reproducibility record}{104}{section.C.3}\protected@file@percent }
-\newlabel{sec:appendix-ti-freertos}{{C.3}{104}{ST--TI FreeRTOS reproducibility record}{section.C.3}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {C.2}{\ignorespaces Raw UART observation windows for the ST--TI FreeRTOS benchmark.}}{104}{table.caption.103}\protected@file@percent }
-\newlabel{tab:appendix-ti-freertos-runtime}{{C.2}{104}{Raw UART observation windows for the ST--TI FreeRTOS benchmark}{table.caption.103}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {C.3}{\ignorespaces IAR high/size map totals for the ST--TI FreeRTOS projects (bytes).}}{104}{table.caption.104}\protected@file@percent }
-\newlabel{tab:appendix-ti-freertos-footprint}{{C.3}{104}{IAR high/size map totals for the ST--TI FreeRTOS projects (bytes)}{table.caption.104}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {C.4}Agent configuration file}{105}{section.C.4}\protected@file@percent }
-\newlabel{sec:appendix-agent-config}{{C.4}{105}{Agent configuration file}{section.C.4}{}}
-\newlabel{lst:agent-config}{{C.2}{105}{Creation-Porting agent configuration (abbreviated)}{lstlisting.C.2}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {C.2}{\ignorespaces Creation-Porting agent configuration (abbreviated).}}{105}{lstlisting.C.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {C.5}FreeRTOS cooperative benchmark scenario}{107}{section.C.5}\protected@file@percent }
-\newlabel{sec:appendix-freertos-coop}{{C.5}{107}{FreeRTOS cooperative benchmark scenario}{section.C.5}{}}
-\newlabel{lst:freertos-coop}{{C.3}{107}{FreeRTOS cooperative scenario --- task functions (STM32, simplified)}{lstlisting.C.3}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {C.3}{\ignorespaces FreeRTOS cooperative scenario --- task functions (STM32, simplified).}}{107}{lstlisting.C.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {C.6}Footprint tool CLI output}{109}{section.C.6}\protected@file@percent }
-\newlabel{sec:appendix-tool-output}{{C.6}{109}{Footprint tool CLI output}{section.C.6}{}}
-\newlabel{lst:tool-output}{{C.4}{109}{MCU Workflow Studio CLI --- benchmark summary output}{lstlisting.C.4}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {C.4}{\ignorespaces MCU Workflow Studio CLI --- benchmark summary output.}}{109}{lstlisting.C.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {C.7}Static-analysis automation script (ST vs.\ TI)}{110}{section.C.7}\protected@file@percent }
-\newlabel{sec:appendix-analyze-firmware}{{C.7}{110}{Static-analysis automation script (ST vs.\ TI)}{section.C.7}{}}
-\newlabel{lst:analyze-firmware}{{C.5}{110}{Abbreviated \texttt {analyze\_firmware.py} --- API and documentation extraction}{lstlisting.C.5}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {C.5}{\ignorespaces Abbreviated \texttt  {analyze\_firmware.py} --- API and documentation extraction.}}{110}{lstlisting.C.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {C.3}ST--TI FreeRTOS reproducibility record}{103}{section.C.3}\protected@file@percent }
+\newlabel{sec:appendix-ti-freertos}{{C.3}{103}{ST--TI FreeRTOS reproducibility record}{section.C.3}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {C.2}{\ignorespaces Raw UART observation windows for the ST--TI FreeRTOS benchmark.}}{103}{table.caption.98}\protected@file@percent }
+\newlabel{tab:appendix-ti-freertos-runtime}{{C.2}{103}{Raw UART observation windows for the ST--TI FreeRTOS benchmark}{table.caption.98}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {C.3}{\ignorespaces IAR high/size map totals for the ST--TI FreeRTOS projects (bytes).}}{103}{table.caption.99}\protected@file@percent }
+\newlabel{tab:appendix-ti-freertos-footprint}{{C.3}{103}{IAR high/size map totals for the ST--TI FreeRTOS projects (bytes)}{table.caption.99}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {C.4}Agent configuration file}{104}{section.C.4}\protected@file@percent }
+\newlabel{sec:appendix-agent-config}{{C.4}{104}{Agent configuration file}{section.C.4}{}}
+\newlabel{lst:agent-config}{{C.2}{104}{Creation-Porting agent configuration (abbreviated)}{lstlisting.C.2}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {C.2}{\ignorespaces Creation-Porting agent configuration (abbreviated).}}{104}{lstlisting.C.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {C.5}FreeRTOS cooperative benchmark scenario}{106}{section.C.5}\protected@file@percent }
+\newlabel{sec:appendix-freertos-coop}{{C.5}{106}{FreeRTOS cooperative benchmark scenario}{section.C.5}{}}
+\newlabel{lst:freertos-coop}{{C.3}{106}{FreeRTOS cooperative scenario --- task functions (STM32, simplified)}{lstlisting.C.3}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {C.3}{\ignorespaces FreeRTOS cooperative scenario --- task functions (STM32, simplified).}}{106}{lstlisting.C.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {C.6}Footprint tool CLI output}{108}{section.C.6}\protected@file@percent }
+\newlabel{sec:appendix-tool-output}{{C.6}{108}{Footprint tool CLI output}{section.C.6}{}}
+\newlabel{lst:tool-output}{{C.4}{108}{MCU Workflow Studio CLI --- benchmark summary output}{lstlisting.C.4}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {C.4}{\ignorespaces MCU Workflow Studio CLI --- benchmark summary output.}}{108}{lstlisting.C.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {C.7}Static-analysis automation script (ST vs.\ TI)}{109}{section.C.7}\protected@file@percent }
+\newlabel{sec:appendix-analyze-firmware}{{C.7}{109}{Static-analysis automation script (ST vs.\ TI)}{section.C.7}{}}
+\newlabel{lst:analyze-firmware}{{C.5}{109}{Abbreviated \texttt {analyze\_firmware.py} --- API and documentation extraction}{lstlisting.C.5}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {C.5}{\ignorespaces Abbreviated \texttt  {analyze\_firmware.py} --- API and documentation extraction.}}{109}{lstlisting.C.5}\protected@file@percent }
 \bibcite{st-about}{1}
 \bibcite{st-investors}{2}
 \bibcite{st-strategy}{3}
@@ -573,7 +563,7 @@
 \bibcite{st-stm32h735g-dk}{9}
 \bibcite{nxp-frdm-mcxa156}{10}
 \bibcite{st-nucleo-l552ze-q}{11}
-\@writefile{toc}{\contentsline {chapter}{Bibliography}{112}{appendix*.105}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{Bibliography}{111}{appendix*.100}\protected@file@percent }
 \bibcite{renesas-fpb-ra0e1}{12}
 \bibcite{st-nucleo-l031k6}{13}
 \bibcite{renesas-fpb-ra8e1}{14}
@@ -618,4 +608,4 @@
 \bibcite{misra-c2012}{53}
 \bibcite{nist-pqc}{54}
 \gdef\svg@ink@ver@settings{{\m@ne }{inkscape}{\m@ne }}
-\gdef \@abspage@last{138}
+\gdef \@abspage@last{137}
